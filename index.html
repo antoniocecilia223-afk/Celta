@@ -3,130 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta Browser | Dashboard</title>
+    <title>Celta Browser | Live Feed 2026</title>
     <style>
         * { box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; 
-            background-color: #0f0f0f; 
-            color: #ffffff;
-            display: flex;
-        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #0d0d0d; color: #fff; display: flex; }
+        
+        /* BARRA LATERAL - NOTÍCIAS REAIS 2026 */
+        .sidebar { width: 300px; background: #151515; height: 100vh; padding: 20px; border-right: 1px solid #333; overflow-y: auto; position: sticky; top: 0; }
+        .sidebar h3 { font-size: 12px; color: #ff4500; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 25px; }
+        .news-item { font-size: 13px; margin: 12px 0; color: #ccc; line-height: 1.4; border-left: 2px solid #444; padding-left: 8px; }
+        .news-item b { color: #fff; display: block; margin-bottom: 3px; }
 
-        /* BARRA LATERAL DE NOTÍCIAS */
-        .sidebar {
-            width: 250px;
-            background-color: #161616;
-            height: 100vh;
-            padding: 20px;
-            border-right: 1px solid #333;
-            position: sticky;
-            top: 0;
-            display: none; /* Escondido em telas pequenas */
-        }
-        @media (min-width: 900px) { .sidebar { display: block; } }
+        /* PAINEL CENTRAL */
+        .main { flex: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; }
+        .logo { font-size: 60px; font-weight: 900; font-style: italic; background: linear-gradient(to bottom, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        
+        .search-area { width: 100%; max-width: 650px; margin-bottom: 40px; }
+        input { width: 100%; padding: 18px 25px; border-radius: 40px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); outline: none; }
 
-        .sidebar h3 { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-        .news-item { margin-bottom: 20px; font-size: 13px; cursor: pointer; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .news-item:hover { color: #4285f4; }
+        /* PLACAR YOUTUBERS */
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; max-width: 650px; margin-bottom: 30px; }
+        .stat-card { background: #1a1a1a; padding: 15px; border-radius: 12px; border: 1px solid #333; text-align: center; }
+        .stat-card span { font-size: 20px; font-weight: bold; color: #00ff00; }
 
-        /* CONTEÚDO PRINCIPAL */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        .logo { 
-            font-size: 70px; 
-            font-weight: 900; 
-            font-style: italic;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #fff 0%, #555 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .search-box { width: 100%; max-width: 600px; margin-bottom: 40px; }
-        input[type="text"] { 
-            width: 100%; padding: 15px 25px; border-radius: 30px; 
-            border: 1px solid #333; background: #1e1e1e; color: white; font-size: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6); outline: none;
-        }
-
-        /* SEÇÃO DE VÍDEOS EM ALTA */
-        .section-title { width: 100%; max-width: 800px; margin-bottom: 15px; font-weight: bold; color: #aaa; }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 40px;
-        }
-        .video-card {
-            background: #1a1a1a;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: 0.3s;
-            cursor: pointer;
-            border: 1px solid #333;
-        }
-        .video-card:hover { transform: scale(1.05); border-color: #555; }
-        .thumb { width: 100%; height: 100px; background: #333; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .video-info { padding: 10px; font-size: 12px; }
-
-        /* ATALHOS RAPIDOS */
-        .shortcuts { display: flex; gap: 20px; margin-bottom: 40px; }
-        .btn-celvantes { 
-            padding: 10px 20px; border-radius: 20px; border: 1px solid #007bff; 
-            color: #007bff; text-decoration: none; font-weight: bold; transition: 0.3s;
-        }
-        .btn-celvantes:hover { background: #007bff; color: white; }
+        /* VÍDEOS RECENTES MRBEAST */
+        .video-box { background: #1a1a1a; width: 100%; max-width: 650px; border-radius: 15px; padding: 20px; border: 1px solid #333; }
+        .video-box h4 { margin: 0 0 15px 0; color: #ff0000; }
+        .video-link { display: flex; align-items: center; text-decoration: none; color: #fff; margin-bottom: 10px; padding: 10px; border-radius: 8px; background: #222; transition: 0.3s; }
+        .video-link:hover { background: #333; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h3>Notícias Celta</h3>
-        <div class="news-item"><b>Tecnologia:</b> O novo motor do Celta Web bate recorde de velocidade.</div>
-        <div class="news-item"><b>Mundo:</b> MrBeast planeja o maior vídeo da história no espaço.</div>
-        <div class="news-item"><b>Games:</b> Lançamentos de 2026 que você não pode perder.</div>
+        <h2 style="color:#fff; font-style: italic;">CELTA NEWS</h2>
+        
+        <h3>⚽ Futebol (Hoje 26/02)</h3>
+        <div class="news-item"><b>Recopa Sul-Americana:</b> Finalíssima entre Flamengo x Lanús no Maracanã (21:30).</div>
+        <div class="news-item"><b>Champions League:</b> Atalanta x Borussia Dortmund lutam por vaga nas oitavas.</div>
+        <div class="news-item"><b>Brasileirão:</b> Palmeiras x Fluminense e Cruzeiro x Corinthians agitam a noite.</div>
+
+        <h3>🇺🇸 Política EUA</h3>
+        <div class="news-item"><b>State of the Union:</b> Trump inicia tour pelo país após discurso ao Congresso.</div>
+        <div class="news-item"><b>Minneapolis:</b> Saída de alto oficial do Tesouro gera debate sobre imigração.</div>
+
+        <h3>🤖 IA & Tecnologia</h3>
+        <div class="news-item"><b>Google Gemini 3:</b> Versão Pro atinge 750 milhões de usuários ativos.</div>
+        <div class="news-item"><b>ChatGPT 2026:</b> Novo "Modo de Estudo" e checkout de compras direto na IA.</div>
     </div>
 
-    <div class="main-content">
+    <div class="main">
         <div class="logo">CELTA</div>
         
-        <div class="search-box">
+        <div class="search-area">
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar ou digitar URL..." autofocus>
+                <input type="text" name="q" placeholder="Acelere sua busca..." autofocus>
             </form>
         </div>
 
-        <div class="shortcuts">
-            <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" target="_blank" class="btn-celvantes">Ir para Celvantes 💠</a>
+        <div class="section-title" style="margin-bottom:10px; color:#888;">📊 Placar Global de YouTubers (Fev/2026)</div>
+        <div class="stats-grid">
+            <div class="stat-card">MrBeast<br><span>468 Milhões</span></div>
+            <div class="stat-card">T-Series<br><span>310 Milhões</span></div>
+            <div class="stat-card">Cocomelon<br><span>200 Milhões</span></div>
+            <div class="stat-card">Cristiano Ronaldo<br><span>78 Milhões</span></div>
         </div>
 
-        <div class="section-title">🔥 Vídeos em Alta</div>
-        <div class="video-grid">
-            <div class="video-card" onclick="window.open('https://www.youtube.com/@MrBeast', '_blank')">
-                <div class="thumb">🦁</div>
-                <div class="video-info"><b>MrBeast</b><br>Sobrevivi 100 dias no Celta</div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com', '_blank')">
-                <div class="thumb">🎥</div>
-                <div class="video-info"><b>YouTube</b><br>Tendências do dia</div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.instagram.com', '_blank')">
-                <div class="thumb">📸</div>
-                <div class="video-info"><b>Instagram</b><br>Veja os novos Reels</div>
-            </div>
+        <div class="video-box">
+            <h4>🎬 Lançamentos MrBeast</h4>
+            <a href="https://www.youtube.com/@MrBeast" class="video-link">
+                <span style="font-size: 24px; margin-right: 15px;">🍦</span>
+                <div><b>I Ate $100,000 Golden Ice Cream</b><br><small>Ouro comestível e luxo extremo.</small></div>
+            </a>
+            <a href="https://www.youtube.com/@MrBeast" class="video-link">
+                <span style="font-size: 24px; margin-right: 15px;">🏫</span>
+                <div><b>Built 10 Schools in 3 Continents</b><br><small>Projeto filantrópico global.</small></div>
+            </a>
         </div>
 
-        <footer style="color: #333; font-size: 11px;">Celta Browser v2.0 - 2026</footer>
+        <div style="margin-top: 30px;">
+             <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" style="color: #007bff; text-decoration: none;">Visitar Celvantes 💠</a>
+        </div>
     </div>
 
 </body>
