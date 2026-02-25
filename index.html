@@ -3,88 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta Browser | Live Feed 2026</title>
+    <title>Celta</title>
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #0d0d0d; color: #fff; display: flex; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #121212; color: #e8eaed; display: flex; flex-direction: column; align-items: center; }
         
-        /* BARRA LATERAL - NOTÍCIAS REAIS 2026 */
-        .sidebar { width: 300px; background: #151515; height: 100vh; padding: 20px; border-right: 1px solid #333; overflow-y: auto; position: sticky; top: 0; }
-        .sidebar h3 { font-size: 12px; color: #ff4500; text-transform: uppercase; border-bottom: 1px solid #333; padding-bottom: 5px; margin-top: 25px; }
-        .news-item { font-size: 13px; margin: 12px 0; color: #ccc; line-height: 1.4; border-left: 2px solid #444; padding-left: 8px; }
-        .news-item b { color: #fff; display: block; margin-bottom: 3px; }
+        /* TOPO ESTILO GOOGLE */
+        .header { margin-top: 50px; text-align: center; width: 100%; }
+        .logo { font-size: 80px; font-weight: bold; font-style: italic; background: linear-gradient(#fff, #777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .search-box { width: 90%; max-width: 580px; margin-bottom: 40px; }
+        input { width: 100%; padding: 14px 25px; border-radius: 30px; border: 1px solid #3c4043; background: #202124; color: white; font-size: 16px; outline: none; box-shadow: 0 1px 6px rgba(0,0,0,0.3); }
 
-        /* PAINEL CENTRAL */
-        .main { flex: 1; padding: 40px; display: flex; flex-direction: column; align-items: center; }
-        .logo { font-size: 60px; font-weight: 900; font-style: italic; background: linear-gradient(to bottom, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        /* FEED DE NOTÍCIAS EMBAIXO */
+        .feed { width: 90%; max-width: 800px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding-bottom: 50px; }
+        .card { background: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.3s; cursor: pointer; text-decoration: none; color: inherit; }
+        .card:hover { background: #252525; transform: translateY(-5px); }
+        .card img { width: 100%; height: 160px; object-fit: cover; background: #333; }
+        .card-content { padding: 15px; }
+        .card-tag { font-size: 10px; text-transform: uppercase; color: #8ab4f8; font-weight: bold; margin-bottom: 5px; }
+        .card-title { font-size: 16px; font-weight: 500; line-height: 1.4; }
         
-        .search-area { width: 100%; max-width: 650px; margin-bottom: 40px; }
-        input { width: 100%; padding: 18px 25px; border-radius: 40px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); outline: none; }
-
         /* PLACAR YOUTUBERS */
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; width: 100%; max-width: 650px; margin-bottom: 30px; }
-        .stat-card { background: #1a1a1a; padding: 15px; border-radius: 12px; border: 1px solid #333; text-align: center; }
-        .stat-card span { font-size: 20px; font-weight: bold; color: #00ff00; }
-
-        /* VÍDEOS RECENTES MRBEAST */
-        .video-box { background: #1a1a1a; width: 100%; max-width: 650px; border-radius: 15px; padding: 20px; border: 1px solid #333; }
-        .video-box h4 { margin: 0 0 15px 0; color: #ff0000; }
-        .video-link { display: flex; align-items: center; text-decoration: none; color: #fff; margin-bottom: 10px; padding: 10px; border-radius: 8px; background: #222; transition: 0.3s; }
-        .video-link:hover { background: #333; }
+        .stats { grid-column: 1 / -1; background: #202124; padding: 20px; border-radius: 12px; border: 1px dotted #444; text-align: center; }
+        .stats b { color: #00ff00; font-size: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2 style="color:#fff; font-style: italic;">CELTA NEWS</h2>
-        
-        <h3>⚽ Futebol (Hoje 26/02)</h3>
-        <div class="news-item"><b>Recopa Sul-Americana:</b> Finalíssima entre Flamengo x Lanús no Maracanã (21:30).</div>
-        <div class="news-item"><b>Champions League:</b> Atalanta x Borussia Dortmund lutam por vaga nas oitavas.</div>
-        <div class="news-item"><b>Brasileirão:</b> Palmeiras x Fluminense e Cruzeiro x Corinthians agitam a noite.</div>
-
-        <h3>🇺🇸 Política EUA</h3>
-        <div class="news-item"><b>State of the Union:</b> Trump inicia tour pelo país após discurso ao Congresso.</div>
-        <div class="news-item"><b>Minneapolis:</b> Saída de alto oficial do Tesouro gera debate sobre imigração.</div>
-
-        <h3>🤖 IA & Tecnologia</h3>
-        <div class="news-item"><b>Google Gemini 3:</b> Versão Pro atinge 750 milhões de usuários ativos.</div>
-        <div class="news-item"><b>ChatGPT 2026:</b> Novo "Modo de Estudo" e checkout de compras direto na IA.</div>
-    </div>
-
-    <div class="main">
+    <div class="header">
         <div class="logo">CELTA</div>
-        
-        <div class="search-area">
+        <div class="search-box">
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" placeholder="Acelere sua busca..." autofocus>
+                <input type="text" name="q" placeholder="Pesquisar na web..." autofocus autocomplete="off">
             </form>
         </div>
-
-        <div class="section-title" style="margin-bottom:10px; color:#888;">📊 Placar Global de YouTubers (Fev/2026)</div>
-        <div class="stats-grid">
-            <div class="stat-card">MrBeast<br><span>468 Milhões</span></div>
-            <div class="stat-card">T-Series<br><span>310 Milhões</span></div>
-            <div class="stat-card">Cocomelon<br><span>200 Milhões</span></div>
-            <div class="stat-card">Cristiano Ronaldo<br><span>78 Milhões</span></div>
-        </div>
-
-        <div class="video-box">
-            <h4>🎬 Lançamentos MrBeast</h4>
-            <a href="https://www.youtube.com/@MrBeast" class="video-link">
-                <span style="font-size: 24px; margin-right: 15px;">🍦</span>
-                <div><b>I Ate $100,000 Golden Ice Cream</b><br><small>Ouro comestível e luxo extremo.</small></div>
-            </a>
-            <a href="https://www.youtube.com/@MrBeast" class="video-link">
-                <span style="font-size: 24px; margin-right: 15px;">🏫</span>
-                <div><b>Built 10 Schools in 3 Continents</b><br><small>Projeto filantrópico global.</small></div>
-            </a>
-        </div>
-
-        <div style="margin-top: 30px;">
-             <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" style="color: #007bff; text-decoration: none;">Visitar Celvantes 💠</a>
-        </div>
     </div>
+
+    <div class="feed">
+        <div class="stats">
+            🏆 <b>RANKING 2026:</b> MrBeast (461M) | T-Series (310M) | Luccas Neto (53M) | Felipe Neto (47M)
+        </div>
+
+        <a href="#" class="card">
+            <img src="https://www.realmadrid.com/pt-PT/noticias/futebol/primeira-equipa/atualidade/gran-recibimiento-al-real-madrid-antes-del-partido-contra-el-benfica-25-02-2026" alt="Real Madrid">
+            <div class="card-content">
+                <div class="card-tag">Futebol - Champions</div>
+                <div class="card-title">Real Madrid recebe Benfica no Bernabéu; Mbappé é dúvida por lesão no joelho.</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://images.unsplash.com/photo-1580130281216-1e0c7c07da66?q=80&w=500" alt="EUA">
+            <div class="card-content">
+                <div class="card-tag">Política EUA</div>
+                <div class="card-title">Trump proclama "Era de Ouro" em discurso anual ao Congresso e ataca democratas.</div>
+            </div>
+        </a>
+
+        <a href="https://www.youtube.com/@MrBeast" class="card">
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=500" alt="MrBeast">
+            <div class="card-content">
+                <div class="card-tag">YouTube - MrBeast</div>
+                <div class="card-title">Novo Vídeo: "Foguetes de $1 vs $1 Bilhão" — Beast testa tecnologias de Marte.</div>
+            </div>
+        </a>
+
+        <a href="#" class="card">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=500" alt="IA">
+            <div class="card-content">
+                <div class="card-tag">Tecnologia</div>
+                <div class="card-title">GPT-5.2 atualizado: OpenAI lança modo de raciocínio estendido e melhoria em imagens.</div>
+            </div>
+        </a>
+    </div>
+
+    <footer style="margin-bottom: 30px; color: #5f6368; font-size: 13px;">
+        <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" style="color: #8ab4f8; text-decoration: none;">Acesse o Celvantes 💠</a>
+    </footer>
 
 </body>
 </html>
