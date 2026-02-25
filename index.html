@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta | Global Master 2026</title>
+    <title>Celta | Global Hub 2026</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; overflow-x: hidden; }
@@ -16,7 +16,7 @@
         /* PERFIL */
         .user-bar { background: #1a1a1a; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; flex-wrap: wrap; font-size: 13px; }
         .xp-bar { width: 100px; height: 8px; background: #333; border-radius: 4px; display: inline-block; margin-left: 8px; overflow: hidden; vertical-align: middle; }
-        .xp-fill { width: 70%; height: 100%; background: #00ff00; }
+        .xp-fill { width: 85%; height: 100%; background: #00ff00; }
 
         .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
         .active-page { display: block; }
@@ -27,8 +27,15 @@
         .card { background: #111; border-radius: 12px; border: 1px solid #222; overflow: hidden; }
         .card-header { background: #1a1a1a; padding: 12px; font-weight: bold; border-bottom: 1px solid #222; color: #00ff00; }
         .card-body { padding: 15px; }
-        .live-tag { background: red; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; float: right; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0.3; } }
+
+        /* CHAT */
+        .chat-container { max-width: 600px; margin: 0 auto; background: #111; border-radius: 15px; border: 1px solid #333; height: 500px; display: flex; flex-direction: column; }
+        #chat-window { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { background: #222; padding: 10px; border-radius: 10px; max-width: 80%; }
+        .msg.me { align-self: flex-end; background: #004400; border: 1px solid #00ff00; }
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #333; }
+        .chat-input-area input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid #444; background: #000; color: #fff; outline: none; }
+        .send-btn { background: #00ff00; color: #000; border: none; padding: 0 20px; border-radius: 20px; margin-left: 10px; cursor: pointer; font-weight: bold; }
 
         iframe { width: 100%; border: none; border-radius: 8px; }
         .logo { font-size: 60px; font-weight: 900; font-style: italic; text-align: center; margin: 30px 0; }
@@ -38,15 +45,16 @@
 <body>
 
     <div class="user-bar">
-        <div><b>Piloto Celta</b> | Nível 10 <div class="xp-bar"><div class="xp-fill"></div></div></div>
+        <div><b>Piloto Celta</b> | Nível 12 <div class="xp-bar"><div class="xp-fill"></div></div></div>
         <div id="google_translate_element"></div>
     </div>
 
     <nav>
-        <a onclick="openPage('home')" id="nav-home" class="active">🏠 Início</a>
-        <a onclick="openPage('news')" id="nav-news">🌎 Notícias/TV</a>
+        <a onclick="openPage('home')" id="nav-home" class="active">🏠 Home</a>
+        <a onclick="openPage('news')" id="nav-news">🌎 Notícias/NASA</a>
         <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol/FIFA</a>
         <a onclick="openPage('videojogos')" id="nav-videojogos">🎮 Videojogos</a>
+        <a onclick="openPage('chat')" id="nav-chat">💬 Bater Papo</a>
         <a onclick="openPage('minigames')" id="nav-minigames">🕹️ Mini-Jogos</a>
         <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima/Mapa</a>
         <a onclick="openPage('ranking')" id="nav-ranking">📊 Ranking YT</a>
@@ -61,71 +69,74 @@
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center;">🌎 Notícias e TV em Directo</h2>
+        <h2 style="text-align:center;">🌎 Notícias e Descobertas NASA</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-header">RTP Notícias <span class="live-tag">LIVE</span></div>
-                <div class="card-body"><iframe height="200" src="https://www.youtube.com/embed/live_stream?channel=UC8S-P63vN3T_p90fO-lS47A"></iframe></div>
+                <div class="card-header">🚀 Descobertas da NASA (2026)</div>
+                <div class="card-body">
+                    <b>Artemis III:</b> NASA confirma que a primeira base modular lunar já está enviando oxigênio processado do solo lunar.<br><br>
+                    <b>Vida em Europa:</b> A sonda Clipper detectou compostos orgânicos complexos nos jatos de água da lua Europa (Júpiter).<br><br>
+                    <b>Novo Telescópio:</b> O sucessor do James Webb capturou a imagem mais nítida de um exoplaneta na "zona habitável".
+                </div>
             </div>
             <div class="card">
-                <div class="card-header">Elon Musk & Futuro</div>
-                <div class="card-body"><b>Marte 2026:</b> Starship pronta para o lançamento de Outubro. Grok 3 assume controle de moderação no X.com.</div>
+                <div class="card-header">Telejornal Directo <span style="color:red; font-size:10px;">● LIVE</span></div>
+                <div class="card-body"><iframe height="180" src="https://www.youtube.com/embed/live_stream?channel=UC8S-P63vN3T_p90fO-lS47A"></iframe></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat" class="page">
+        <h2 style="text-align:center;">💬 Sala de Bate Papo Celta</h2>
+        <div class="chat-container">
+            <div id="chat-window">
+                <div class="msg"><b>Sistema:</b> Bem-vindo ao chat! Respeite os outros usuários.</div>
+                <div class="msg"><b>Visitante_2026:</b> Alguém viu a notícia da NASA sobre Júpiter?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-msg" placeholder="Escreva aqui...">
+                <button class="send-btn" onclick="sendMsg()">Enviar</button>
             </div>
         </div>
     </div>
 
     <div id="futebol" class="page">
-        <h2 style="text-align:center;">⚽ Futebol e FIFA 2026</h2>
+        <h2 style="text-align:center;">⚽ Futebol e FIFA Directo</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-header">Jogos em Directo <span class="live-tag">LIVE</span></div>
+                <div class="card-header">Jogos em Directo</div>
                 <div class="card-body"><iframe height="200" src="https://www.youtube.com/embed/live_stream?channel=UC4iRaS_A69GuW_540L5j6mQ"></iframe></div>
-            </div>
-            <div class="card">
-                <div class="card-header">Notícias FIFA</div>
-                <div class="card-body">Brasil e Portugal lideram as apostas para as semifinais da Copa 2026. Bilhetes para a final esgotados.</div>
             </div>
         </div>
     </div>
 
     <div id="videojogos" class="page">
-        <h2 style="text-align:center;">🎮 Mundo dos Videojogos</h2>
+        <h2 style="text-align:center;">🎮 Notícias de Games</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-header">PlayStation & Xbox 2026</div>
-                <div class="card-body">
-                    <b>GTA VI:</b> Rockstar anuncia primeira grande expansão de mapa para o modo online.<br><br>
-                    <b>PS6:</b> Primeiros rumores indicam lançamento de um protótipo em 2027.<br><br>
-                    <b>Lançamento:</b> Novo "Elden Ring: Shadows of the Moon" ganha trailer épico.
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">E-Sports</div>
-                <div class="card-body">Mundial de League of Legends 2026 terá prêmio recorde de 20 milhões de dólares.</div>
+                <div class="card-header">GTA VI & Lançamentos</div>
+                <div class="card-body">A Rockstar Games confirmou o modo cooperativo para a campanha de GTA VI.</div>
             </div>
         </div>
     </div>
 
     <div id="minigames" class="page">
-        <h2 style="text-align:center;">🕹️ Sala de Mini-Jogos</h2>
+        <h2 style="text-align:center;">🕹️ Sala de Jogos</h2>
         <iframe src="https://www.miniplay.com/embed/pac-man" style="height:500px; border:2px solid #00ff00;"></iframe>
     </div>
 
     <div id="clima" class="page">
-        <h2 style="text-align:center;">🌡️ Clima e Mapa Mundial</h2>
+        <h2 style="text-align:center;">🌡️ Mapa e Clima</h2>
         <iframe height="450" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&level=surface&overlay=temp&menu=&message=true&marker=false&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1"></iframe>
-        <div id="clock-display" style="text-align:center; padding:20px; font-size:20px; color:#00ff00;"></div>
     </div>
 
     <div id="ranking" class="page">
-        <h2 style="text-align:center;">📊 Maiores Canais (+1.000.000)</h2>
-        <div style="max-width:600px; margin:0 auto; background:#111; padding:20px; border-radius:10px;">
-            <p>1º <b>MrBeast</b> - 468M</p>
-            <p>2º <b>T-Series</b> - 310M</p>
-            <p>... <b>Luccas Neto</b> - 53M</p>
-            <p>... <b>Felipe Neto</b> - 47M</p>
+        <h2 style="text-align:center;">📊 Ranking Master de YouTubers</h2>
+        <div style="max-width:500px; margin:0 auto; background:#111; padding:15px; border-radius:10px;">
+            <p>🥇 <b>MrBeast</b> - 468M</p>
+            <p>🥈 <b>T-Series</b> - 310M</p>
             <hr>
-            <p style="font-size:12px; color:#555;">Lista detectada: 55.420 canais acima de 1M.</p>
+            <p>... +55.000 canais acima de 1M.</p>
         </div>
     </div>
 
@@ -140,11 +151,15 @@
             window.scrollTo(0,0);
         }
 
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock-display').innerHTML = "Hora Local: " + now.toLocaleTimeString();
+        function sendMsg() {
+            var input = document.getElementById('chat-msg');
+            var win = document.getElementById('chat-window');
+            if(input.value.trim() !== "") {
+                win.innerHTML += `<div class="msg me"><b>Você:</b> ${input.value}</div>`;
+                input.value = "";
+                win.scrollTop = win.scrollHeight;
+            }
         }
-        setInterval(updateClock, 1000);
 
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element');
