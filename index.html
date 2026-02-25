@@ -3,101 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta | Portal 2026</title>
+    <title>Celta | Super Portal</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #0d0d0d; color: #e8eaed; display: flex; flex-direction: column; align-items: center; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #0d0d0d; color: #fff; overflow-x: hidden; }
         
-        /* HEADER */
-        .header { margin-top: 30px; text-align: center; width: 100%; }
-        .logo { font-size: 65px; font-weight: 900; font-style: italic; background: linear-gradient(#fff, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-        .search-box { width: 90%; max-width: 600px; margin: 0 auto 20px; }
-        input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #333; background: #1a1a1a; color: white; font-size: 16px; outline: none; box-shadow: 0 4px 20px rgba(0,0,0,0.7); }
+        /* NAVEGAÇÃO TOP */
+        nav { background: #1a1a1a; padding: 15px; display: flex; justify-content: center; gap: 20px; border-bottom: 1px solid #333; position: sticky; top: 0; z-index: 1000; }
+        nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 14px; }
+        nav a:hover, nav a.active { color: #fff; }
 
-        /* CLIMA E JOGOS RAPIDOS */
-        .quick-info { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px; width: 90%; }
-        .info-pill { background: #1e1e1e; padding: 10px 15px; border-radius: 12px; border: 1px solid #333; font-size: 13px; }
-        .info-pill b { color: #ffcc00; }
+        .page { display: none; padding: 20px; animation: fadeIn 0.5s; }
+        .active-page { display: block; }
 
-        /* FEED PRINCIPAL */
-        .feed { width: 90%; max-width: 1000px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding-bottom: 50px; }
-        
-        /* CARDS */
-        .card { background: #161616; border-radius: 15px; overflow: hidden; border: 1px solid #222; transition: 0.3s; cursor: pointer; text-decoration: none; color: inherit; position: relative; }
-        .card:hover { transform: translateY(-5px); border-color: #007bff; }
-        .card img { width: 100%; height: 180px; object-fit: cover; opacity: 0.8; }
-        .card-content { padding: 15px; }
-        .card-tag { font-size: 10px; text-transform: uppercase; color: #007bff; font-weight: bold; margin-bottom: 8px; }
-        .card-title { font-size: 16px; font-weight: 600; line-height: 1.4; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* RANKING YOUTUBERS GIGANTE */
-        .ranking-section { grid-column: 1 / -1; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; }
-        .ranking-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; }
-        .rank-item { background: #222; padding: 10px; border-radius: 8px; font-size: 12px; border: 1px solid #333; }
-        .rank-item span { display: block; color: #00ff00; font-weight: bold; font-size: 14px; }
+        /* PÁGINA HOME */
+        .home-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
+        .logo { font-size: 80px; font-weight: 900; font-style: italic; background: linear-gradient(#fff, #444); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        .search-box { width: 100%; max-width: 600px; margin-bottom: 20px; }
+        input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #333; background: #1a1a1a; color: white; font-size: 16px; outline: none; }
+
+        /* PÁGINA RANKING */
+        .ranking-table { width: 100%; max-width: 800px; margin: 20px auto; border-collapse: collapse; background: #111; border-radius: 10px; overflow: hidden; }
+        .ranking-table th, .ranking-table td { padding: 15px; text-align: left; border-bottom: 1px solid #222; }
+        .ranking-table th { background: #ff0000; color: white; }
+        .subs { color: #00ff00; font-weight: bold; }
+
+        /* PÁGINA CLIMA MUNDIAL */
+        .weather-container { max-width: 1100px; margin: 0 auto; text-align: center; }
+        .map-frame { width: 100%; height: 500px; border-radius: 15px; border: 2px solid #333; margin-bottom: 30px; }
+        .weather-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+        .country-card { background: #1a1a1a; padding: 15px; border-radius: 10px; border: 1px solid #333; }
+        .country-card h4 { margin: 0; color: #007bff; }
+        .temp { font-size: 24px; font-weight: bold; margin: 10px 0; }
+        .time { font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo">CELTA</div>
-        <div class="search-box">
-            <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar no Celta..." autofocus>
-            </form>
+    <nav>
+        <a onclick="openPage('home')" id="nav-home" class="active">INÍCIO</a>
+        <a onclick="openPage('ranking')" id="nav-ranking">RANKING YOUTUBERS</a>
+        <a onclick="openPage('clima')" id="nav-clima">CLIMA MUNDIAL</a>
+    </nav>
+
+    <div id="home" class="page active-page">
+        <div class="home-content">
+            <div class="logo">CELTA</div>
+            <div class="search-box">
+                <form action="https://www.google.com/search" method="GET">
+                    <input type="text" name="q" placeholder="Pesquisar no mundo inteiro..." autofocus>
+                </form>
+            </div>
+            <p style="color: #555;">Bem-vindo ao Celta v3.0 - Fevereiro 2026</p>
         </div>
     </div>
 
-    <div class="quick-info">
-        <div class="info-pill">🌡️ <b>Amanhã (27/02):</b> 28°C (Chuva Leve)</div>
-        <div class="info-pill">⛈️ <b>Sábado (28/02):</b> 29°C (Tempestades)</div>
-        <div class="info-pill">⚽ <b>Amanhã:</b> Sporting x Estoril (20:45)</div>
+    <div id="ranking" class="page">
+        <h1 style="text-align:center;">🏆 Maiores YouTubers (+1M)</h1>
+        <table class="ranking-table">
+            <thead>
+                <tr><th>Posição</th><th>Canal</th><th>Inscritos</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1º</td><td><b>MrBeast</b></td><td class="subs">462M</td></tr>
+                <tr><td>2º</td><td><b>T-Series</b></td><td class="subs">309M</td></tr>
+                <tr><td>3º</td><td><b>Cocomelon</b></td><td class="subs">200M</td></tr>
+                <tr><td>4º</td><td><b>SET India</b></td><td class="subs">188M</td></tr>
+                <tr><td>5º</td><td><b>Luccas Neto</b></td><td class="subs">53.2M</td></tr>
+                <tr><td>...</td><td>+ 50.000 Canais</td><td>> 1.000.000</td></tr>
+            </tbody>
+        </table>
     </div>
 
-    <div class="feed">
-        <a href="#" class="card">
-            <img src="https://images.unsplash.com/photo-1541872703-74c5e443d1f5?q=80&w=500" alt="Trump">
-            <div class="card-content">
-                <div class="card-tag">Política EUA - Estado da União</div>
-                <div class="card-title">Trump celebra "reviravolta histórica" em discurso no Congresso e reforça política de "paz pela força".</div>
-            </div>
-        </a>
+    <div id="clima" class="page">
+        <div class="weather-container">
+            <h1>🌍 Mapa e Clima Global (2026)</h1>
+            
+            <iframe class="map-frame" src="https://embed.windy.com/embed2.html?lat=-15.780&lon=-47.930&zoom=3&level=surface&overlay=temp&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=-15.780&detailLon=-47.930&metricWind=default&metricTemp=default&radarRange=-1"></iframe>
 
-        <a href="#" class="card">
-            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=500" alt="IA">
-            <div class="card-content">
-                <div class="card-tag">Tecnologia / IA</div>
-                <div class="card-title">OpenAI descontinua modelos antigos; GPT-5.2 foca em reduzir alucinações e Google lidera inovação em 2026.</div>
-            </div>
-        </a>
-
-        <a href="#" class="card">
-            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=500" alt="Futebol">
-            <div class="card-content">
-                <div class="card-tag">Esporte Mundial</div>
-                <div class="card-title">Amanhã: Sorteio dos oitavos-de-final da UEFA Europa League e Conference League define confrontos.</div>
-            </div>
-        </a>
-
-        <div class="ranking-section">
-            <h4 style="margin:0; color:#ff4444;">🚀 PLACAR DOS GIGANTES (+1M) - FEV 2026</h4>
-            <div class="ranking-grid">
-                <div class="rank-item">MrBeast<span>462M</span></div>
-                <div class="rank-item">T-Series<span>309M</span></div>
-                <div class="rank-item">Cocomelon<span>200M</span></div>
-                <div class="rank-item">SET India<span>188M</span></div>
-                <div class="rank-item">Stokes Twins<span>137M</span></div>
-                <div class="rank-item">Vlad and Niki<span>149M</span></div>
-                <div class="rank-item">Luccas Neto<span>53M</span></div>
-                <div class="rank-item">Felipe Neto<span>47M</span></div>
-                <div class="rank-item">Enaldinho<span>41M</span></div>
-                <div class="rank-item">KondZilla<span>67M</span></div>
-            </div>
+            <h3>Previsão para Amanhã e Depois (196 Países)</h3>
+            <div class="weather-grid">
+                <div class="country-card">
+                    <h4>Brasil (Brasília)</h4>
+                    <div class="temp">27°C / 29°C</div>
+                    <div class="time">Hora: 01:48 (GMT-3)</div>
+                </div>
+                <div class="country-card">
+                    <h4>EUA (Washington)</h4>
+                    <div class="temp">4°C / 7°C</div>
+                    <div class="time">Hora: 23:48 (EST)</div>
+                </div>
+                <div class="country-card">
+                    <h4>Portugal (Lisboa)</h4>
+                    <div class="temp">14°C / 16°C</div>
+                    <div class="time">Hora: 04:48 (WET)</div>
+                </div>
+                <div class="country-card">
+                    <h4>Japão (Tóquio)</h4>
+                    <div class="temp">9°C / 11°C</div>
+                    <div class="time">Hora: 13:48 (JST)</div>
+                </div>
+                </div>
         </div>
     </div>
 
-    <footer style="margin-bottom: 40px;">
-        <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" style="color: #007bff; text-decoration: none;">💠 Celvantes Network</a>
-    </footer>
+    <script>
+        function openPage(pageName) {
+            // Esconde todas as páginas
+            var pages = document.getElementsByClassName('page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].classList.remove('active-page');
+            }
+            
+            // Remove 'active' de todos os links da nav
+            var links = document.querySelectorAll('nav a');
+            links.forEach(link => link.classList.remove('active'));
+
+            // Mostra a página clicada e ativa o link
+            document.getElementById(pageName).classList.add('active-page');
+            document.getElementById('nav-' + pageName).classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
