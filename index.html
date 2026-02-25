@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta | Global Master Portal</title>
+    <title>Celta | Portal Global 2026</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; overflow-x: hidden; }
         
-        /* NAVEGAÇÃO MASTER */
-        nav { background: #111; padding: 10px; display: flex; justify-content: center; gap: 8px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
-        nav a { color: #aaa; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 10px; text-transform: uppercase; padding: 8px 10px; border-radius: 5px; }
+        /* NAVEGAÇÃO */
+        nav { background: #111; padding: 12px; display: flex; justify-content: center; gap: 15px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
+        nav a { color: #aaa; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; padding: 8px 12px; border-radius: 5px; }
         nav a:hover, nav a.active { color: #00ff00; background: #222; }
 
-        /* PERFIL COM XP E NÍVEL */
-        .user-bar { background: #1a1a1a; padding: 15px; display: flex; align-items: center; justify-content: space-around; border-bottom: 1px solid #333; flex-wrap: wrap; }
-        .xp-bar-bg { width: 150px; height: 10px; background: #333; border-radius: 5px; margin-top: 5px; }
-        .xp-fill { width: 40%; height: 100%; background: #00ff00; border-radius: 5px; }
+        /* PERFIL E XP */
+        .user-bar { background: #1a1a1a; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; flex-wrap: wrap; font-size: 14px; }
+        .xp-bar { width: 120px; height: 8px; background: #333; border-radius: 4px; display: inline-block; margin-left: 10px; overflow: hidden; }
+        .xp-fill { width: 65%; height: 100%; background: #00ff00; }
 
         .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
         .active-page { display: block; }
@@ -24,130 +24,121 @@
 
         /* GRID E CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .card { background: #111; border-radius: 15px; border: 1px solid #222; overflow: hidden; position: relative; }
+        .card { background: #111; border-radius: 12px; border: 1px solid #222; overflow: hidden; }
         .card-header { background: #1a1a1a; padding: 15px; font-weight: bold; border-bottom: 1px solid #222; color: #00ff00; }
-        .live-tag { background: red; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; float: right; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .card-body { padding: 15px; line-height: 1.6; }
 
-        /* TABELA DE RANKING GIGANTE */
-        .ranking-container { max-width: 900px; margin: 0 auto; background: #111; border-radius: 15px; padding: 20px; border: 1px solid #333; }
-        .rank-table { width: 100%; border-collapse: collapse; }
-        .rank-table tr:nth-child(even) { background: #161616; }
-        .rank-table td { padding: 12px; border-bottom: 1px solid #222; font-size: 14px; }
+        /* RANKING TABLE */
+        .rank-table { width: 100%; max-width: 800px; margin: 0 auto; border-collapse: collapse; background: #111; border: 1px solid #333; }
+        .rank-table td { padding: 12px; border-bottom: 1px solid #222; }
         .subs { color: #00ff00; font-weight: bold; }
 
-        iframe { width: 100%; border-radius: 8px; border: none; }
-        .logo { font-size: 70px; font-weight: 900; font-style: italic; text-align: center; margin: 40px 0; color: #fff; }
+        /* LOGO HOME */
+        .home-content { text-align: center; padding: 80px 20px; }
+        .logo { font-size: 80px; font-weight: 900; font-style: italic; margin-bottom: 30px; text-shadow: 0 0 20px rgba(0,255,0,0.2); }
+        .search-main { width: 100%; max-width: 600px; padding: 18px 25px; border-radius: 50px; border: 1px solid #333; background: #111; color: white; font-size: 18px; outline: none; }
     </style>
 </head>
 <body>
 
     <div class="user-bar">
-        <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:40px; height:40px; background:#00ff00; border-radius:50%;"></div>
-            <div><b>Piloto Celta</b> <br> <small>Nível 5 (Expert)</small></div>
-        </div>
-        <div>
-            XP para Nível 6:
-            <div class="xp-bar-bg"><div class="xp-fill"></div></div>
-        </div>
+        <div><b>Piloto Celta</b> | Nível 8 <div class="xp-bar"><div class="xp-fill"></div></div></div>
         <div id="google_translate_element"></div>
     </div>
 
     <nav>
         <a onclick="openPage('home')" id="nav-home" class="active">🏠 Início</a>
-        <a onclick="openPage('telejornal')" id="nav-telejornal">📺 TV Directo</a>
-        <a onclick="openPage('futebol')" id="nav-futebol">⚽ FIFA & Futebol</a>
+        <a onclick="openPage('news')" id="nav-news">🌎 Notícias Mundiais</a>
+        <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol & FIFA</a>
         <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima & Mapa</a>
-        <a onclick="openPage('ranking')" id="nav-ranking">📊 Ranking +1M</a>
-        <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" target="_blank" style="color:#007bff">💠 Celvantes</a>
+        <a onclick="openPage('ranking')" id="nav-ranking">📊 Ranking YouTubers</a>
+        <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" target="_blank">💠 Celvantes</a>
     </nav>
 
     <div id="home" class="page active-page">
-        <div class="logo">CELTA</div>
-        <div style="text-align:center;">
+        <div class="home-content">
+            <div class="logo">CELTA</div>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar no Mundo Inteiro..." style="width:80%; max-width:600px; padding:15px; border-radius:30px; border:1px solid #333; background:#111; color:#fff; font-size:18px;">
+                <input type="text" name="q" class="search-main" placeholder="Pesquisar notícias, pessoas ou lugares..." autofocus>
             </form>
-            <p style="color:#666; margin-top:20px;">O seu portal 2026: Rápido, Global e Conectado.</p>
+            <p style="margin-top: 30px; color: #444;">O mundo em suas mãos. Edição 2026.</p>
         </div>
     </div>
 
-    <div id="telejornal" class="page">
-        <h2 style="text-align:center;">🌎 Notícias Mundiais & Telejornais em Directo</h2>
+    <div id="news" class="page">
+        <h2 style="text-align:center;">🌎 Notícias do Mundo</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-header">RTP Notícias (Portugal) <span class="live-tag">DIRECTO</span></div>
-                <div class="card-body"><iframe height="200" src="https://www.youtube.com/embed/live_stream?channel=UC8S-P63vN3T_p90fO-lS47A"></iframe></div>
+                <div class="card-header">Últimas Notícias</div>
+                <div class="card-body">
+                    <b>EUA:</b> Donald Trump assina novas ordens executivas sobre comércio no Ártico.<br><br>
+                    <b>Elon Musk:</b> SpaceX confirma que a primeira Starship de carga pousará em Marte em Outubro.<br><br>
+                    <b>Tecnologia:</b> OpenAI lança o GPT-5.2 com raciocínio lógico avançado.
+                </div>
             </div>
             <div class="card">
-                <div class="card-header">CNN International <span class="live-tag">LIVE</span></div>
-                <div class="card-body"><iframe height="200" src="https://www.youtube.com/embed/live_stream?channel=UCupvZG-5ko_eiOSupigOtFg"></iframe></div>
-            </div>
-            <div class="card">
-                <div class="card-header">Elon Musk & X.com Update</div>
-                <div class="card-body" style="padding:15px;">
-                    <p><b>Elon Musk (Fev 2026):</b> Anuncia que o primeiro humano com Neuralink já controla um carro Tesla apenas com o pensamento.</p>
+                <div class="card-header">Geopolítica 2026</div>
+                <div class="card-body">
+                    A economia global mostra sinais de recuperação com a adoção em massa de energia solar e fusão nuclear experimental em vários países.
                 </div>
             </div>
         </div>
     </div>
 
     <div id="futebol" class="page">
-        <h2 style="text-align:center;">⚽ FIFA & Futebol Global</h2>
+        <h2 style="text-align:center;">⚽ Futebol & FIFA Master</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-header">Jogos em Directo <span class="live-tag">LIVE</span></div>
-                <div class="card-body"><iframe height="200" src="https://www.youtube.com/embed/live_stream?channel=UC4iRaS_A69GuW_540L5j6mQ"></iframe></div>
+                <div class="card-header">Copa do Mundo 2026</div>
+                <div class="card-body">
+                    <b>FIFA:</b> Obras nos estádios de Nova York e Dallas entram na fase final. Sorteio dos grupos revela "Grupo da Morte" com três gigantes europeus.
+                </div>
             </div>
             <div class="card">
-                <div class="card-header">Notícias FIFA Copa 2026</div>
-                <div class="card-body" style="padding:15px;">
-                    <p><b>FIFA:</b> Estádios nos EUA recebem tecnologia de grama inteligente.</p>
-                    <p><b>Ligas:</b> Real Madrid e Manchester City disputam liderança do ranking mundial de clubes.</p>
+                <div class="card-header">Ligas & Mercado</div>
+                <div class="card-body">
+                    <b>Champions League:</b> Real Madrid avança para as quartas após vitória emocionante sobre o Bayern.<br><br>
+                    <b>Jogadores:</b> Endrick lidera artilharia e Mbappé atinge a marca de 500 gols na carreira.
                 </div>
             </div>
         </div>
     </div>
 
     <div id="clima" class="page">
-        <h2 style="text-align:center;">🌡️ Mapa, Clima e Horas Mundiais</h2>
+        <h2 style="text-align:center;">🌡️ Clima, Mapa e Horários</h2>
         <div class="grid">
             <div class="card" style="grid-column: 1 / -1;">
-                <iframe height="450" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&level=surface&overlay=temp&menu=&message=true&marker=false&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1"></iframe>
+                <iframe height="450" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&level=surface&overlay=temp&menu=&message=true&marker=false&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1" style="width:100%; border:none; border-radius:12px;"></iframe>
             </div>
             <div class="card">
-                <div class="card-header">⌚ Horário nas Capitais</div>
-                <div id="clock-list" style="padding:15px; line-height:2;"></div>
+                <div class="card-header">⌚ Relógios Globais</div>
+                <div id="clocks" style="padding:15px; line-height:2;">Carregando horários...</div>
             </div>
             <div class="card">
-                <div class="card-header">🌡️ Previsão Amanhã</div>
+                <div class="card-header">🌦️ Previsão (26-27 Fev)</div>
                 <div style="padding:15px;">
-                    Portugal: 16°C | Brasil: 29°C | EUA: 5°C | Angola: 31°C
+                    Lisboa: 15°C (Céu Limpo)<br>
+                    Brasília: 28°C (Sol e Chuva)<br>
+                    Nova York: 4°C (Frio Intenso)<br>
+                    Luanda: 31°C (Calor)
                 </div>
             </div>
         </div>
     </div>
 
     <div id="ranking" class="page">
-        <h2 style="text-align:center;">📊 Lista Master de YouTubers (+1.000.000)</h2>
-        <div class="ranking-container">
-            <table class="rank-table">
-                <thead><tr style="color:#00ff00;"><td>Pos</td><td>Canal</td><td>Inscritos</td></tr></thead>
-                <tbody id="ranking-body">
-                    <tr><td>1º</td><td><b>MrBeast</b></td><td class="subs">468.000.000</td></tr>
-                    <tr><td>2º</td><td><b>T-Series</b></td><td class="subs">310.000.000</td></tr>
-                    <tr><td>3º</td><td><b>Cocomelon</b></td><td class="subs">201.000.000</td></tr>
-                    <tr><td>4º</td><td><b>SET India</b></td><td class="subs">189.000.000</td></tr>
-                    <tr><td>5º</td><td><b>Kids Diana Show</b></td><td class="subs">130.000.000</td></tr>
-                    <tr><td>6º</td><td><b>PewDiePie</b></td><td class="subs">111.000.000</td></tr>
-                    <tr><td>...</td><td><b>Luccas Neto</b></td><td class="subs">53.400.000</td></tr>
-                    <tr><td>...</td><td><b>Felipe Neto</b></td><td class="subs">47.800.000</td></tr>
-                    <tr><td>...</td><td><b>Enaldinho</b></td><td class="subs">41.500.000</td></tr>
-                    <tr><td>...</td><td colspan="2"><i>Mais 55.000 canais acima de 1.000.000 de inscritos detectados...</i></td></tr>
-                </tbody>
-            </table>
-        </div>
+        <h2 style="text-align:center;">📊 Lista Master YouTubers (+1.000.000)</h2>
+        <table class="rank-table">
+            <tr><td>1º</td><td><b>MrBeast</b></td><td class="subs">468M</td></tr>
+            <tr><td>2º</td><td><b>T-Series</b></td><td class="subs">310M</td></tr>
+            <tr><td>3º</td><td><b>Cocomelon</b></td><td class="subs">201M</td></tr>
+            <tr><td>4º</td><td><b>SET India</b></td><td class="subs">189M</td></tr>
+            <tr><td>5º</td><td><b>Kids Diana Show</b></td><td class="subs">130M</td></tr>
+            <tr><td>...</td><td><b>Luccas Neto</b></td><td class="subs">53M</td></tr>
+            <tr><td>...</td><td><b>Felipe Neto</b></td><td class="subs">47M</td></tr>
+            <tr><td>...</td><td><b>Enaldinho</b></td><td class="subs">41M</td></tr>
+            <tr style="text-align:center; font-size:12px; color:#555;"><td colspan="3">Monitorando +55.000 canais acima de 1 milhão de inscritos</td></tr>
+        </table>
     </div>
 
     <script>
@@ -162,16 +153,11 @@
         }
 
         function updateClocks() {
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const options = { hour: '2-digit', minute: '2-digit' };
             const pt = new Date().toLocaleTimeString('pt-PT', { timeZone: 'Europe/Lisbon', ...options });
             const br = new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Sao_Paulo', ...options });
             const ny = new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', ...options });
-            
-            document.getElementById('clock-list').innerHTML = `
-                🇵🇹 Lisboa: <b>${pt}</b><br>
-                🇧🇷 Brasília: <b>${br}</b><br>
-                🇺🇸 Nova York: <b>${ny}</b>
-            `;
+            document.getElementById('clocks').innerHTML = `Lisboa: <b>${pt}</b> | Brasília: <b>${br}</b> | NY: <b>${ny}</b>`;
         }
         setInterval(updateClocks, 1000);
 
