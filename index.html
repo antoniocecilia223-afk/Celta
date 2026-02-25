@@ -3,28 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta</title>
+    <title>Celta | Portal 2026</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #121212; color: #e8eaed; display: flex; flex-direction: column; align-items: center; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #0d0d0d; color: #e8eaed; display: flex; flex-direction: column; align-items: center; }
         
-        /* TOPO ESTILO GOOGLE */
-        .header { margin-top: 50px; text-align: center; width: 100%; }
-        .logo { font-size: 80px; font-weight: bold; font-style: italic; background: linear-gradient(#fff, #777); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
-        .search-box { width: 90%; max-width: 580px; margin-bottom: 40px; }
-        input { width: 100%; padding: 14px 25px; border-radius: 30px; border: 1px solid #3c4043; background: #202124; color: white; font-size: 16px; outline: none; box-shadow: 0 1px 6px rgba(0,0,0,0.3); }
+        /* HEADER */
+        .header { margin-top: 30px; text-align: center; width: 100%; }
+        .logo { font-size: 65px; font-weight: 900; font-style: italic; background: linear-gradient(#fff, #555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .search-box { width: 90%; max-width: 600px; margin: 0 auto 20px; }
+        input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #333; background: #1a1a1a; color: white; font-size: 16px; outline: none; box-shadow: 0 4px 20px rgba(0,0,0,0.7); }
 
-        /* FEED DE NOTÍCIAS EMBAIXO */
-        .feed { width: 90%; max-width: 800px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding-bottom: 50px; }
-        .card { background: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.3s; cursor: pointer; text-decoration: none; color: inherit; }
-        .card:hover { background: #252525; transform: translateY(-5px); }
-        .card img { width: 100%; height: 160px; object-fit: cover; background: #333; }
-        .card-content { padding: 15px; }
-        .card-tag { font-size: 10px; text-transform: uppercase; color: #8ab4f8; font-weight: bold; margin-bottom: 5px; }
-        .card-title { font-size: 16px; font-weight: 500; line-height: 1.4; }
+        /* CLIMA E JOGOS RAPIDOS */
+        .quick-info { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-bottom: 25px; width: 90%; }
+        .info-pill { background: #1e1e1e; padding: 10px 15px; border-radius: 12px; border: 1px solid #333; font-size: 13px; }
+        .info-pill b { color: #ffcc00; }
+
+        /* FEED PRINCIPAL */
+        .feed { width: 90%; max-width: 1000px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding-bottom: 50px; }
         
-        /* PLACAR YOUTUBERS */
-        .stats { grid-column: 1 / -1; background: #202124; padding: 20px; border-radius: 12px; border: 1px dotted #444; text-align: center; }
-        .stats b { color: #00ff00; font-size: 20px; }
+        /* CARDS */
+        .card { background: #161616; border-radius: 15px; overflow: hidden; border: 1px solid #222; transition: 0.3s; cursor: pointer; text-decoration: none; color: inherit; position: relative; }
+        .card:hover { transform: translateY(-5px); border-color: #007bff; }
+        .card img { width: 100%; height: 180px; object-fit: cover; opacity: 0.8; }
+        .card-content { padding: 15px; }
+        .card-tag { font-size: 10px; text-transform: uppercase; color: #007bff; font-weight: bold; margin-bottom: 8px; }
+        .card-title { font-size: 16px; font-weight: 600; line-height: 1.4; }
+
+        /* RANKING YOUTUBERS GIGANTE */
+        .ranking-section { grid-column: 1 / -1; background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+        .ranking-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; }
+        .rank-item { background: #222; padding: 10px; border-radius: 8px; font-size: 12px; border: 1px solid #333; }
+        .rank-item span { display: block; color: #00ff00; font-weight: bold; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -33,51 +42,61 @@
         <div class="logo">CELTA</div>
         <div class="search-box">
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" placeholder="Pesquisar na web..." autofocus autocomplete="off">
+                <input type="text" name="q" placeholder="Pesquisar no Celta..." autofocus>
             </form>
         </div>
     </div>
 
+    <div class="quick-info">
+        <div class="info-pill">🌡️ <b>Amanhã (27/02):</b> 28°C (Chuva Leve)</div>
+        <div class="info-pill">⛈️ <b>Sábado (28/02):</b> 29°C (Tempestades)</div>
+        <div class="info-pill">⚽ <b>Amanhã:</b> Sporting x Estoril (20:45)</div>
+    </div>
+
     <div class="feed">
-        <div class="stats">
-            🏆 <b>RANKING 2026:</b> MrBeast (461M) | T-Series (310M) | Luccas Neto (53M) | Felipe Neto (47M)
-        </div>
-
         <a href="#" class="card">
-            <img src="https://www.realmadrid.com/pt-PT/noticias/futebol/primeira-equipa/atualidade/gran-recibimiento-al-real-madrid-antes-del-partido-contra-el-benfica-25-02-2026" alt="Real Madrid">
+            <img src="https://images.unsplash.com/photo-1541872703-74c5e443d1f5?q=80&w=500" alt="Trump">
             <div class="card-content">
-                <div class="card-tag">Futebol - Champions</div>
-                <div class="card-title">Real Madrid recebe Benfica no Bernabéu; Mbappé é dúvida por lesão no joelho.</div>
-            </div>
-        </a>
-
-        <a href="#" class="card">
-            <img src="https://images.unsplash.com/photo-1580130281216-1e0c7c07da66?q=80&w=500" alt="EUA">
-            <div class="card-content">
-                <div class="card-tag">Política EUA</div>
-                <div class="card-title">Trump proclama "Era de Ouro" em discurso anual ao Congresso e ataca democratas.</div>
-            </div>
-        </a>
-
-        <a href="https://www.youtube.com/@MrBeast" class="card">
-            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=500" alt="MrBeast">
-            <div class="card-content">
-                <div class="card-tag">YouTube - MrBeast</div>
-                <div class="card-title">Novo Vídeo: "Foguetes de $1 vs $1 Bilhão" — Beast testa tecnologias de Marte.</div>
+                <div class="card-tag">Política EUA - Estado da União</div>
+                <div class="card-title">Trump celebra "reviravolta histórica" em discurso no Congresso e reforça política de "paz pela força".</div>
             </div>
         </a>
 
         <a href="#" class="card">
             <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=500" alt="IA">
             <div class="card-content">
-                <div class="card-tag">Tecnologia</div>
-                <div class="card-title">GPT-5.2 atualizado: OpenAI lança modo de raciocínio estendido e melhoria em imagens.</div>
+                <div class="card-tag">Tecnologia / IA</div>
+                <div class="card-title">OpenAI descontinua modelos antigos; GPT-5.2 foca em reduzir alucinações e Google lidera inovação em 2026.</div>
             </div>
         </a>
+
+        <a href="#" class="card">
+            <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=500" alt="Futebol">
+            <div class="card-content">
+                <div class="card-tag">Esporte Mundial</div>
+                <div class="card-title">Amanhã: Sorteio dos oitavos-de-final da UEFA Europa League e Conference League define confrontos.</div>
+            </div>
+        </a>
+
+        <div class="ranking-section">
+            <h4 style="margin:0; color:#ff4444;">🚀 PLACAR DOS GIGANTES (+1M) - FEV 2026</h4>
+            <div class="ranking-grid">
+                <div class="rank-item">MrBeast<span>462M</span></div>
+                <div class="rank-item">T-Series<span>309M</span></div>
+                <div class="rank-item">Cocomelon<span>200M</span></div>
+                <div class="rank-item">SET India<span>188M</span></div>
+                <div class="rank-item">Stokes Twins<span>137M</span></div>
+                <div class="rank-item">Vlad and Niki<span>149M</span></div>
+                <div class="rank-item">Luccas Neto<span>53M</span></div>
+                <div class="rank-item">Felipe Neto<span>47M</span></div>
+                <div class="rank-item">Enaldinho<span>41M</span></div>
+                <div class="rank-item">KondZilla<span>67M</span></div>
+            </div>
+        </div>
     </div>
 
-    <footer style="margin-bottom: 30px; color: #5f6368; font-size: 13px;">
-        <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" style="color: #8ab4f8; text-decoration: none;">Acesse o Celvantes 💠</a>
+    <footer style="margin-bottom: 40px;">
+        <a href="https://antoniocecilia223-afk.github.io/celvantes.github.io/" style="color: #007bff; text-decoration: none;">💠 Celvantes Network</a>
     </footer>
 
 </body>
