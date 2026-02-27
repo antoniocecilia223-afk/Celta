@@ -3,49 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celta | Global Hub 2026</title>
+    <title>Celta | Portal Global 2026</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; overflow-x: hidden; }
         
-        /* NAVEGAÇÃO */
         nav { background: #111; padding: 10px; display: flex; justify-content: center; gap: 8px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
         nav a { color: #aaa; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 9px; text-transform: uppercase; padding: 7px 10px; border-radius: 5px; }
         nav a:hover, nav a.active { color: #00ff00; background: #222; }
 
-        /* PERFIL */
         .user-bar { background: #1a1a1a; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; flex-wrap: wrap; font-size: 13px; }
         .xp-bar { width: 100px; height: 8px; background: #333; border-radius: 4px; display: inline-block; margin-left: 8px; overflow: hidden; vertical-align: middle; }
-        .xp-fill { width: 85%; height: 100%; background: #00ff00; }
+        .xp-fill { width: 90%; height: 100%; background: #00ff00; }
 
         .page { display: none; padding: 20px; animation: fadeIn 0.4s; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* GRID */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
         .card { background: #111; border-radius: 12px; border: 1px solid #222; overflow: hidden; }
         .card-header { background: #1a1a1a; padding: 12px; font-weight: bold; border-bottom: 1px solid #222; color: #00ff00; }
-        .card-body { padding: 15px; }
-
-        /* CHAT */
-        .chat-container { max-width: 600px; margin: 0 auto; background: #111; border-radius: 15px; border: 1px solid #333; height: 500px; display: flex; flex-direction: column; }
-        #chat-window { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
-        .msg { background: #222; padding: 10px; border-radius: 10px; max-width: 80%; }
-        .msg.me { align-self: flex-end; background: #004400; border: 1px solid #00ff00; }
-        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #333; }
-        .chat-input-area input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid #444; background: #000; color: #fff; outline: none; }
-        .send-btn { background: #00ff00; color: #000; border: none; padding: 0 20px; border-radius: 20px; margin-left: 10px; cursor: pointer; font-weight: bold; }
+        .card-body { padding: 15px; font-size: 14px; line-height: 1.5; }
+        .live-tag { background: red; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; float: right; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
 
         iframe { width: 100%; border: none; border-radius: 8px; }
         .logo { font-size: 60px; font-weight: 900; font-style: italic; text-align: center; margin: 30px 0; }
         input.search-main { width: 100%; max-width: 500px; padding: 15px; border-radius: 30px; border: 1px solid #333; background: #111; color: #fff; display: block; margin: 0 auto; }
+        
+        .chat-container { max-width: 600px; margin: 0 auto; background: #111; border-radius: 15px; border: 1px solid #333; height: 400px; display: flex; flex-direction: column; }
+        #chat-window { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { background: #222; padding: 10px; border-radius: 10px; }
+        .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #333; }
+        .chat-input-area input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid #444; background: #000; color: #fff; outline: none; }
     </style>
 </head>
 <body>
 
     <div class="user-bar">
-        <div><b>Piloto Celta</b> | Nível 12 <div class="xp-bar"><div class="xp-fill"></div></div></div>
+        <div><b>Piloto Celta</b> | Nível 15 <div class="xp-bar"><div class="xp-fill"></div></div></div>
         <div id="google_translate_element"></div>
     </div>
 
@@ -64,81 +60,92 @@
     <div id="home" class="page active-page">
         <div class="logo">CELTA</div>
         <form action="https://www.google.com/search" method="GET">
-            <input type="text" name="q" class="search-main" placeholder="Pesquisa global 2026..." autofocus>
+            <input type="text" name="q" class="search-main" placeholder="Pesquisar mundo em tempo real..." autofocus>
         </form>
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center;">🌎 Notícias e Descobertas NASA</h2>
+        <h2 style="text-align:center;">🌎 Notícias Mundiais - 27 de Fev de 2026</h2>
         <div class="grid">
             <div class="card">
-                <div class="card-header">🚀 Descobertas da NASA (2026)</div>
+                <div class="card-header">🚀 NASA & Espaço</div>
                 <div class="card-body">
-                    <b>Artemis III:</b> NASA confirma que a primeira base modular lunar já está enviando oxigênio processado do solo lunar.<br><br>
-                    <b>Vida em Europa:</b> A sonda Clipper detectou compostos orgânicos complexos nos jatos de água da lua Europa (Júpiter).<br><br>
-                    <b>Novo Telescópio:</b> O sucessor do James Webb capturou a imagem mais nítida de um exoplaneta na "zona habitável".
+                    <b>Artemis Hub:</b> NASA confirma a instalação bem-sucedida do primeiro gerador de oxigênio permanente no Polo Sul da Lua.<br><br>
+                    <b>Asteroides:</b> O sistema DART 2 evitou com sucesso um pequeno detrito espacial que ameaçava satélites de comunicação.<br><br>
+                    <b>NASA Discovery:</b> Novos dados do Telescópio Webb sugerem oceanos líquidos sob as nuvens de exoplanetas próximos.
                 </div>
             </div>
             <div class="card">
-                <div class="card-header">Telejornal Directo <span style="color:red; font-size:10px;">● LIVE</span></div>
+                <div class="card-header">🌍 Geopolítica & Elon Musk</div>
+                <div class="card-body">
+                    <b>Elon Musk (X):</b> Musk anuncia que o X.com processou seu primeiro bilhão de dólares em pagamentos via Doge e BTC hoje.<br><br>
+                    <b>Economia:</b> A cúpula do G20 discute a regulação global de robôs humanoides nas fábricas.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">📺 TV Directo <span class="live-tag">LIVE</span></div>
                 <div class="card-body"><iframe height="180" src="https://www.youtube.com/embed/live_stream?channel=UC8S-P63vN3T_p90fO-lS47A"></iframe></div>
             </div>
         </div>
     </div>
 
+    <div id="futebol" class="page">
+        <h2 style="text-align:center;">⚽ Central FIFA & Futebol Mundial</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🏆 Copa do Mundo FIFA 2026</div>
+                <div class="card-body">
+                    <b>Faltam 103 dias!</b> A FIFA iniciou hoje a última fase de venda de ingressos para a abertura no Estádio Azteca.<br><br>
+                    <b>Brasil:</b> Dorival Jr. faz pré-convocação com Endrick e Vini Jr. como destaques absolutos.<br><br>
+                    <b>Portugal:</b> Cristiano Ronaldo confirma que estará na lista final para o Mundial 2026.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🇪🇺 Ligas Europeias (Resultados)</div>
+                <div class="card-body">
+                    <b>Champions League:</b> Oitavas de final agitam a semana. Real Madrid e City seguem como favoritos após vitórias na ida.<br><br>
+                    <b>Benfica/Porto:</b> Disputa acirrada pelo topo da Liga Portugal.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">🎥 Futebol Directo <span class="live-tag">LIVE</span></div>
+                <div class="card-body"><iframe height="180" src="https://www.youtube.com/embed/live_stream?channel=UC4iRaS_A69GuW_540L5j6mQ"></iframe></div>
+            </div>
+        </div>
+    </div>
+
     <div id="chat" class="page">
-        <h2 style="text-align:center;">💬 Sala de Bate Papo Celta</h2>
+        <h2 style="text-align:center;">💬 Chat Comunitário</h2>
         <div class="chat-container">
             <div id="chat-window">
-                <div class="msg"><b>Sistema:</b> Bem-vindo ao chat! Respeite os outros usuários.</div>
-                <div class="msg"><b>Visitante_2026:</b> Alguém viu a notícia da NASA sobre Júpiter?</div>
+                <div class="msg"><b>Sistema:</b> Chat atualizado. Bem-vindo!</div>
             </div>
             <div class="chat-input-area">
-                <input type="text" id="chat-msg" placeholder="Escreva aqui...">
-                <button class="send-btn" onclick="sendMsg()">Enviar</button>
+                <input type="text" id="chat-msg" placeholder="Bater um papo...">
+                <button onclick="sendMsg()" style="background:#00ff00; border:none; border-radius:20px; padding:0 15px; font-weight:bold; cursor:pointer;">></button>
             </div>
         </div>
-    </div>
-
-    <div id="futebol" class="page">
-        <h2 style="text-align:center;">⚽ Futebol e FIFA Directo</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">Jogos em Directo</div>
-                <div class="card-body"><iframe height="200" src="https://www.youtube.com/embed/live_stream?channel=UC4iRaS_A69GuW_540L5j6mQ"></iframe></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="videojogos" class="page">
-        <h2 style="text-align:center;">🎮 Notícias de Games</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">GTA VI & Lançamentos</div>
-                <div class="card-body">A Rockstar Games confirmou o modo cooperativo para a campanha de GTA VI.</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="minigames" class="page">
-        <h2 style="text-align:center;">🕹️ Sala de Jogos</h2>
-        <iframe src="https://www.miniplay.com/embed/pac-man" style="height:500px; border:2px solid #00ff00;"></iframe>
     </div>
 
     <div id="clima" class="page">
-        <h2 style="text-align:center;">🌡️ Mapa e Clima</h2>
+        <h2 style="text-align:center;">🌡️ Clima & Mapa Global</h2>
         <iframe height="450" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&level=surface&overlay=temp&menu=&message=true&marker=false&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=default&radarRange=-1"></iframe>
     </div>
 
     <div id="ranking" class="page">
-        <h2 style="text-align:center;">📊 Ranking Master de YouTubers</h2>
+        <h2 style="text-align:center;">📊 Ranking YouTubers 2026</h2>
         <div style="max-width:500px; margin:0 auto; background:#111; padding:15px; border-radius:10px;">
-            <p>🥇 <b>MrBeast</b> - 468M</p>
-            <p>🥈 <b>T-Series</b> - 310M</p>
+            <p>1º <b>MrBeast</b> - 468M</p>
+            <p>2º <b>T-Series</b> - 310M</p>
+            <p>3º <b>Cocomelon</b> - 201M</p>
             <hr>
-            <p>... +55.000 canais acima de 1M.</p>
+            <p style="color:#666; font-size:12px;">+55.000 canais acima de 1 milhão monitorados.</p>
         </div>
     </div>
+
+    <div id="videojogos" class="page"><h2 style="text-align:center;">🎮 Notícias de Games</h2><div class="grid"><div class="card"><div class="card-header">GTA VI Update</div><div class="card-body">Rockstar libera novas imagens de Vice City. Lançamento bate recordes de pré-venda.</div></div></div></div>
+
+    <div id="minigames" class="page"><h2 style="text-align:center;">🕹️ Sala de Jogos</h2><iframe src="https://www.miniplay.com/embed/pac-man" style="height:500px;"></iframe></div>
 
     <script>
         function openPage(pageName) {
@@ -155,7 +162,7 @@
             var input = document.getElementById('chat-msg');
             var win = document.getElementById('chat-window');
             if(input.value.trim() !== "") {
-                win.innerHTML += `<div class="msg me"><b>Você:</b> ${input.value}</div>`;
+                win.innerHTML += `<div class="msg"><b>Você:</b> ${input.value}</div>`;
                 input.value = "";
                 win.scrollTop = win.scrollHeight;
             }
