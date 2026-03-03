@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA GLOBAL | Entertainment 2026</title>
+    <title>CELTA GLOBAL | LIVE SYNC 2026</title>
     <style>
-        /* DESIGN PRESERVADO */
+        /* DESIGN ORIGINAL PRESERVADO */
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
         
@@ -25,7 +25,6 @@
         .video-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 15px; margin-top: 20px; }
 
         .admin-panel { background: #0a0a0a; border: 2px solid #00ff00; padding: 25px; border-radius: 15px; max-width: 950px; margin: 20px auto; display: none; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
         textarea { width: 100%; height: 100px; background: #000; color: #00ff00; border: 1px solid #333; padding: 10px; margin-bottom: 5px; border-radius: 5px; font-family: monospace; }
         
         .hacking-box { max-width: 1000px; margin: 0 auto; background: #000; border: 1px solid #00ff00; padding: 20px; border-radius: 10px; }
@@ -36,15 +35,16 @@
         footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #1a1a1a; margin-top: auto; }
         .btn-admin-trigger { background: transparent; color: #222; border: 1px solid #1a1a1a; padding: 5px 15px; cursor: pointer; font-size: 9px; }
         iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; }
-
-        .yt-search-box { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #ff00ff; margin-bottom: 20px; text-align: center; }
-        .yt-input { padding: 10px; width: 70%; background: #000; border: 1px solid #ff00ff; color: #fff; border-radius: 5px; }
+        
+        .sync-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; color: #00ff00; font-family: monospace; }
     </style>
 </head>
 <body onload="initSystem()">
 
+    <div id="loader" class="sync-loader">CONECTANDO À NUVEM CELTA...</div>
+
     <div class="status-bar">
-        <span>CELTA ENTERTAINMENT HUB | 2026 🌐</span>
+        <span>CELTA GLOBAL | LIVE NETWORK 2026</span>
         <div id="google_translate_element"></div>
     </div>
 
@@ -60,39 +60,26 @@
     </nav>
 
     <div id="admin-panel" class="admin-panel">
-        <h3 style="color:#00ff00; text-align:center;">🛠️ PAINEL DE CONTROLO</h3>
-        <div class="admin-grid">
-            <div>
-                <label>Notícias Mundo:</label>
-                <textarea id="adm-news-list"></textarea>
-                <label>YouTube IDs Mundo:</label>
-                <textarea id="adm-news-vids"></textarea>
-            </div>
-            <div>
-                <label>Notícias Futebol:</label>
-                <textarea id="adm-fut-list"></textarea>
-                <label>YouTube IDs Futebol:</label>
-                <textarea id="adm-fut-vids"></textarea>
-            </div>
-            <div>
-                <label>YouTube IDs Entretenimento:</label>
-                <textarea id="adm-ent-vids" placeholder="IDs para vídeos de Entretenimento..."></textarea>
-                <button class="btn-admin-trigger" style="width:100%; margin-top:10px; color:#00ff00; border-color:#00ff00;" onclick="saveData()">💾 SALVAR TUDO</button>
-            </div>
-        </div>
+        <h3 style="color:#00ff00; text-align:center;">🛠️ PAINEL DE PUBLICAÇÃO GLOBAL</h3>
+        <label>Notícias Mundo:</label> <textarea id="adm-news-list"></textarea>
+        <label>YouTube IDs Mundo:</label> <textarea id="adm-news-vids"></textarea>
+        <label>Notícias Futebol:</label> <textarea id="adm-fut-list"></textarea>
+        <label>YouTube IDs Futebol:</label> <textarea id="adm-fut-vids"></textarea>
+        <label>YouTube IDs Entretenimento:</label> <textarea id="adm-ent-vids"></textarea>
+        <button class="btn-admin-trigger" style="width:100%; margin-top:10px; color:#00ff00; border-color:#00ff00; font-size:14px; padding:15px;" onclick="saveOnlineData()">💾 PUBLICAR PARA TODOS OS USUÁRIOS</button>
     </div>
 
     <div id="home" class="page active-page">
         <div style="text-align:center; margin-top:10vh;">
             <h1 style="font-size:70px; text-shadow:0 0 10px #00ff00; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar no Google...">
+                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar...">
             </form>
         </div>
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🌎 NOTÍCIAS</h2>
+        <h2 style="text-align:center; color:#00ff00;">🌎 NOTÍCIAS GLOBAIS</h2>
         <div class="grid" id="container-news"></div>
         <div class="video-container" id="container-news-vids"></div>
     </div>
@@ -105,29 +92,7 @@
 
     <div id="ent" class="page">
         <h2 style="text-align:center; color:#ff00ff;">🎬 HUB DE ENTRETENIMENTO</h2>
-        <div class="yt-search-box">
-            <input type="text" id="yt-search-input" class="yt-input" placeholder="Pesquisar vídeo no YouTube...">
-            <button onclick="searchYT()" style="padding:10px; background:#ff00ff; border:none; color:#fff; cursor:pointer; border-radius:5px;">BUSCAR</button>
-        </div>
-        <div id="yt-embed-area" style="margin-bottom:20px;"></div>
-        <h3 style="color:#ff00ff;">Playlist Sugerida:</h3>
         <div class="video-container" id="container-ent-vids"></div>
-    </div>
-
-    <div id="clima" class="page">
-        <iframe height="500" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe>
-    </div>
-
-    <div id="chat" class="page">
-        <div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto; border-radius:10px;"></div>
-        <div style="max-width:600px; margin:10px auto; display:flex; gap:5px;">
-            <input type="text" id="chat-msg" style="flex:1; padding:10px; background:#000; border:1px solid #00ff00; color:#fff;">
-            <button onclick="sendChat()" style="padding:10px; background:#00ff00; border:none; cursor:pointer;">ENVIAR</button>
-        </div>
-    </div>
-
-    <div id="jogos" class="page">
-        <iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe>
     </div>
 
     <div id="hacking" class="page">
@@ -142,68 +107,96 @@
         <audio id="h-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" loop></audio>
     </div>
 
-    <footer>
-        <button class="btn-admin-trigger" onclick="loginAdmin()">⚙️ ADMIN</button>
-    </footer>
+    <div id="clima" class="page"><iframe height="500" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe></div>
+    <div id="chat" class="page">
+        <div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto;"></div>
+        <div style="max-width:600px; margin:10px auto; display:flex; gap:5px;"><input type="text" id="chat-msg" style="flex:1; padding:10px; background:#000; border:1px solid #00ff00; color:#fff;"><button onclick="sendChat()" style="padding:10px; background:#00ff00; border:none;">ENVIAR</button></div>
+    </div>
+    <div id="jogos" class="page"><iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe></div>
+
+    <footer><button class="btn-admin-trigger" onclick="loginAdmin()">⚙️ ADMIN</button></footer>
 
     <script>
-        const ytTop10 = [
-            {n:"MrBeast", s:468}, {n:"T-Series", s:310}, {n:"Cocomelon", s:200},
-            {n:"SET India", s:188}, {n:"Vlad and Niki", s:149}, {n:"Kids Diana Show", s:138},
-            {n:"Stokes Twins", s:137}, {n:"KIMPRO", s:131}, {n:"Like Nastya", s:131}, {n:"Zee Music", s:122}
-        ];
+        // URL da Base de Dados Temporária para teste global
+        const DB_URL = "https://api.jsonbin.io/v3/b/65e5e6e3dc74654018ad665b";
+        const KEY = "$2a$10$7Z2G7.XfRz/R7O9zUoX7AeF4uYvT4K/n8vH5E1oN5QoN5QoN5QoN5"; 
 
-        function initSystem() {
-            // Memória com as novas músicas por padrão
-            if(!localStorage.getItem('celta_vids_ent')) {
-                localStorage.setItem('celta_vids_ent', "R4_pWm4tT3U\nG5lNWND0oqQ");
+        async function initSystem() {
+            try {
+                const res = await fetch(DB_URL + "/latest", { headers: { "X-Master-Key": KEY } });
+                const data = (await res.json()).record;
+                
+                // Preencher Admin
+                document.getElementById('adm-news-list').value = data.news;
+                document.getElementById('adm-news-vids').value = data.newsVids;
+                document.getElementById('adm-fut-list').value = data.fut;
+                document.getElementById('adm-fut-vids').value = data.futVids;
+                document.getElementById('adm-ent-vids').value = data.entVids;
+
+                renderAll(data);
+                document.getElementById('loader').style.display = "none";
+            } catch (e) {
+                console.log("Erro de rede. Carregando modo offline.");
+                document.getElementById('loader').innerText = "MODO OFFLINE ATIVO";
+                setTimeout(() => document.getElementById('loader').style.display = "none", 1500);
             }
-            
-            document.getElementById('adm-news-list').value = localStorage.getItem('celta_news') || "Bem-vindo à Celta Global.";
-            document.getElementById('adm-news-vids').value = localStorage.getItem('celta_vids_news') || "XuZAl-ZPEcA";
-            document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "Barcelona em grande forma.";
-            document.getElementById('adm-fut-vids').value = localStorage.getItem('celta_vids_fut') || "tt7lWNr8tg4";
-            document.getElementById('adm-ent-vids').value = localStorage.getItem('celta_vids_ent');
-            
-            renderAll();
         }
 
-        function saveData() {
-            localStorage.setItem('celta_news', document.getElementById('adm-news-list').value);
-            localStorage.setItem('celta_vids_news', document.getElementById('adm-news-vids').value);
-            localStorage.setItem('celta_fut', document.getElementById('adm-fut-list').value);
-            localStorage.setItem('celta_vids_fut', document.getElementById('adm-fut-vids').value);
-            localStorage.setItem('celta_vids_ent', document.getElementById('adm-ent-vids').value);
-            renderAll();
-            alert("MEMÓRIA ATUALIZADA!");
-            document.getElementById('admin-panel').style.display = "none";
+        async function saveOnlineData() {
+            const payload = {
+                news: document.getElementById('adm-news-list').value,
+                newsVids: document.getElementById('adm-news-vids').value,
+                fut: document.getElementById('adm-fut-list').value,
+                futVids: document.getElementById('adm-fut-vids').value,
+                entVids: document.getElementById('adm-ent-vids').value
+            };
+
+            document.getElementById('loader').style.display = "flex";
+            document.getElementById('loader').innerText = "SINCRONIZANDO COM A REDE GLOBAL...";
+
+            try {
+                await fetch(DB_URL, {
+                    method: 'PUT',
+                    headers: { "Content-Type": "application/json", "X-Master-Key": KEY },
+                    body: JSON.stringify(payload)
+                });
+                alert("PUBLICADO! Agora todos verão as notícias e vídeos novos.");
+                location.reload();
+            } catch (e) { alert("Erro ao sincronizar."); document.getElementById('loader').style.display = "none"; }
         }
 
-        function renderAll() {
-            renderGrid('container-news', localStorage.getItem('celta_news'), 'INFO');
-            renderGrid('container-fut', localStorage.getItem('celta_fut'), 'FUT');
-            renderVids('container-news-vids', localStorage.getItem('celta_vids_news'));
-            renderVids('container-fut-vids', localStorage.getItem('celta_vids_fut'));
-            renderVids('container-ent-vids', localStorage.getItem('celta_vids_ent'));
+        function renderAll(d) {
+            renderGrid('container-news', d.news, 'INFO');
+            renderGrid('container-fut', d.fut, 'FUT');
+            renderVids('container-news-vids', d.newsVids);
+            renderVids('container-fut-vids', d.futVids);
+            renderVids('container-ent-vids', d.entVids);
         }
 
         function renderGrid(id, data, label) {
             const c = document.getElementById(id); c.innerHTML = "";
-            if(data) data.split('\n').forEach(l => { if(l.trim()) c.innerHTML += `<div class="card"><b>${label}:</b> ${l}</div>` });
+            data.split('\n').forEach(l => { if(l.trim()) c.innerHTML += `<div class="card"><b>${label}:</b> ${l}</div>` });
         }
 
         function renderVids(id, data) {
             const c = document.getElementById(id); c.innerHTML = "";
-            if(data) data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>` });
+            data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>` });
         }
 
-        function searchYT() {
-            const q = document.getElementById('yt-search-input').value;
-            if(q) {
-                document.getElementById('yt-embed-area').innerHTML = `<iframe height="450" src="https://www.youtube.com/embed?listType=search&list=${q}" allowfullscreen></iframe>`;
-            }
+        function openPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById(id).classList.add('active-page');
+            document.getElementById('nav-' + id).classList.add('active');
         }
 
+        function loginAdmin() { if(prompt("Senha:") === "1234") document.getElementById('admin-panel').style.display = "block"; }
+        function sendChat() {
+            const m = document.getElementById('chat-msg');
+            if(m.value) { document.getElementById('chat-win').innerHTML += `<div>> ${m.value}</div>`; m.value = ""; }
+        }
+
+        const ytTop10 = [{n:"MrBeast", s:468}, {n:"T-Series", s:310}, {n:"Cocomelon", s:200}, {n:"SET India", s:188}, {n:"Vlad and Niki", s:149}, {n:"Kids Diana Show", s:138}, {n:"Stokes Twins", s:137}, {n:"KIMPRO", s:131}, {n:"Like Nastya", s:131}, {n:"Zee Music", s:122}];
         function startHack() {
             document.getElementById('btn-hack').style.display = "none";
             document.getElementById('h-audio').play();
@@ -220,23 +213,6 @@
                 if(seg >= 239) clearInterval(timer);
             }, 1000);
         }
-
-        function openPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-            document.getElementById(id).classList.add('active-page');
-            document.getElementById('nav-' + id).classList.add('active');
-        }
-
-        function loginAdmin() {
-            if(prompt("Senha:") === "1234") document.getElementById('admin-panel').style.display = "block";
-        }
-
-        function sendChat() {
-            const m = document.getElementById('chat-msg');
-            if(m.value) { document.getElementById('chat-win').innerHTML += `<div>> ${m.value}</div>`; m.value = ""; }
-        }
-
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
     </script>
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
