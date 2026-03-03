@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA GLOBAL | Music & News 2026</title>
+    <title>CELTA GLOBAL | Entertainment 2026</title>
     <style>
-        /* DESIGN PRESERVADO */
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
         
@@ -14,45 +13,45 @@
         nav { background: #000; padding: 12px; display: flex; justify-content: center; gap: 8px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
         nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 10px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px; }
         nav a:hover, nav a.active { color: #00ff00; border-color: #00ff00; background: #001100; text-shadow: 0 0 5px #00ff00; border: 1px solid #00ff00; }
-        .nav-link-music { color: #ff00ff !important; border: 1px solid #ff00ff !important; }
+        .nav-link-ent { color: #ff00ff !important; border: 1px solid #ff00ff !important; }
 
         .page { display: none; padding: 25px; flex: 1; animation: fadeIn 0.4s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* GRID E CARDS */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
         .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; }
         .video-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 15px; margin-top: 20px; }
 
-        /* PAINEL ADMIN */
         .admin-panel { background: #0a0a0a; border: 2px solid #00ff00; padding: 25px; border-radius: 15px; max-width: 950px; margin: 20px auto; display: none; }
         .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
         textarea { width: 100%; height: 100px; background: #000; color: #00ff00; border: 1px solid #333; padding: 10px; margin-bottom: 5px; border-radius: 5px; font-family: monospace; }
         
-        /* HACKING */
         .hacking-box { max-width: 1000px; margin: 0 auto; background: #000; border: 1px solid #00ff00; padding: 20px; border-radius: 10px; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
         th, td { border: 1px solid #1a1a1a; padding: 10px; text-align: left; }
-        th { color: #00ff00; }
+        th { color: #00ff00; text-transform: uppercase; }
 
         footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #1a1a1a; margin-top: auto; }
         .btn-admin-trigger { background: transparent; color: #222; border: 1px solid #1a1a1a; padding: 5px 15px; cursor: pointer; font-size: 9px; }
         iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; }
+
+        .yt-search-box { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #ff00ff; margin-bottom: 20px; text-align: center; }
+        .yt-input { padding: 10px; width: 70%; background: #000; border: 1px solid #ff00ff; color: #fff; border-radius: 5px; }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div class="status-bar">
-        <span>CELTA GLOBAL V.3.8 | MEMÓRIA ATIVA</span>
+        <span>CELTA ENTERTAINMENT HUB | 2026 🌐</span>
         <div id="google_translate_element"></div>
     </div>
 
     <nav>
-        <a onclick="openPage('home')" id="nav-home" class="active">🔍 Pesquisa</a>
+        <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
         <a onclick="openPage('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="openPage('musica')" id="nav-musica" class="nav-link-music">🎵 Música</a>
+        <a onclick="openPage('ent')" id="nav-ent" class="nav-link-ent">🎬 Entretenimento</a>
         <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima</a>
         <a onclick="openPage('chat')" id="nav-chat">💬 Chat</a>
         <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
@@ -60,7 +59,7 @@
     </nav>
 
     <div id="admin-panel" class="admin-panel">
-        <h3 style="color:#00ff00; text-align:center;">🛠️ CONFIGURAÇÕES MASTER</h3>
+        <h3 style="color:#00ff00; text-align:center;">🛠️ PAINEL DE CONTROLO</h3>
         <div class="admin-grid">
             <div>
                 <label>Notícias Mundo:</label>
@@ -75,8 +74,8 @@
                 <textarea id="adm-fut-vids"></textarea>
             </div>
             <div>
-                <label>YouTube IDs Música:</label>
-                <textarea id="adm-music-vids" placeholder="ID da música ou playlist..."></textarea>
+                <label>YouTube IDs Entretenimento:</label>
+                <textarea id="adm-ent-vids" placeholder="IDs para vídeos de Entretenimento..."></textarea>
                 <button class="btn-admin-trigger" style="width:100%; margin-top:10px; color:#00ff00; border-color:#00ff00;" onclick="saveData()">💾 SALVAR TUDO</button>
             </div>
         </div>
@@ -86,7 +85,7 @@
         <div style="text-align:center; margin-top:10vh;">
             <h1 style="font-size:70px; text-shadow:0 0 10px #00ff00; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar...">
+                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar no Google...">
             </form>
         </div>
     </div>
@@ -103,9 +102,14 @@
         <div class="video-container" id="container-fut-vids"></div>
     </div>
 
-    <div id="musica" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎵 PLAYER DE MÚSICA</h2>
-        <div class="video-container" id="container-music-vids"></div>
+    <div id="ent" class="page">
+        <h2 style="text-align:center; color:#ff00ff;">🎬 HUB DE ENTRETENIMENTO</h2>
+        <div class="yt-search-box">
+            <input type="text" id="yt-search-input" class="yt-input" placeholder="Pesquisar vídeo no YouTube...">
+            <button onclick="searchYT()" style="padding:10px; background:#ff00ff; border:none; color:#fff; cursor:pointer; border-radius:5px;">BUSCAR</button>
+        </div>
+        <div id="yt-embed-area" style="margin-bottom:20px;"></div>
+        <div class="video-container" id="container-ent-vids"></div>
     </div>
 
     <div id="clima" class="page">
@@ -113,9 +117,9 @@
     </div>
 
     <div id="chat" class="page">
-        <div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto;"></div>
+        <div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto; border-radius:10px;"></div>
         <div style="max-width:600px; margin:10px auto; display:flex; gap:5px;">
-            <input type="text" id="chat-msg" style="flex:1; padding:10px; border:1px solid #00ff00; background:#000; color:#fff;">
+            <input type="text" id="chat-msg" style="flex:1; padding:10px; background:#000; border:1px solid #00ff00; color:#fff;">
             <button onclick="sendChat()" style="padding:10px; background:#00ff00; border:none; cursor:pointer;">ENVIAR</button>
         </div>
     </div>
@@ -126,10 +130,10 @@
 
     <div id="hacking" class="page">
         <div class="hacking-box">
-            <h3 id="h-timer" style="text-align:center; color:#00ff00;">HACKING 3:59</h3>
-            <button onclick="startHack()" id="btn-hack" style="width:100%; padding:15px; background:#00ff00; border:none; font-weight:bold; cursor:pointer;">EXECUTAR</button>
+            <h3 id="h-timer" style="text-align:center; color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3>
+            <button onclick="startHack()" id="btn-hack" style="width:100%; padding:15px; background:#00ff00; border:none; font-weight:bold; cursor:pointer;">INICIAR</button>
             <table>
-                <thead><tr><th>RANK</th><th>CANAL</th><th>SUBS</th></tr></thead>
+                <thead><tr><th>RANK</th><th>CANAL</th><th>SUBS (2026)</th></tr></thead>
                 <tbody id="yt-body"></tbody>
             </table>
         </div>
@@ -141,13 +145,18 @@
     </footer>
 
     <script>
+        const ytTop10 = [
+            {n:"MrBeast", s:468}, {n:"T-Series", s:310}, {n:"Cocomelon", s:200},
+            {n:"SET India", s:188}, {n:"Vlad and Niki", s:149}, {n:"Kids Diana Show", s:138},
+            {n:"Stokes Twins", s:137}, {n:"KIMPRO", s:131}, {n:"Like Nastya", s:131}, {n:"Zee Music", s:122}
+        ];
+
         function initSystem() {
-            // Carregar Memória
-            document.getElementById('adm-news-list').value = localStorage.getItem('celta_news') || "Notícia 1\nNotícia 2";
+            document.getElementById('adm-news-list').value = localStorage.getItem('celta_news') || "Bem-vindo à Celta Global.";
             document.getElementById('adm-news-vids').value = localStorage.getItem('celta_vids_news') || "XuZAl-ZPEcA";
-            document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "Futebol 1";
+            document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "Barcelona em grande forma.";
             document.getElementById('adm-fut-vids').value = localStorage.getItem('celta_vids_fut') || "tt7lWNr8tg4";
-            document.getElementById('adm-music-vids').value = localStorage.getItem('celta_vids_music') || "jfKfPfyJRdk";
+            document.getElementById('adm-ent-vids').value = localStorage.getItem('celta_vids_ent') || "jfKfPfyJRdk";
             renderAll();
         }
 
@@ -156,18 +165,18 @@
             localStorage.setItem('celta_vids_news', document.getElementById('adm-news-vids').value);
             localStorage.setItem('celta_fut', document.getElementById('adm-fut-list').value);
             localStorage.setItem('celta_vids_fut', document.getElementById('adm-fut-vids').value);
-            localStorage.setItem('celta_vids_music', document.getElementById('adm-music-vids').value);
+            localStorage.setItem('celta_vids_ent', document.getElementById('adm-ent-vids').value);
             renderAll();
-            alert("SISTEMA CELTA ATUALIZADO!");
+            alert("MEMÓRIA ATUALIZADA!");
             document.getElementById('admin-panel').style.display = "none";
         }
 
         function renderAll() {
-            renderGrid('container-news', localStorage.getItem('celta_news'), 'MUNDO');
+            renderGrid('container-news', localStorage.getItem('celta_news'), 'INFO');
             renderGrid('container-fut', localStorage.getItem('celta_fut'), 'FUT');
             renderVids('container-news-vids', localStorage.getItem('celta_vids_news'));
             renderVids('container-fut-vids', localStorage.getItem('celta_vids_fut'));
-            renderVids('container-music-vids', localStorage.getItem('celta_vids_music'));
+            renderVids('container-ent-vids', localStorage.getItem('celta_vids_ent'));
         }
 
         function renderGrid(id, data, label) {
@@ -177,7 +186,31 @@
 
         function renderVids(id, data) {
             const c = document.getElementById(id); c.innerHTML = "";
-            data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}"></iframe>` });
+            data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>` });
+        }
+
+        function searchYT() {
+            const q = document.getElementById('yt-search-input').value;
+            if(q) {
+                document.getElementById('yt-embed-area').innerHTML = `<iframe height="450" src="https://www.youtube.com/embed?listType=search&list=${q}" allowfullscreen></iframe>`;
+            }
+        }
+
+        function startHack() {
+            document.getElementById('btn-hack').style.display = "none";
+            document.getElementById('h-audio').play();
+            let seg = 0;
+            const timer = setInterval(() => {
+                seg++;
+                document.getElementById('h-timer').innerText = `HACKING: ${Math.floor(seg/60)}:${seg%60} / 3:59`;
+                let html = "";
+                ytTop10.forEach((item, i) => {
+                    let s = (item.s * (seg/239)).toFixed(1);
+                    html += `<tr><td>${i+1}</td><td>${item.n}</td><td style="color:#00ff00;">${s}M</td></tr>`;
+                });
+                document.getElementById('yt-body').innerHTML = html;
+                if(seg >= 239) clearInterval(timer);
+            }, 1000);
         }
 
         function openPage(id) {
@@ -194,23 +227,6 @@
         function sendChat() {
             const m = document.getElementById('chat-msg');
             if(m.value) { document.getElementById('chat-win').innerHTML += `<div>> ${m.value}</div>`; m.value = ""; }
-        }
-
-        function startHack() {
-            document.getElementById('btn-hack').style.display = "none";
-            document.getElementById('h-audio').play();
-            let seg = 0;
-            const timer = setInterval(() => {
-                seg++;
-                document.getElementById('h-timer').innerText = `HACKING: ${Math.floor(seg/60)}:${seg%60} / 3:59`;
-                let html = "";
-                [{n:"MrBeast", s:468}, {n:"T-Series", s:310}].forEach((item, i) => {
-                    let s = (item.s * (seg/239)).toFixed(1);
-                    html += `<tr><td>${i+1}</td><td>${item.n}</td><td style="color:#00ff00;">${s}M</td></tr>`;
-                });
-                document.getElementById('yt-body').innerHTML = html;
-                if(seg >= 239) clearInterval(timer);
-            }, 1000);
         }
 
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
