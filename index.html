@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CELTA GLOBAL | Entertainment 2026</title>
     <style>
+        /* DESIGN PRESERVADO */
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
         
@@ -109,6 +110,7 @@
             <button onclick="searchYT()" style="padding:10px; background:#ff00ff; border:none; color:#fff; cursor:pointer; border-radius:5px;">BUSCAR</button>
         </div>
         <div id="yt-embed-area" style="margin-bottom:20px;"></div>
+        <h3 style="color:#ff00ff;">Playlist Sugerida:</h3>
         <div class="video-container" id="container-ent-vids"></div>
     </div>
 
@@ -152,11 +154,17 @@
         ];
 
         function initSystem() {
+            // Memória com as novas músicas por padrão
+            if(!localStorage.getItem('celta_vids_ent')) {
+                localStorage.setItem('celta_vids_ent', "R4_pWm4tT3U\nG5lNWND0oqQ");
+            }
+            
             document.getElementById('adm-news-list').value = localStorage.getItem('celta_news') || "Bem-vindo à Celta Global.";
             document.getElementById('adm-news-vids').value = localStorage.getItem('celta_vids_news') || "XuZAl-ZPEcA";
             document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "Barcelona em grande forma.";
             document.getElementById('adm-fut-vids').value = localStorage.getItem('celta_vids_fut') || "tt7lWNr8tg4";
-            document.getElementById('adm-ent-vids').value = localStorage.getItem('celta_vids_ent') || "jfKfPfyJRdk";
+            document.getElementById('adm-ent-vids').value = localStorage.getItem('celta_vids_ent');
+            
             renderAll();
         }
 
@@ -181,12 +189,12 @@
 
         function renderGrid(id, data, label) {
             const c = document.getElementById(id); c.innerHTML = "";
-            data.split('\n').forEach(l => { if(l.trim()) c.innerHTML += `<div class="card"><b>${label}:</b> ${l}</div>` });
+            if(data) data.split('\n').forEach(l => { if(l.trim()) c.innerHTML += `<div class="card"><b>${label}:</b> ${l}</div>` });
         }
 
         function renderVids(id, data) {
             const c = document.getElementById(id); c.innerHTML = "";
-            data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>` });
+            if(data) data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>` });
         }
 
         function searchYT() {
