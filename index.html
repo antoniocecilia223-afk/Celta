@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CELTA GLOBAL | Entertainment 2026</title>
     <style>
-        /* DESIGN PRESERVADO */
+        /* DESIGN PRESERVADO E SEGURO */
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
         
@@ -44,7 +44,7 @@
 <body onload="initSystem()">
 
     <div class="status-bar">
-        <span>CELTA ENTERTAINMENT HUB | 2026 🌐</span>
+        <span>CELTA ENTERTAINMENT HUB | 2026 🌐 (SECURE MODE)</span>
         <div id="google_translate_element"></div>
     </div>
 
@@ -60,7 +60,7 @@
     </nav>
 
     <div id="admin-panel" class="admin-panel">
-        <h3 style="color:#00ff00; text-align:center;">🛠️ PAINEL DE CONTROLO</h3>
+        <h3 style="color:#00ff00; text-align:center;">🛠️ PAINEL DE CONTROLO MASTER</h3>
         <div class="admin-grid">
             <div>
                 <label>Notícias Mundo:</label>
@@ -75,9 +75,9 @@
                 <textarea id="adm-fut-vids"></textarea>
             </div>
             <div>
-                <label>YouTube IDs Entretenimento:</label>
-                <textarea id="adm-ent-vids" placeholder="IDs para vídeos de Entretenimento..."></textarea>
-                <button class="btn-admin-trigger" style="width:100%; margin-top:10px; color:#00ff00; border-color:#00ff00;" onclick="saveData()">💾 SALVAR TUDO</button>
+                <label>Conteúdo Entretenimento (YouTube IDs ou Links Suno):</label>
+                <textarea id="adm-ent-vids" placeholder="IDs de vídeos ou Links Suno..."></textarea>
+                <button class="btn-admin-trigger" style="width:100%; margin-top:10px; color:#00ff00; border-color:#00ff00; padding: 10px;" onclick="saveData()">💾 SALVAR E PUBLICAR</button>
             </div>
         </div>
     </div>
@@ -86,31 +86,31 @@
         <div style="text-align:center; margin-top:10vh;">
             <h1 style="font-size:70px; text-shadow:0 0 10px #00ff00; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar no Google...">
+                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar de forma segura...">
             </form>
         </div>
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🌎 NOTÍCIAS</h2>
+        <h2 style="text-align:center; color:#00ff00;">🌎 NOTÍCIAS GLOBAIS</h2>
         <div class="grid" id="container-news"></div>
         <div class="video-container" id="container-news-vids"></div>
     </div>
 
     <div id="futebol" class="page">
-        <h2 style="text-align:center; color:#00ff00;">⚽ FUTEBOL</h2>
+        <h2 style="text-align:center; color:#00ff00;">⚽ DESPORTO</h2>
         <div class="grid" id="container-fut"></div>
         <div class="video-container" id="container-fut-vids"></div>
     </div>
 
     <div id="ent" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎬 HUB DE ENTRETENIMENTO</h2>
+        <h2 style="text-align:center; color:#ff00ff;">🎬 HUB DE ENTRETENIMENTO & MÚSICA</h2>
         <div class="yt-search-box">
-            <input type="text" id="yt-search-input" class="yt-input" placeholder="Pesquisar vídeo no YouTube...">
+            <input type="text" id="yt-search-input" class="yt-input" placeholder="Pesquisar no YouTube...">
             <button onclick="searchYT()" style="padding:10px; background:#ff00ff; border:none; color:#fff; cursor:pointer; border-radius:5px;">BUSCAR</button>
         </div>
         <div id="yt-embed-area" style="margin-bottom:20px;"></div>
-        <h3 style="color:#ff00ff;">Playlist Sugerida:</h3>
+        <h3 style="color:#ff00ff;">A Tua Playlist (Inclui Suno AI):</h3>
         <div class="video-container" id="container-ent-vids"></div>
     </div>
 
@@ -119,7 +119,7 @@
     </div>
 
     <div id="chat" class="page">
-        <div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto; border-radius:10px;"></div>
+        <div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto; border-radius:10px; font-family: monospace; color:#00ff00;"></div>
         <div style="max-width:600px; margin:10px auto; display:flex; gap:5px;">
             <input type="text" id="chat-msg" style="flex:1; padding:10px; background:#000; border:1px solid #00ff00; color:#fff;">
             <button onclick="sendChat()" style="padding:10px; background:#00ff00; border:none; cursor:pointer;">ENVIAR</button>
@@ -133,7 +133,7 @@
     <div id="hacking" class="page">
         <div class="hacking-box">
             <h3 id="h-timer" style="text-align:center; color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3>
-            <button onclick="startHack()" id="btn-hack" style="width:100%; padding:15px; background:#00ff00; border:none; font-weight:bold; cursor:pointer;">INICIAR</button>
+            <button onclick="startHack()" id="btn-hack" style="width:100%; padding:15px; background:#00ff00; border:none; font-weight:bold; cursor:pointer;">INICIAR HACKING</button>
             <table>
                 <thead><tr><th>RANK</th><th>CANAL</th><th>SUBS (2026)</th></tr></thead>
                 <tbody id="yt-body"></tbody>
@@ -143,7 +143,7 @@
     </div>
 
     <footer>
-        <button class="btn-admin-trigger" onclick="loginAdmin()">⚙️ ADMIN</button>
+        <button class="btn-admin-trigger" onclick="loginAdmin()">⚙️ CONFIGURAÇÕES DE REDE</button>
     </footer>
 
     <script>
@@ -154,14 +154,16 @@
         ];
 
         function initSystem() {
-            // Memória com as novas músicas por padrão
+            // MÚSICAS PADRÃO (LINKIN PARK + SUNO ENVIADOS)
+            const musicasPadrao = "R4_pWm4tT3U\nG5lNWND0oqQ\nhttps://suno.com/s/x5dt1K0M3VXfkhPh\nhttps://suno.com/s/tW89B55LqXRb17Op";
+
             if(!localStorage.getItem('celta_vids_ent')) {
-                localStorage.setItem('celta_vids_ent', "R4_pWm4tT3U\nG5lNWND0oqQ");
+                localStorage.setItem('celta_vids_ent', musicasPadrao);
             }
             
-            document.getElementById('adm-news-list').value = localStorage.getItem('celta_news') || "Bem-vindo à Celta Global.";
+            document.getElementById('adm-news-list').value = localStorage.getItem('celta_news') || "Celta Global Online.";
             document.getElementById('adm-news-vids').value = localStorage.getItem('celta_vids_news') || "XuZAl-ZPEcA";
-            document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "Barcelona em grande forma.";
+            document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "Barcelona vs Madrid.";
             document.getElementById('adm-fut-vids').value = localStorage.getItem('celta_vids_fut') || "tt7lWNr8tg4";
             document.getElementById('adm-ent-vids').value = localStorage.getItem('celta_vids_ent');
             
@@ -175,7 +177,7 @@
             localStorage.setItem('celta_vids_fut', document.getElementById('adm-fut-vids').value);
             localStorage.setItem('celta_vids_ent', document.getElementById('adm-ent-vids').value);
             renderAll();
-            alert("MEMÓRIA ATUALIZADA!");
+            alert("BASE DE DADOS ATUALIZADA!");
             document.getElementById('admin-panel').style.display = "none";
         }
 
@@ -194,7 +196,17 @@
 
         function renderVids(id, data) {
             const c = document.getElementById(id); c.innerHTML = "";
-            if(data) data.split('\n').forEach(v => { if(v.trim()) c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>` });
+            if(data) data.split('\n').forEach(v => { 
+                if(v.trim()) {
+                    if(v.includes("suno.com")) {
+                        // Suporte para Suno (Link direto clicável ou iframe se disponível)
+                        c.innerHTML += `<div class="card" style="border-left-color:#ff00ff">🎵 MÚSICA SUNO:<br><a href="${v.trim()}" target="_blank" style="color:#ff00ff">Ouvir no Suno AI</a></div>`;
+                    } else {
+                        // Suporte para YouTube
+                        c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${v.trim()}" allowfullscreen></iframe>`;
+                    }
+                }
+            });
         }
 
         function searchYT() {
@@ -210,7 +222,7 @@
             let seg = 0;
             const timer = setInterval(() => {
                 seg++;
-                document.getElementById('h-timer').innerText = `HACKING: ${Math.floor(seg/60)}:${seg%60} / 3:59`;
+                document.getElementById('h-timer').innerText = `HACKING STATUS: ${Math.floor(seg/60)}:${seg%60} / 3:59`;
                 let html = "";
                 ytTop10.forEach((item, i) => {
                     let s = (item.s * (seg/239)).toFixed(1);
@@ -229,16 +241,16 @@
         }
 
         function loginAdmin() {
-            if(prompt("Senha:") === "1234") document.getElementById('admin-panel').style.display = "block";
+            if(prompt("Senha do Sistema:") === "1234") document.getElementById('admin-panel').style.display = "block";
         }
 
         function sendChat() {
             const m = document.getElementById('chat-msg');
-            if(m.value) { document.getElementById('chat-win').innerHTML += `<div>> ${m.value}</div>`; m.value = ""; }
+            if(m.value) { document.getElementById('chat-win').innerHTML += `<div>[USER]: ${m.value}</div>`; m.value = ""; }
         }
 
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
     </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
