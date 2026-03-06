@@ -3,36 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA GLOBAL | CONNECT 2026</title>
+    <title>CELTA OS | ULTIMATE 2026</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
-        
         .status-bar { background: #000; padding: 5px 20px; display: flex; justify-content: space-between; font-family: monospace; font-size: 11px; color: #00ff00; border-bottom: 1px solid #1a1a1a; }
-        
         nav { background: #000; padding: 12px; display: flex; justify-content: center; gap: 8px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
-        nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 10px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px; border: 1px solid transparent; }
-        nav a:hover, nav a.active { color: #00ff00; border-color: #00ff00; background: #001100; box-shadow: 0 0 10px #00ff00; }
-        .nav-comms { color: #00ffff !important; border: 1px solid #00ffff !important; font-size: 11px; }
-
-        .page { display: none; padding: 15px; flex: 1; animation: fadeIn 0.4s ease; }
+        nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 10px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px; }
+        nav a:hover, nav a.active { color: #00ff00; border-color: #00ff00; background: #001100; box-shadow: 0 0 10px #00ff00; border: 1px solid #00ff00; }
+        .page { display: none; padding: 20px; flex: 1; animation: fadeIn 0.4s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
         .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; }
-        
-        /* Iframe para Sites Reais */
-        .external-frame { width: 100%; border-radius: 12px; border: 2px solid #00ffff; background: #000; height: 600px; }
-        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; }
-        
-        footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #1a1a1a; font-size: 10px; color: #444; }
+        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; min-height: 400px; }
+        .secret-btn { background: transparent; border: none; color: #111; font-size: 8px; cursor: pointer; margin-top: 10px; }
+        .secret-content { display: none; background: #111; border: 2px dashed #ff0000; padding: 20px; margin-top: 20px; text-align: center; }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div class="status-bar">
-        <span>CELTA NETWORK | ACTIVE SESSION 2026 🌐</span>
+        <span>CELTA NETWORK | ENCRYPTED 🌐</span>
         <div id="google_translate_element"></div>
     </div>
 
@@ -40,72 +32,97 @@
         <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
         <a onclick="openPage('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="openPage('chat-real')" id="nav-chat-real" class="nav-comms">💬 Chat Online</a>
-        <a onclick="openPage('call-real')" id="nav-call-real" class="nav-comms">📞 Chamada Real</a>
+        <a onclick="openPage('call')" id="nav-call">📞 Chamada</a>
+        <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima</a>
+        <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
         <a onclick="openPage('ent')" id="nav-ent">🎬 Música</a>
+        <a onclick="openPage('hacking')" id="nav-hacking">📊 Hacking</a>
     </nav>
 
     <div id="home" class="page active-page">
         <div style="text-align:center; margin-top:10vh;">
             <h1 style="font-size:70px; text-shadow:0 0 15px #00ff00; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar com segurança...">
+                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar...">
             </form>
         </div>
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🌎 JORNAL MUNDO</h2>
+        <h2 style="text-align:center; color:#00ff00;">🌎 JORNAL</h2>
         <div class="grid">
-            <div class="card">
-                <b>INFO:</b> Lua de Sangue 2026.
-                <iframe src="https://www.youtube.com/embed/XuZAl-ZPEcA" height="200"></iframe>
-            </div>
-            <div class="card">
-                <b>LIVE:</b> Euronews Notícias.
-                <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" height="200"></iframe>
-            </div>
+            <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" height="250"></iframe>
+            <iframe src="https://www.youtube.com/embed/XuZAl-ZPEcA" height="250"></iframe>
         </div>
-    </div>
-
-    <div id="chat-real" class="page">
-        <h2 style="text-align:center; color:#00ffff;">💬 SALA DE CHAT GLOBAL</h2>
-        <p style="text-align:center; font-size:12px;">Podes falar com outras pessoas em tempo real aqui em baixo.</p>
-        <iframe src="https://minnit.chat/CeltaGlobal?embed&nickname=" class="external-frame" allowTransparency="true"></iframe>
-    </div>
-
-    <div id="call-real" class="page">
-        <h2 style="text-align:center; color:#00ffff;">📞 VIDEOCHAMADA ENCRIPTADA</h2>
-        <p style="text-align:center; font-size:12px;">Entra na sala, liga o micro e convida alguém para falar contigo.</p>
-        <iframe src="https://meet.jit.si/CeltaGlobalConnect2026" class="external-frame" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
     </div>
 
     <div id="futebol" class="page">
-        <h2 style="text-align:center; color:#00ff00;">⚽ RESULTADOS LIVE</h2>
-        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:550px;"></iframe>
+        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:600px;"></iframe>
+    </div>
+
+    <div id="call" class="page">
+        <h2 style="text-align:center; color:#00e5ff;">📞 JITSI MEET LIVE</h2>
+        <iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
+    </div>
+
+    <div id="clima" class="page">
+        <iframe src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe>
+    </div>
+
+    <div id="jogos" class="page">
+        <iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe>
     </div>
 
     <div id="ent" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎬 PLAYLIST & SUNO</h2>
+        <h2 style="text-align:center; color:#ff00ff;">🎬 PLAYLIST</h2>
         <div class="grid">
-            <iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" height="250"></iframe>
             <div class="card" style="border-left-color:#ff00ff;">
-                <b>SUNO AI 1:</b> <a href="https://suno.com/s/x5dt1K0M3VXfkhPh" target="_blank" style="color:#ff00ff;">Ouvir Online</a>
+                <b>SINA DA OFÉLIA:</b><br>
+                <iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" height="200"></iframe>
             </div>
             <div class="card" style="border-left-color:#ff00ff;">
-                <b>SUNO AI 2:</b> <a href="https://suno.com/s/tW89B55LqXRb17Op" target="_blank" style="color:#ff00ff;">Ouvir Online</a>
+                <b>TAKA (BRAZILIAN MONTAGEM):</b><br>
+                <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" height="200"></iframe>
             </div>
+            <iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" height="200"></iframe>
         </div>
     </div>
 
-    <footer>CELVIO BARCELONA | SDC CUP 2026 | COPYRIGHT CELTA</footer>
+    <div id="hacking" class="page">
+        <div style="border:1px solid #00ff00; padding:20px; text-align:center;">
+            <h3 id="h-timer" style="color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3>
+            <button onclick="alert('Iniciando scan...')">INICIAR SCAN</button>
+        </div>
+    </div>
+
+    <div id="secret-page" class="page">
+        <h2 style="text-align:center; color:#ff0000;">⚠️ ÁREA RESTRITA CELTA</h2>
+        <div class="card" style="border-left-color:#ff0000;">
+            <p>Bem-vindo à página secreta. Conteúdo exclusivo SDC CUP desbloqueado.</p>
+        </div>
+    </div>
+
+    <footer style="text-align:center; padding:20px;">
+        <p style="font-size:10px; color:#333;">SDC CUP 2026</p>
+        <button class="secret-btn" onclick="accessSecret()">.</button>
+    </footer>
 
     <script>
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            document.getElementById('nav-' + id).classList.add('active');
+            const navItem = document.getElementById('nav-' + id);
+            if(navItem) navItem.classList.add('active');
+        }
+
+        function accessSecret() {
+            const code = prompt("Introduza o Código de Acesso:");
+            if(code === "1234") {
+                openPage('secret-page');
+            } else {
+                alert("Acesso Negado.");
+            }
         }
 
         function googleTranslateElementInit() { 
