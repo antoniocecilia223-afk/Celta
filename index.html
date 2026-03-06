@@ -3,37 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA GLOBAL | Entertainment 2026</title>
+    <title>CELTA OS | CONNECT 2026</title>
     <style>
-        /* DESIGN PRESERVADO */
         * { box-sizing: border-box; transition: 0.3s; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        
+        /* BARRA DE STATUS ESTILO CELTA */
         .status-bar { background: #000; padding: 5px 20px; display: flex; justify-content: space-between; font-family: monospace; font-size: 11px; color: #00ff00; border-bottom: 1px solid #1a1a1a; }
+        
+        /* NAVEGAÇÃO */
         nav { background: #000; padding: 12px; display: flex; justify-content: center; gap: 8px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
-        nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 10px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px; }
-        nav a:hover, nav a.active { color: #00ff00; border-color: #00ff00; background: #001100; text-shadow: 0 0 5px #00ff00; border: 1px solid #00ff00; }
-        .nav-link-ent { color: #ff00ff !important; border: 1px solid #ff00ff !important; }
-        .page { display: none; padding: 25px; flex: 1; animation: fadeIn 0.4s ease; }
+        nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 11px; text-transform: uppercase; padding: 8px 15px; border-radius: 4px; border: 1px solid transparent; }
+        nav a:hover, nav a.active { color: #00ff00; border-color: #00ff00; background: #001100; box-shadow: 0 0 10px #00ff00; }
+        .nav-comm { color: #00e5ff !important; border: 1px solid #00e5ff !important; }
+
+        .page { display: none; padding: 20px; flex: 1; animation: fadeIn 0.5s ease; }
         .active-page { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
-        .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; }
-        .video-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 15px; margin-top: 20px; }
-        .admin-panel { background: #0a0a0a; border: 2px solid #00ff00; padding: 25px; border-radius: 15px; max-width: 950px; margin: 20px auto; display: none; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        textarea { width: 100%; height: 100px; background: #000; color: #00ff00; border: 1px solid #333; padding: 10px; margin-bottom: 5px; border-radius: 5px; font-family: monospace; }
-        footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #1a1a1a; margin-top: auto; }
-        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; }
-        .hacking-box { max-width: 1000px; margin: 0 auto; background: #000; border: 1px solid #00ff00; padding: 20px; border-radius: 10px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 12px; }
-        th, td { border: 1px solid #1a1a1a; padding: 10px; text-align: left; }
-        th { color: #00ff00; text-transform: uppercase; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* WIDGETS E CONTAINERS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; position: relative; }
+        iframe { width: 100%; border-radius: 8px; border: 1px solid #333; background: #000; min-height: 350px; }
+
+        /* SISTEMA DE CHAT & CHAMADAS */
+        .comm-container { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 300px; gap: 20px; height: 500px; }
+        .chat-box { background: #000; border: 1px solid #00e5ff; border-radius: 10px; display: flex; flex-direction: column; }
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-family: monospace; }
+        .chat-input { display: flex; border-top: 1px solid #00e5ff; }
+        .chat-input input { flex: 1; background: #000; border: none; color: #fff; padding: 15px; outline: none; }
+        .call-sidebar { background: #0a0a0a; border: 1px solid #00e5ff; border-radius: 10px; padding: 15px; text-align: center; }
+        .btn-call { width: 100%; padding: 12px; background: #00ff00; color: #000; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-call.hangup { background: #ff0000; color: #fff; }
+
+        footer { background: #000; padding: 15px; text-align: center; border-top: 1px solid #1a1a1a; font-size: 10px; color: #444; }
     </style>
 </head>
-<body onload="initSystem()">
+<body onload="initCelta()">
 
     <div class="status-bar">
-        <span>CELTA SYSTEM 2026 | SECURE LIVE 🌐</span>
+        <span id="celta-clock">CELTA CONNECT | LOADING...</span>
         <div id="google_translate_element"></div>
     </div>
 
@@ -41,133 +50,90 @@
         <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
         <a onclick="openPage('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="openPage('ent')" id="nav-ent" class="nav-link-ent">🎬 Entretenimento</a>
-        <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima</a>
-        <a onclick="openPage('chat')" id="nav-chat">💬 Chat</a>
-        <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="openPage('hacking')" id="nav-hacking">📊 Hacking</a>
+        <a onclick="openPage('comm')" id="nav-comm" class="nav-comm">📱 Chat & Call</a>
+        <a onclick="openPage('music')" id="nav-music">🎵 Música</a>
     </nav>
 
-    <div id="admin-panel" class="admin-panel">
-        <h3 style="color:#00ff00; text-align:center;">🛠️ PAINEL DE CONTROLO</h3>
-        <div class="admin-grid">
-            <div>
-                <label>Notícias Mundo (Texto):</label>
-                <textarea id="adm-news-list"></textarea>
-                <label>YouTube IDs Mundo (Jornal):</label>
-                <textarea id="adm-news-vids"></textarea>
-            </div>
-            <div>
-                <label>Notícias Futebol:</label>
-                <textarea id="adm-fut-list"></textarea>
-                <label>YouTube IDs Futebol:</label>
-                <textarea id="adm-fut-vids"></textarea>
-            </div>
-            <div>
-                <label>IDs Entretenimento (YouTube/Suno):</label>
-                <textarea id="adm-ent-vids"></textarea>
-                <button class="btn-admin-trigger" style="width:100%; margin-top:10px; color:#00ff00; border-color:#00ff00; padding:10px;" onclick="saveData()">💾 PUBLICAR TUDO</button>
-            </div>
-        </div>
-    </div>
-
     <div id="home" class="page active-page">
-        <div style="text-align:center; margin-top:10vh;">
-            <h1 style="font-size:70px; text-shadow:0 0 10px #00ff00; font-style:italic;">CELTA</h1>
-            <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisa segura 2026...">
+        <div style="text-align:center; margin-top:15vh;">
+            <h1 style="font-size:80px; text-shadow:0 0 20px #00ff00; font-style:italic; margin:0;">CELTA</h1>
+            <p style="color:#00ff00; letter-spacing: 5px;">GLOBAL NETWORK 2026</p>
+            <form action="https://www.google.com/search" method="GET" style="margin-top:30px;">
+                <input type="text" name="q" style="width:90%; max-width:600px; padding:18px; border-radius:40px; border:2px solid #00ff00; background:#000; color:#fff; text-align:center;" placeholder="O que procuras hoje?">
             </form>
         </div>
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🌎 JORNAL MUNDO</h2>
-        <div class="grid" id="container-news"></div>
-        <div class="video-container" id="container-news-vids"></div>
-    </div>
-
-    <div id="futebol" class="page">
-        <h2 style="text-align:center; color:#00ff00;">⚽ FUTEBOL</h2>
-        <div class="grid" id="container-fut"></div>
-        <div class="video-container" id="container-fut-vids"></div>
-    </div>
-
-    <div id="ent" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎬 PLAYLIST & ENTRETENIMENTO</h2>
-        <div class="video-container" id="container-ent-vids"></div>
-    </div>
-
-    <div id="clima" class="page"><iframe height="500" src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe></div>
-    <div id="chat" class="page"><div id="chat-win" style="max-width:600px; margin:0 auto; background:#000; border:1px solid #222; height:300px; padding:15px; overflow-y:auto;"></div><div style="max-width:600px; margin:10px auto; display:flex; gap:5px;"><input type="text" id="chat-msg" style="flex:1; padding:10px; background:#000; border:1px solid #00ff00; color:#fff;"><button onclick="sendChat()" style="padding:10px; background:#00ff00; border:none;">ENVIAR</button></div></div>
-    <div id="jogos" class="page"><iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe></div>
-    <div id="hacking" class="page">
-        <div class="hacking-box">
-            <h3 id="h-timer" style="text-align:center; color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3>
-            <button onclick="startHack()" id="btn-hack" style="width:100%; padding:15px; background:#00ff00; border:none; font-weight:bold;">INICIAR</button>
-            <table><thead><tr><th>RANK</th><th>CANAL</th><th>SUBS (2026)</th></tr></thead><tbody id="yt-body"></tbody></table>
+        <h2 style="text-align:center; color:#00ff00;">🌎 NOTÍCIAS EM TEMPO REAL</h2>
+        <div class="grid">
+            <div class="card" style="grid-column: span 2;">
+                <iframe src="https://www.bing.com/news/search?q=Mundo&format=rss" style="height:500px; background:#fff;"></iframe>
+            </div>
+            <div class="card">
+                <h4 style="color:#00ff00;">ÚLTIMA HORA (LUA DE SANGUE)</h4>
+                <p>Eclipse Lunar visível em várias regiões. Veja a transmissão abaixo:</p>
+                <iframe src="https://www.youtube.com/embed/XuZAl-ZPEcA" height="200"></iframe>
+            </div>
         </div>
     </div>
 
-    <footer><button class="btn-admin-trigger" onclick="loginAdmin()">⚙️ ADMIN</button></footer>
+    <div id="futebol" class="page">
+        <h2 style="text-align:center; color:#00ff00;">⚽ RESULTADOS & GOLOS</h2>
+        <div class="grid">
+            <div class="card" style="grid-column: span 2;">
+                <iframe src="https://www.scorebat.com/embed/livescore/" style="height:600px; border:none;"></iframe>
+            </div>
+            <div class="card">
+                <h4 style="color:#00ff00;">SCD 2026 JORNAL</h4>
+                <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" height="200"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="comm" class="page">
+        <h2 style="text-align:center; color:#00e5ff;">📱 CELTA COMMUNICATION</h2>
+        <div class="comm-container">
+            <div class="chat-box">
+                <div class="chat-messages" id="chat-flow">
+                    <div style="color:#00e5ff;">[SISTEMA] Ligado ao servidor Celta...</div>
+                    <div style="color:#888;">> Bem-vindo ao Chat, Celvio.</div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Escreve uma mensagem..." onkeypress="if(event.key==='Enter') sendMsg()">
+                    <button onclick="sendMsg()" style="background:#00e5ff; border:none; padding:0 20px; cursor:pointer;">➔</button>
+                </div>
+            </div>
+            <div class="call-sidebar">
+                <div style="font-size:40px; margin-bottom:10px;">👤</div>
+                <div id="call-status" style="color:#888;">Pronto para chamar</div>
+                <hr style="border:0; border-top:1px solid #333; margin:15px 0;">
+                <button class="btn-call" id="call-btn" onclick="toggleCall()">📞 INICIAR CHAMADA</button>
+                <p style="font-size:10px; margin-top:10px; color:#555;">Encriptação Celta ponta-a-ponta ativada.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="music" class="page">
+        <h2 style="text-align:center; color:#ff00ff;">🎵 CELTA BEATS</h2>
+        <div class="grid">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PL4fGSI1pDJn6jWnpA8mF4rId83W64u7S4" height="450"></iframe>
+            <div class="card" style="border-left-color:#ff00ff;">
+                <h4 style="color:#ff00ff;">PLAYLIST PRIVADA</h4>
+                <p>Músicas do Linkin Park e produções Suno AI.</p>
+                <iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" height="200"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>CELVIO BARCELONA - SDC CUP 2026 | COPYRIGHT CELTA STYLE</footer>
 
     <script>
-        const ytTop10 = [{n:"MrBeast",s:468},{n:"T-Series",s:310},{n:"Cocomelon",s:200},{n:"SET India",s:188},{n:"Vlad and Niki",s:149},{n:"Kids Diana Show",s:138},{n:"Stokes Twins",s:137},{n:"KIMPRO",s:131},{n:"Like Nastya",s:131},{n:"Zee Music",s:122}];
-
-        function initSystem() {
-            // NOTÍCIAS NOVAS
-            const noticiaLua = "Como assistir à Lua de Sangue pela internet? Veja o melhor horário para observar o eclipse lunar (Fonte: Exame)";
-            const idsJornal = "XuZAl-ZPEcA\npykpO5kQJ98"; // Euronews + Novo vídeo enviado
-            const idsMusica = "R4_pWm4tT3U\nG5lNWND0oqQ\nWa2MqAhAK5s\nhttps://suno.com/s/x5dt1K0M3VXfkhPh\nhttps://suno.com/s/tW89B55LqXRb17Op";
-
-            if(!localStorage.getItem('celta_news')) localStorage.setItem('celta_news', noticiaLua);
-            if(!localStorage.getItem('celta_vids_news')) localStorage.setItem('celta_vids_news', idsJornal);
-            if(!localStorage.getItem('celta_vids_ent')) localStorage.setItem('celta_vids_ent', idsMusica);
-
-            document.getElementById('adm-news-list').value = localStorage.getItem('celta_news');
-            document.getElementById('adm-news-vids').value = localStorage.getItem('celta_vids_news');
-            document.getElementById('adm-fut-list').value = localStorage.getItem('celta_fut') || "SCD 2026 em desenvolvimento.";
-            document.getElementById('adm-fut-vids').value = localStorage.getItem('celta_vids_fut') || "tt7lWNr8tg4";
-            document.getElementById('adm-ent-vids').value = localStorage.getItem('celta_vids_ent');
-
-            renderAll();
-        }
-
-        function saveData() {
-            localStorage.setItem('celta_news', document.getElementById('adm-news-list').value);
-            localStorage.setItem('celta_vids_news', document.getElementById('adm-news-vids').value);
-            localStorage.setItem('celta_fut', document.getElementById('adm-fut-list').value);
-            localStorage.setItem('celta_vids_fut', document.getElementById('adm-fut-vids').value);
-            localStorage.setItem('celta_vids_ent', document.getElementById('adm-ent-vids').value);
-            renderAll();
-            alert("CONTEÚDO PUBLICADO COM SUCESSO!");
-            document.getElementById('admin-panel').style.display = "none";
-        }
-
-        function renderAll() {
-            renderGrid('container-news', localStorage.getItem('celta_news'), 'NOTÍCIA');
-            renderGrid('container-fut', localStorage.getItem('celta_fut'), 'FUT');
-            renderVids('container-news-vids', localStorage.getItem('celta_vids_news'));
-            renderVids('container-fut-vids', localStorage.getItem('celta_vids_fut'));
-            renderVids('container-ent-vids', localStorage.getItem('celta_vids_ent'));
-        }
-
-        function renderGrid(id, data, label) {
-            const c = document.getElementById(id); c.innerHTML = "";
-            if(data) data.split('\n').forEach(l => { if(l.trim()) c.innerHTML += `<div class="card"><b>${label}:</b> ${l}</div>` });
-        }
-
-        function renderVids(id, data) {
-            const c = document.getElementById(id); c.innerHTML = "";
-            if(data) data.split('\n').forEach(v => {
-                if(v.trim()) {
-                    if(v.includes("suno.com")) {
-                        c.innerHTML += `<div class="card" style="border-left-color:#ff00ff">🎵 SUNO AI:<br><a href="${v.trim()}" target="_blank" style="color:#ff00ff">Ouvir Música</a></div>`;
-                    } else {
-                        const idVid = v.includes("v=") ? v.split("v=")[1].split("&")[0] : v.includes("youtu.be/") ? v.split("youtu.be/")[1].split("?")[0] : v;
-                        c.innerHTML += `<iframe height="250" src="https://www.youtube.com/embed/${idVid.trim()}" allowfullscreen></iframe>`;
-                    }
-                }
-            });
+        function initCelta() {
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('celta-clock').innerText = "CELTA OS | " + now.toLocaleTimeString();
+            }, 1000);
         }
 
         function openPage(id) {
@@ -177,26 +143,46 @@
             document.getElementById('nav-' + id).classList.add('active');
         }
 
-        function loginAdmin() { if(prompt("Senha:") === "1234") document.getElementById('admin-panel').style.display = "block"; }
-        function sendChat() { const m = document.getElementById('chat-msg'); if(m.value) { document.getElementById('chat-win').innerHTML += `<div>> ${m.value}</div>`; m.value = ""; } }
-        
-        function startHack() {
-            document.getElementById('btn-hack').style.display = "none";
-            let seg = 0;
-            const timer = setInterval(() => {
-                seg++;
-                document.getElementById('h-timer').innerText = `HACKING: ${Math.floor(seg/60)}:${seg%60} / 3:59`;
-                let html = "";
-                ytTop10.forEach((item, i) => {
-                    let s = (item.s * (seg/239)).toFixed(1);
-                    html += `<tr><td>${i+1}</td><td>${item.n}</td><td style="color:#00ff00;">${s}M</td></tr>`;
-                });
-                document.getElementById('yt-body').innerHTML = html;
-                if(seg >= 239) clearInterval(timer);
-            }, 1000);
+        // FUNÇÕES DE COMUNICAÇÃO
+        function sendMsg() {
+            const input = document.getElementById('chat-input');
+            const flow = document.getElementById('chat-flow');
+            if(input.value) {
+                flow.innerHTML += `<div style="margin-bottom:8px;"><b style="color:#00ff00;">VOCÊ:</b> ${input.value}</div>`;
+                input.value = "";
+                flow.scrollTop = flow.scrollHeight;
+                
+                // Resposta automática do sistema
+                setTimeout(() => {
+                    flow.innerHTML += `<div style="margin-bottom:8px;"><b style="color:#00e5ff;">CELTA_AI:</b> Mensagem recebida e encriptada.</div>`;
+                    flow.scrollTop = flow.scrollHeight;
+                }, 1000);
+            }
         }
 
-        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
+        let isCalling = false;
+        function toggleCall() {
+            const btn = document.getElementById('call-btn');
+            const status = document.getElementById('call-status');
+            if(!isCalling) {
+                isCalling = true;
+                btn.innerText = "⌛ A LIGAR...";
+                btn.classList.add('hangup');
+                setTimeout(() => {
+                    status.innerText = "EM CHAMADA VOZ (LIVE)";
+                    btn.innerText = "🛑 DESLIGAR";
+                }, 2000);
+            } else {
+                isCalling = false;
+                status.innerText = "Chamada Terminada";
+                btn.innerText = "📞 INICIAR CHAMADA";
+                btn.classList.remove('hangup');
+            }
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element');
+        }
     </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
