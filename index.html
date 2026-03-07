@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | ULTIMATE 2026</title>
+    <title>CELTA OS | CONNECT 2026</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
@@ -16,94 +16,86 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
         .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; }
-        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; min-height: 400px; }
-        .secret-btn { background: transparent; border: none; color: #111; font-size: 8px; cursor: pointer; margin-top: 10px; }
-        .secret-content { display: none; background: #111; border: 2px dashed #ff0000; padding: 20px; margin-top: 20px; text-align: center; }
+        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; min-height: 500px; }
+        .secret-btn { background: transparent; border: none; color: #111; font-size: 8px; cursor: pointer; }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div class="status-bar">
-        <span>CELTA NETWORK | ENCRYPTED 🌐</span>
+        <span>CELTA NETWORK | FULL INTEGRATION 2026 🌐</span>
         <div id="google_translate_element"></div>
     </div>
 
     <nav>
         <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="openPage('news')" id="nav-news">🌎 Notícias</a>
+        <a onclick="openPage('ia')" id="nav-ia">🤖 IA (Suno)</a>
+        <a onclick="openPage('news')" id="nav-news">🌎 Euronews</a>
         <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
         <a onclick="openPage('call')" id="nav-call">📞 Chamada</a>
-        <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima</a>
+        <a onclick="openPage('ent')" id="nav-ent">🎬 YouTube</a>
         <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="openPage('ent')" id="nav-ent">🎬 Música</a>
+        <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima</a>
         <a onclick="openPage('hacking')" id="nav-hacking">📊 Hacking</a>
     </nav>
+
+    <div id="ia" class="page">
+        <h2 style="text-align:center; color:#00ff00;">🤖 CELTA IA: SUNO AI CREATOR</h2>
+        <iframe src="https://suno.com/create" allow="autoplay; encrypted-media"></iframe>
+    </div>
+
+    <div id="news" class="page">
+        <h2 style="text-align:center; color:#00ff00;">🌎 EURONEWS LIVE MUNDO</h2>
+        <div class="grid">
+            <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" height="400" style="grid-column: span 2;"></iframe>
+            <div class="card">
+                <b>INFO CELTA:</b> As notícias mundiais são atualizadas em tempo real via Euronews.
+            </div>
+        </div>
+    </div>
+
+    <div id="ent" class="page">
+        <h2 style="text-align:center; color:#ff00ff;">🎬 YOUTUBE & MÚSICA</h2>
+        <div class="grid">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PL4fGSI1pDJn6jWnpA8mF4rId83W64u7S4" height="400" style="grid-column: span 2;"></iframe>
+            <div class="card" style="border-left-color:#ff00ff;">
+                <b>Favoritos de Celvio:</b><br>
+                <p>Sina da Ofélia & Taka (Montagem)</p>
+                <a href="#" onclick="openPage('musicas-antigas')" style="color:#ff00ff;">Ver Músicas Individuais</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="musicas-antigas" class="page">
+        <h2 style="text-align:center; color:#ff00ff;">🎵 MINHA PLAYLIST</h2>
+        <div class="grid">
+            <iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" height="250"></iframe>
+            <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" height="250"></iframe>
+            <iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" height="250"></iframe>
+        </div>
+    </div>
 
     <div id="home" class="page active-page">
         <div style="text-align:center; margin-top:10vh;">
             <h1 style="font-size:70px; text-shadow:0 0 15px #00ff00; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar...">
+                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Rede Segura Celpay...">
             </form>
         </div>
     </div>
 
-    <div id="news" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🌎 JORNAL</h2>
-        <div class="grid">
-            <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" height="250"></iframe>
-            <iframe src="https://www.youtube.com/embed/XuZAl-ZPEcA" height="250"></iframe>
-        </div>
-    </div>
-
-    <div id="futebol" class="page">
-        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:600px;"></iframe>
-    </div>
-
-    <div id="call" class="page">
-        <h2 style="text-align:center; color:#00e5ff;">📞 JITSI MEET LIVE</h2>
-        <iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; display-capture; autoplay"></iframe>
-    </div>
-
-    <div id="clima" class="page">
-        <iframe src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe>
-    </div>
-
-    <div id="jogos" class="page">
-        <iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe>
-    </div>
-
-    <div id="ent" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎬 PLAYLIST</h2>
-        <div class="grid">
-            <div class="card" style="border-left-color:#ff00ff;">
-                <b>SINA DA OFÉLIA:</b><br>
-                <iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" height="200"></iframe>
-            </div>
-            <div class="card" style="border-left-color:#ff00ff;">
-                <b>TAKA (BRAZILIAN MONTAGEM):</b><br>
-                <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" height="200"></iframe>
-            </div>
-            <iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" height="200"></iframe>
-        </div>
-    </div>
-
-    <div id="hacking" class="page">
-        <div style="border:1px solid #00ff00; padding:20px; text-align:center;">
-            <h3 id="h-timer" style="color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3>
-            <button onclick="alert('Iniciando scan...')">INICIAR SCAN</button>
-        </div>
-    </div>
+    <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/" style="height:600px;"></iframe></div>
+    <div id="call" class="page"><iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; autoplay"></iframe></div>
+    <div id="jogos" class="page"><iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe></div>
+    <div id="clima" class="page"><iframe src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe></div>
+    <div id="hacking" class="page"><div style="border:1px solid #00ff00; padding:20px; text-align:center;"><h3 style="color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3></div></div>
 
     <div id="secret-page" class="page">
-        <h2 style="text-align:center; color:#ff0000;">⚠️ ÁREA RESTRITA CELTA</h2>
-        <div class="card" style="border-left-color:#ff0000;">
-            <p>Bem-vindo à página secreta. Conteúdo exclusivo SDC CUP desbloqueado.</p>
-        </div>
+        <h2 style="text-align:center; color:#ff0000;">⚠️ ÁREA RESTRITA (1234)</h2>
+        <div class="card" style="border-left-color:#ff0000; text-align:center;">Acesso concedido, Celvio.</div>
     </div>
 
-    <footer style="text-align:center; padding:20px;">
-        <p style="font-size:10px; color:#333;">SDC CUP 2026</p>
+    <footer style="text-align:center; padding:10px;">
         <button class="secret-btn" onclick="accessSecret()">.</button>
     </footer>
 
@@ -112,22 +104,16 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            const navItem = document.getElementById('nav-' + id);
-            if(navItem) navItem.classList.add('active');
+            const navBtn = document.getElementById('nav-' + id);
+            if(navBtn) navBtn.classList.add('active');
         }
 
         function accessSecret() {
-            const code = prompt("Introduza o Código de Acesso:");
-            if(code === "1234") {
-                openPage('secret-page');
-            } else {
-                alert("Acesso Negado.");
-            }
+            if(prompt("Código de Acesso:") === "1234") { openPage('secret-page'); } 
+            else { alert("Acesso Negado."); }
         }
 
-        function googleTranslateElementInit() { 
-            new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); 
-        }
+        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
     </script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
