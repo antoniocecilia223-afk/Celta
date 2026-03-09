@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | CONNECT 2026</title>
+    <title>CELTA OS | PAYPAL CONNECT 2026</title>
     <style>
         * { box-sizing: border-box; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
@@ -16,101 +16,100 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
         .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; }
-        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; min-height: 500px; }
-        .secret-btn { background: transparent; border: none; color: #111; font-size: 8px; cursor: pointer; }
+        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; min-height: 600px; }
+        .secret-btn { background: transparent; border: none; color: #111; font-size: 12px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div class="status-bar">
-        <span>CELTA NETWORK | FULL INTEGRATION 2026 🌐</span>
+        <span>CELTA OS | PAYPAL OFICIAL: antoniocecilia223@gmail.com 🌐</span>
         <div id="google_translate_element"></div>
     </div>
 
     <nav>
         <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="openPage('ia')" id="nav-ia">🤖 IA (Suno)</a>
-        <a onclick="openPage('news')" id="nav-news">🌎 Euronews</a>
-        <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="openPage('call')" id="nav-call">📞 Chamada</a>
-        <a onclick="openPage('ent')" id="nav-ent">🎬 YouTube</a>
+        <a onclick="openPage('paypal')" id="nav-paypal" style="color: #0070ba; background: #fff;">💳 PayPal</a>
+        <a onclick="openPage('ia')" id="nav-ia">🤖 Suno AI</a>
+        <a onclick="openPage('news')" id="nav-news">🌎 Notícias (PT)</a>
         <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="openPage('clima')" id="nav-clima">🌡️ Clima</a>
+        <a onclick="openPage('futebol')" id="nav-futebol">🔵🔴 Barça</a>
+        <a onclick="openPage('ent')" id="nav-ent">🎵 Música</a>
         <a onclick="openPage('hacking')" id="nav-hacking">📊 Hacking</a>
     </nav>
 
+    <div id="paypal" class="page">
+        <h2 style="text-align:center; color:#0070ba;">💳 PAYPAL OFICIAL</h2>
+        <p style="text-align:center; font-size:12px;">Login: <b>antoniocecilia223@gmail.com</b></p>
+        <iframe src="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Fprofile&state=%2F" allow="payment; geolocation"></iframe>
+    </div>
+
     <div id="ia" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🤖 CELTA IA: SUNO AI CREATOR</h2>
-        <iframe src="https://suno.com/create" allow="autoplay; encrypted-media"></iframe>
+        <h2 style="text-align:center; color:#00ff00;">🤖 SUNO AI CREATOR</h2>
+        <iframe src="https://suno.com/create"></iframe>
     </div>
 
     <div id="news" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🌎 EURONEWS LIVE MUNDO</h2>
         <div class="grid">
-            <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" height="400" style="grid-column: span 2;"></iframe>
+            <div class="card" style="grid-column: span 2;">
+                <h4 style="color:#00ff00;">GOOGLE NOTÍCIAS PORTUGAL</h4>
+                <iframe src="https://news.google.com/topstories?hl=pt-PT&gl=PT&ceid=PT:pt-150" style="min-height:450px;"></iframe>
+            </div>
             <div class="card">
-                <b>INFO CELTA:</b> As notícias mundiais são atualizadas em tempo real via Euronews.
+                <h4 style="color:#00ff00;">EURONEWS PT</h4>
+                <iframe src="https://www.youtube.com/embed/videoseries?list=PLm2v3vTf69SHe9_eA23z80u5V2L88G_R6" height="300" style="min-height:300px;"></iframe>
             </div>
         </div>
     </div>
 
-    <div id="ent" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎬 YOUTUBE & MÚSICA</h2>
+    <div id="jogos" class="page">
+        <h2 style="text-align:center; color:#00ff00;">🕹️ JOGOS ONLINE</h2>
         <div class="grid">
-            <iframe src="https://www.youtube.com/embed/videoseries?list=PL4fGSI1pDJn6jWnpA8mF4rId83W64u7S4" height="400" style="grid-column: span 2;"></iframe>
-            <div class="card" style="border-left-color:#ff00ff;">
-                <b>Favoritos de Celvio:</b><br>
-                <p>Sina da Ofélia & Taka (Montagem)</p>
-                <a href="#" onclick="openPage('musicas-antigas')" style="color:#ff00ff;">Ver Músicas Individuais</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="musicas-antigas" class="page">
-        <h2 style="text-align:center; color:#ff00ff;">🎵 MINHA PLAYLIST</h2>
-        <div class="grid">
-            <iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" height="250"></iframe>
-            <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" height="250"></iframe>
-            <iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" height="250"></iframe>
+            <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
+            <iframe src="https://m.plonga.com/online-games/snake"></iframe>
         </div>
     </div>
 
     <div id="home" class="page active-page">
         <div style="text-align:center; margin-top:10vh;">
-            <h1 style="font-size:70px; text-shadow:0 0 15px #00ff00; font-style:italic;">CELTA</h1>
+            <h1 style="font-size:80px; text-shadow:0 0 15px #00ff00; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:550px; padding:15px; border-radius:30px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Rede Segura Celpay...">
+                <input type="text" name="q" style="width:90%; max-width:600px; padding:18px; border-radius:40px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar...">
             </form>
         </div>
     </div>
 
-    <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/" style="height:600px;"></iframe></div>
-    <div id="call" class="page"><iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; autoplay"></iframe></div>
-    <div id="jogos" class="page"><iframe src="https://www.miniplay.com/embed/pac-man" height="500"></iframe></div>
-    <div id="clima" class="page"><iframe src="https://embed.windy.com/embed2.html?lat=0&lon=0&zoom=2&overlay=temp"></iframe></div>
-    <div id="hacking" class="page"><div style="border:1px solid #00ff00; padding:20px; text-align:center;"><h3 style="color:#00ff00;">PROTOCOLO EXTRAÇÃO 3:59</h3></div></div>
+    <div id="futebol" class="page"><iframe src="https://www.youtube.com/embed/live_stream?channel=UC14U7jnWnJzh_uO7D09A8Kw"></iframe></div>
+    <div id="ent" class="page">
+        <div class="grid">
+            <iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" height="250"></iframe>
+            <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" height="250"></iframe>
+        </div>
+    </div>
+    <div id="hacking" class="page"><div style="border:1px solid #00ff00; padding:20px; text-align:center; color:#00ff00;">SEGURANÇA PAYPAL ATIVA | ADMIN: CELVIO</div></div>
 
     <div id="secret-page" class="page">
-        <h2 style="text-align:center; color:#ff0000;">⚠️ ÁREA RESTRITA (1234)</h2>
-        <div class="card" style="border-left-color:#ff0000; text-align:center;">Acesso concedido, Celvio.</div>
+        <h2 style="text-align:center; color:#ff0000;">⚠️ ADMIN TERMINAL</h2>
+        <div style="background:#000; border:2px solid #ff0000; padding:20px; font-family:monospace; color:#ff0000;">
+            <p>> CONTA: antoniocecilia223@gmail.com</p>
+            <p>> STATUS: ACESSO TOTAL</p>
+            <button onclick="openPage('paypal')" style="background:#ff0000; color:#000; border:none; padding:10px; font-weight:bold; cursor:pointer;">ABRIR PAYPAL NO CELTA</button>
+        </div>
     </div>
 
-    <footer style="text-align:center; padding:10px;">
-        <button class="secret-btn" onclick="accessSecret()">.</button>
-    </footer>
+    <footer style="text-align:center;"><button class="secret-btn" onclick="accessSecret()">.</button></footer>
 
     <script>
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            const navBtn = document.getElementById('nav-' + id);
+            const navBtn = document.getElementById('nav-'+id);
             if(navBtn) navBtn.classList.add('active');
         }
 
         function accessSecret() {
-            if(prompt("Código de Acesso:") === "1234") { openPage('secret-page'); } 
-            else { alert("Acesso Negado."); }
+            if(prompt("CÓDIGO ADMIN:") === "1234") { openPage('secret-page'); }
         }
 
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
