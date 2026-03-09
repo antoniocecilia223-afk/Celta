@@ -1,115 +1,284 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | PAYPAL CONNECT 2026</title>
+    <title>CELTA OS | SUPREME 2026</title>
     <style>
-        * { box-sizing: border-box; transition: 0.3s; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; }
-        .status-bar { background: #000; padding: 5px 20px; display: flex; justify-content: space-between; font-family: monospace; font-size: 11px; color: #00ff00; border-bottom: 1px solid #1a1a1a; }
-        nav { background: #000; padding: 12px; display: flex; justify-content: center; gap: 8px; border-bottom: 2px solid #00ff00; position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; }
-        nav a { color: #888; text-decoration: none; font-weight: bold; cursor: pointer; font-size: 10px; text-transform: uppercase; padding: 8px 12px; border-radius: 4px; }
-        nav a:hover, nav a.active { color: #00ff00; border-color: #00ff00; background: #001100; box-shadow: 0 0 10px #00ff00; border: 1px solid #00ff00; }
-        .page { display: none; padding: 20px; flex: 1; animation: fadeIn 0.4s ease; }
+        :root {
+            --primary: #00ff00;
+            --bg: #050505;
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --border: rgba(0, 255, 0, 0.2);
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            margin: 0; 
+            background-color: var(--bg); 
+            background-image: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
+            color: #fff; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            overflow-x: hidden; 
+        }
+
+        /* BARRA DE STATUS PROFISSIONAL */
+        .status-bar { 
+            background: rgba(0,0,0,0.9); 
+            padding: 8px 25px; 
+            display: flex; 
+            justify-content: space-between; 
+            font-family: 'Courier New', monospace; 
+            font-size: 12px; 
+            color: var(--primary); 
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        /* NAVEGAÇÃO FUTURISTA */
+        nav { 
+            background: rgba(0, 0, 0, 0.8); 
+            padding: 15px; 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            border-bottom: 1px solid var(--border); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            flex-wrap: wrap;
+            backdrop-filter: blur(15px);
+        }
+
+        nav a { 
+            color: #aaa; 
+            text-decoration: none; 
+            font-weight: 600; 
+            cursor: pointer; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            padding: 10px 18px; 
+            border-radius: 6px; 
+            border: 1px solid transparent;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover, nav a.active { 
+            color: var(--primary); 
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* PÁGINAS E ANIMAÇÃO */
+        .page { display: none; padding: 30px; flex: 1; animation: pageIn 0.5s ease-out; }
         .active-page { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1300px; margin: 0 auto; }
-        .card { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 15px; border-left: 4px solid #00ff00; }
-        iframe { width: 100%; border-radius: 10px; border: 1px solid #333; background: #000; min-height: 600px; }
-        .secret-btn { background: transparent; border: none; color: #111; font-size: 12px; cursor: pointer; margin-top: 10px; }
+        
+        @keyframes pageIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* GRID E CARDS REALISTAS */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto; }
+        
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            padding: 20px; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary);
+        }
+
+        iframe { 
+            width: 100%; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: #000; 
+            min-height: 550px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* BUSCA CELTA ESTILO GOOGLE 2026 */
+        .search-input {
+            width: 90%; 
+            max-width: 650px; 
+            padding: 20px 30px; 
+            border-radius: 50px; 
+            border: 1px solid var(--border); 
+            background: rgba(255,255,255,0.03); 
+            color: #fff; 
+            font-size: 18px;
+            outline: none;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+        
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(0, 255, 0, 0.15); }
+
+        /* TERMINAL HACKER PROFISSIONAL */
+        .secret-terminal { 
+            background: #020202; 
+            border: 1px solid #ff0000; 
+            padding: 25px; 
+            font-family: 'Consolas', 'Courier New', monospace; 
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
+        }
+        
+        .hacker-text { color: #ff3333; font-size: 14px; margin-bottom: 8px; text-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
+        
+        .admin-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+        
+        .admin-btn { 
+            background: rgba(255, 0, 0, 0.05); 
+            border: 1px solid #ff0000; 
+            color: #ff0000; 
+            padding: 15px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        
+        .admin-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
+
+        .secret-btn { background: transparent; border: none; color: #151515; font-size: 14px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div class="status-bar">
-        <span>CELTA OS | PAYPAL OFICIAL: antoniocecilia223@gmail.com 🌐</span>
+        <span>CORE: ONLINE | SECURE_LINK: ATIVO | 2026</span>
         <div id="google_translate_element"></div>
     </div>
 
     <nav>
         <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="openPage('paypal')" id="nav-paypal" style="color: #0070ba; background: #fff;">💳 PayPal</a>
-        <a onclick="openPage('ia')" id="nav-ia">🤖 Suno AI</a>
-        <a onclick="openPage('news')" id="nav-news">🌎 Notícias (PT)</a>
-        <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="openPage('futebol')" id="nav-futebol">🔵🔴 Barça</a>
+        <a onclick="openPage('cinema')" id="nav-cinema">🎬 Filmes</a>
+        <a onclick="openPage('ia')" id="nav-ia">🤖 Suno IA</a>
+        <a onclick="openPage('news')" id="nav-news">🌎 Notícias</a>
+        <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
+        <a onclick="openPage('call')" id="nav-call">📞 Chamada</a>
         <a onclick="openPage('ent')" id="nav-ent">🎵 Música</a>
+        <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
         <a onclick="openPage('hacking')" id="nav-hacking">📊 Hacking</a>
     </nav>
 
-    <div id="paypal" class="page">
-        <h2 style="text-align:center; color:#0070ba;">💳 PAYPAL OFICIAL</h2>
-        <p style="text-align:center; font-size:12px;">Login: <b>antoniocecilia223@gmail.com</b></p>
-        <iframe src="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fmyaccount%2Fprofile&state=%2F" allow="payment; geolocation"></iframe>
-    </div>
-
-    <div id="ia" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🤖 SUNO AI CREATOR</h2>
-        <iframe src="https://suno.com/create"></iframe>
-    </div>
-
-    <div id="news" class="page">
-        <div class="grid">
-            <div class="card" style="grid-column: span 2;">
-                <h4 style="color:#00ff00;">GOOGLE NOTÍCIAS PORTUGAL</h4>
-                <iframe src="https://news.google.com/topstories?hl=pt-PT&gl=PT&ceid=PT:pt-150" style="min-height:450px;"></iframe>
-            </div>
-            <div class="card">
-                <h4 style="color:#00ff00;">EURONEWS PT</h4>
-                <iframe src="https://www.youtube.com/embed/videoseries?list=PLm2v3vTf69SHe9_eA23z80u5V2L88G_R6" height="300" style="min-height:300px;"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <div id="jogos" class="page">
-        <h2 style="text-align:center; color:#00ff00;">🕹️ JOGOS ONLINE</h2>
-        <div class="grid">
-            <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
-            <iframe src="https://m.plonga.com/online-games/snake"></iframe>
-        </div>
-    </div>
-
     <div id="home" class="page active-page">
-        <div style="text-align:center; margin-top:10vh;">
-            <h1 style="font-size:80px; text-shadow:0 0 15px #00ff00; font-style:italic;">CELTA</h1>
+        <div style="text-align:center; margin-top:15vh;">
+            <h1 style="font-size:100px; text-shadow:0 0 30px var(--primary); font-style:italic; margin:0; letter-spacing:-5px;">CELTA</h1>
+            <p style="color:var(--primary); letter-spacing:5px; margin-bottom:40px; font-size:12px;">ADVANCED OPERATING SYSTEM</p>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" style="width:90%; max-width:600px; padding:18px; border-radius:40px; border:2px solid #00ff00; background:#000; color:#fff;" placeholder="Pesquisar...">
+                <input type="text" name="q" class="search-input" placeholder="Pesquisar na rede Celta...">
             </form>
         </div>
     </div>
 
-    <div id="futebol" class="page"><iframe src="https://www.youtube.com/embed/live_stream?channel=UC14U7jnWnJzh_uO7D09A8Kw"></iframe></div>
+    <div id="cinema" class="page">
+        <h2 style="text-align:center; color:#ffcc00; margin-bottom:30px;">🎬 CINEMA EXPERIENCE</h2>
+        <iframe src="https://archive.org/details/movies?embed=1"></iframe>
+    </div>
+
+    <div id="ia" class="page">
+        <h2 style="text-align:center; color:var(--primary); margin-bottom:30px;">🤖 IA GENERATIVE (SUNO)</h2>
+        <iframe src="https://suno.com/create"></iframe>
+    </div>
+
+    <div id="news" class="page">
+        <h2 style="text-align:center; margin-bottom:30px;">🌎 GLOBAL BROADCAST</h2>
+        <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" style="min-height:600px;"></iframe>
+    </div>
+
+    <div id="futebol" class="page">
+        <h2 style="text-align:center; margin-bottom:30px;">⚽ LIVE SCORE & STATS</h2>
+        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:700px;"></iframe>
+    </div>
+
+    <div id="call" class="page">
+        <iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; autoplay"></iframe>
+    </div>
+
     <div id="ent" class="page">
         <div class="grid">
-            <iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" height="250"></iframe>
-            <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" height="250"></iframe>
+            <div class="card" style="border-left-color:#ff00ff;"><b>SINA DA OFÉLIA</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" style="min-height:250px;"></iframe></div>
+            <div class="card" style="border-left-color:#ff00ff;"><b>TAKA MONTAGEM</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" style="min-height:250px;"></iframe></div>
+            <div class="card" style="border-left-color:#ff00ff;"><b>LINKIN PARK</b><iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" style="min-height:250px;"></iframe></div>
         </div>
     </div>
-    <div id="hacking" class="page"><div style="border:1px solid #00ff00; padding:20px; text-align:center; color:#00ff00;">SEGURANÇA PAYPAL ATIVA | ADMIN: CELVIO</div></div>
+
+    <div id="jogos" class="page">
+        <iframe src="https://www.miniplay.com/embed/pac-man" style="min-height:600px;"></iframe>
+    </div>
+
+    <div id="hacking" class="page">
+        <div class="card" style="text-align:center; padding:100px;">
+            <h2 style="color:var(--primary); font-family:monospace;">SCANNING GLOBAL NETWORK...</h2>
+            <div style="width:100%; height:2px; background:rgba(0,255,0,0.1); margin-top:20px;">
+                <div style="width:65%; height:100%; background:var(--primary); box-shadow:0 0 10px var(--primary);"></div>
+            </div>
+            <p style="margin-top:20px; font-family:monospace;">STATUS: BYPASSING ENCRYPTION...</p>
+        </div>
+    </div>
 
     <div id="secret-page" class="page">
-        <h2 style="text-align:center; color:#ff0000;">⚠️ ADMIN TERMINAL</h2>
-        <div style="background:#000; border:2px solid #ff0000; padding:20px; font-family:monospace; color:#ff0000;">
-            <p>> CONTA: antoniocecilia223@gmail.com</p>
-            <p>> STATUS: ACESSO TOTAL</p>
-            <button onclick="openPage('paypal')" style="background:#ff0000; color:#000; border:none; padding:10px; font-weight:bold; cursor:pointer;">ABRIR PAYPAL NO CELTA</button>
+        <h2 style="text-align:center; color:#ff0000; margin-bottom:30px;">⚠️ NÚCLEO CENTRAL SDC CUP</h2>
+        <div class="secret-terminal">
+            <div id="hacker-flow"></div>
+            <div class="admin-panel">
+                <button class="admin-btn" onclick="alert('Transferência de 200€ iniciada...')">💰 PRÉMIO SDC 28</button>
+                <button class="admin-btn" onclick="alert('Servidor SCD 2026 Reiniciado!')">🔄 REBOOT SCD 2026</button>
+                <button class="admin-btn" onclick="alert('Modo Deus Ativado!')">⚡ MODO DEUS</button>
+                <button class="admin-btn" onclick="alert('Encriptação Celpay 100%')">🛡️ SEGURANÇA CELPAY</button>
+            </div>
         </div>
     </div>
 
-    <footer style="text-align:center;"><button class="secret-btn" onclick="accessSecret()">.</button></footer>
+    <footer style="text-align:center; padding-bottom:20px;">
+        <button class="secret-btn" onclick="accessSecret()">.</button>
+    </footer>
 
     <script>
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            const navBtn = document.getElementById('nav-'+id);
-            if(navBtn) navBtn.classList.add('active');
+            if(document.getElementById('nav-'+id)) document.getElementById('nav-'+id).classList.add('active');
+            if(id === 'secret-page') startHackerEffect();
+            window.scrollTo(0,0);
         }
 
         function accessSecret() {
-            if(prompt("CÓDIGO ADMIN:") === "1234") { openPage('secret-page'); }
+            if(prompt("PASSWORD ADMIN:") === "1234") { openPage('secret-page'); }
+            else { alert("ACESSO NEGADO."); }
+        }
+
+        function startHackerEffect() {
+            const flow = document.getElementById('hacker-flow');
+            const logs = [
+                "> Estabelecendo ligação segura...",
+                "> Usuário: Celvio | ID: 001",
+                "> Acedendo base de dados SCD 2026...",
+                "> Validando carteira antoniocecilia223...",
+                "> Encriptação Celpay: 256-bit AES",
+                "> SISTEMA PRONTO PARA OPERAÇÃO."
+            ];
+            flow.innerHTML = "";
+            logs.forEach((log, i) => {
+                setTimeout(() => {
+                    flow.innerHTML += `<div class="hacker-text">${log}</div>`;
+                }, i * 600);
+            });
         }
 
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
