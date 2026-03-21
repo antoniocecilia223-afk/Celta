@@ -3,286 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | SUPREME 2026</title>
+    <title>CELTA OS | MULTIVERSE 2026</title>
     <style>
         :root {
             --primary: #00ff00;
             --bg: #050505;
-            --card-bg: rgba(20, 20, 20, 0.8);
+            --card-bg: rgba(20, 20, 20, 0.9);
             --border: rgba(0, 255, 0, 0.2);
         }
 
         * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
         body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
+            font-family: 'Segoe UI', sans-serif; 
             margin: 0; 
             background-color: var(--bg); 
-            background-image: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
             color: #fff; 
-            display: flex; 
-            flex-direction: column; 
             min-height: 100vh; 
             overflow-x: hidden; 
         }
 
-        /* BARRA DE STATUS PROFISSIONAL */
-        .status-bar { 
-            background: rgba(0,0,0,0.9); 
-            padding: 8px 25px; 
-            display: flex; 
-            justify-content: space-between; 
-            font-family: 'Courier New', monospace; 
-            font-size: 12px; 
-            color: var(--primary); 
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: blur(10px);
+        /* TELA DE PROCESSAMENTO (BURACO NEGRO + VÍDEO) */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* NAVEGAÇÃO FUTURISTA */
+        /* LOGO BURACO NEGRO CELTA */
+        .black-hole-logo {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background: #000;
+            border-radius: 50%;
+            box-shadow: 0 0 40px 15px #fff, 0 0 80px 30px #00ff00, inset 0 0 40px #000;
+            animation: pulse 1.5s infinite alternate;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(0.95); box-shadow: 0 0 40px 10px #00ff00; }
+            to { transform: scale(1.05); box-shadow: 0 0 70px 25px #fff; }
+        }
+
+        /* NAVEGAÇÃO PROFISSIONAL */
         nav { 
-            background: rgba(0, 0, 0, 0.8); 
+            background: rgba(0, 0, 0, 0.9); 
             padding: 15px; 
             display: flex; 
             justify-content: center; 
-            gap: 12px; 
+            gap: 10px; 
             border-bottom: 1px solid var(--border); 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000; 
-            flex-wrap: wrap;
+            position: sticky; top: 0; z-index: 1000;
             backdrop-filter: blur(15px);
+            flex-wrap: wrap;
         }
 
         nav a { 
-            color: #aaa; 
-            text-decoration: none; 
-            font-weight: 600; 
-            cursor: pointer; 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            padding: 10px 18px; 
-            border-radius: 6px; 
-            border: 1px solid transparent;
-            letter-spacing: 1px;
+            color: #888; text-decoration: none; font-weight: bold; cursor: pointer; 
+            font-size: 10px; text-transform: uppercase; padding: 10px 15px; 
+            border-radius: 5px; border: 1px solid transparent;
         }
 
         nav a:hover, nav a.active { 
-            color: var(--primary); 
+            color: var(--primary); border: 1px solid var(--primary); 
             background: rgba(0, 255, 0, 0.05);
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-            transform: translateY(-2px);
+            box-shadow: 0 0 10px var(--primary);
         }
 
-        /* PÁGINAS E ANIMAÇÃO */
-        .page { display: none; padding: 30px; flex: 1; animation: pageIn 0.5s ease-out; }
+        /* CONTEÚDO DAS PÁGINAS */
+        .page { display: none; padding: 25px; animation: fadeIn 0.8s ease; }
         .active-page { display: block; }
-        
-        @keyframes pageIn { 
-            from { opacity: 0; transform: translateY(10px); } 
-            to { opacity: 1; transform: translateY(0); } 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 20px; border-left: 4px solid var(--primary); }
+
+        iframe { width: 100%; border-radius: 12px; border: 1px solid #333; min-height: 550px; background: #000; }
+
+        /* HOME / BUSCA */
+        .search-container { text-align: center; margin-top: 12vh; }
+        .search-input { 
+            width: 85%; max-width: 600px; padding: 20px; border-radius: 50px; 
+            border: 2px solid var(--primary); background: rgba(255,255,255,0.05); color: #fff; font-size: 18px; outline: none;
         }
 
-        /* GRID E CARDS REALISTAS */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto; }
-        
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 16px; 
-            padding: 20px; 
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        /* TERMINAL HACKER (PÁGINA SECRETA) */
+        .secret-terminal { background: #000; border: 2px solid #ff0000; padding: 20px; font-family: monospace; min-height: 300px; border-radius: 10px; }
+        .hacker-text { color: #ff0000; font-size: 14px; margin-bottom: 5px; }
 
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary);
-        }
-
-        iframe { 
-            width: 100%; 
-            border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            background: #000; 
-            min-height: 550px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        /* BUSCA CELTA ESTILO GOOGLE 2026 */
-        .search-input {
-            width: 90%; 
-            max-width: 650px; 
-            padding: 20px 30px; 
-            border-radius: 50px; 
-            border: 1px solid var(--border); 
-            background: rgba(255,255,255,0.03); 
-            color: #fff; 
-            font-size: 18px;
-            outline: none;
-            box-shadow: 0 0 20px rgba(0,0,0,0.4);
-        }
-        
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 30px rgba(0, 255, 0, 0.15); }
-
-        /* TERMINAL HACKER PROFISSIONAL */
-        .secret-terminal { 
-            background: #020202; 
-            border: 1px solid #ff0000; 
-            padding: 25px; 
-            font-family: 'Consolas', 'Courier New', monospace; 
-            border-radius: 8px;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.1);
-        }
-        
-        .hacker-text { color: #ff3333; font-size: 14px; margin-bottom: 8px; text-shadow: 0 0 8px rgba(255, 0, 0, 0.5); }
-        
-        .admin-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-        
-        .admin-btn { 
-            background: rgba(255, 0, 0, 0.05); 
-            border: 1px solid #ff0000; 
-            color: #ff0000; 
-            padding: 15px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-        
-        .admin-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); }
-
-        .secret-btn { background: transparent; border: none; color: #151515; font-size: 14px; cursor: pointer; margin-top: 20px; }
+        .secret-btn { background: transparent; border: none; color: #111; font-size: 12px; cursor: pointer; margin-top: 20px; }
     </style>
 </head>
 <body onload="initSystem()">
 
-    <div class="status-bar">
-        <span>CORE: ONLINE | SECURE_LINK: ATIVO | 2026</span>
-        <div id="google_translate_element"></div>
+    <div id="loader">
+        <div class="black-hole-logo"></div>
+        <h2 style="margin-top:40px; letter-spacing:8px; font-style:italic;">PROCESSANDO...</h2>
+        <p style="color:var(--primary); font-family:monospace;">MULTIVERSO CELTA ATIVO</p>
     </div>
 
     <nav>
-        <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="openPage('cinema')" id="nav-cinema">🎬 Filmes</a>
-        <a onclick="openPage('ia')" id="nav-ia">🤖 Suno IA</a>
-        <a onclick="openPage('news')" id="nav-news">🌎 Notícias</a>
-        <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="openPage('call')" id="nav-call">📞 Chamada</a>
-        <a onclick="openPage('ent')" id="nav-ent">🎵 Música</a>
-        <a onclick="openPage('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="openPage('hacking')" id="nav-hacking">📊 Hacking</a>
+        <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
+        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
+        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Suno IA</a>
+        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
+        <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
+        <a onclick="triggerLoading('ent')" id="nav-ent">🎵 Música</a>
+        <a onclick="triggerLoading('call')" id="nav-call">📞 Chamada</a>
+        <a onclick="triggerLoading('jogos')" id="nav-jogos">🕹️ Jogos</a>
+        <a onclick="triggerLoading('hacking')" id="nav-hacking">📊 Hacking</a>
     </nav>
 
     <div id="home" class="page active-page">
-        <div style="text-align:center; margin-top:15vh;">
-            <h1 style="font-size:100px; text-shadow:0 0 30px var(--primary); font-style:italic; margin:0; letter-spacing:-5px;">CELTA</h1>
-            <p style="color:var(--primary); letter-spacing:5px; margin-bottom:40px; font-size:12px;">ADVANCED OPERATING SYSTEM</p>
+        <div class="search-container">
+            <div class="black-hole-logo" style="width:120px; height:120px; margin: 0 auto 40px;"></div>
+            <h1 style="font-size:70px; margin:0; letter-spacing:-3px;">CELTA OS</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" class="search-input" placeholder="Pesquisar na rede Celta...">
+                <input type="text" name="q" class="search-input" placeholder="Pesquisar no sistema...">
             </form>
         </div>
     </div>
 
-    <div id="cinema" class="page">
-        <h2 style="text-align:center; color:#ffcc00; margin-bottom:30px;">🎬 CINEMA EXPERIENCE</h2>
-        <iframe src="https://archive.org/details/movies?embed=1"></iframe>
-    </div>
-
     <div id="ia" class="page">
-        <h2 style="text-align:center; color:var(--primary); margin-bottom:30px;">🤖 IA GENERATIVE (SUNO)</h2>
+        <h2 style="text-align:center; color:var(--primary);">🤖 SUNO IA GENERATOR</h2>
         <iframe src="https://suno.com/create"></iframe>
     </div>
 
+    <div id="cinema" class="page">
+        <h2 style="text-align:center; color:#ffcc00;">🎬 CELTA CINEMA FREE</h2>
+        <iframe src="https://archive.org/details/movies?embed=1"></iframe>
+    </div>
+
     <div id="news" class="page">
-        <h2 style="text-align:center; margin-bottom:30px;">🌎 GLOBAL BROADCAST</h2>
-        <iframe src="https://www.youtube.com/embed/pykpO5kQJ98" style="min-height:600px;"></iframe>
+        <h2 style="text-align:center;">🌎 NOTÍCIAS EM TEMPO REAL</h2>
+        <iframe src="https://www.youtube.com/embed/pykpO5kQJ98"></iframe>
     </div>
 
     <div id="futebol" class="page">
-        <h2 style="text-align:center; margin-bottom:30px;">⚽ LIVE SCORE & STATS</h2>
-        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:700px;"></iframe>
+        <h2 style="text-align:center;">⚽ PLACAR AO VIVO</h2>
+        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:650px;"></iframe>
+    </div>
+
+    <div id="ent" class="page">
+        <div class="grid">
+            <div class="card"><b>SINA DA OFÉLIA</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" style="min-height:250px;"></iframe></div>
+            <div class="card"><b>TAKA MONTAGEM</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" style="min-height:250px;"></iframe></div>
+            <div class="card"><b>LINKIN PARK</b><iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" style="min-height:250px;"></iframe></div>
+        </div>
     </div>
 
     <div id="call" class="page">
         <iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; autoplay"></iframe>
     </div>
 
-    <div id="ent" class="page">
-        <div class="grid">
-            <div class="card" style="border-left-color:#ff00ff;"><b>SINA DA OFÉLIA</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" style="min-height:250px;"></iframe></div>
-            <div class="card" style="border-left-color:#ff00ff;"><b>TAKA MONTAGEM</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" style="min-height:250px;"></iframe></div>
-            <div class="card" style="border-left-color:#ff00ff;"><b>LINKIN PARK</b><iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" style="min-height:250px;"></iframe></div>
-        </div>
-    </div>
-
     <div id="jogos" class="page">
-        <iframe src="https://www.miniplay.com/embed/pac-man" style="min-height:600px;"></iframe>
+        <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
     </div>
 
     <div id="hacking" class="page">
-        <div class="card" style="text-align:center; padding:100px;">
-            <h2 style="color:var(--primary); font-family:monospace;">SCANNING GLOBAL NETWORK...</h2>
-            <div style="width:100%; height:2px; background:rgba(0,255,0,0.1); margin-top:20px;">
-                <div style="width:65%; height:100%; background:var(--primary); box-shadow:0 0 10px var(--primary);"></div>
-            </div>
-            <p style="margin-top:20px; font-family:monospace;">STATUS: BYPASSING ENCRYPTION...</p>
+        <div class="card" style="text-align:center; padding:80px;">
+            <h2 style="color:var(--primary);">NETWORK SCANNING...</h2>
+            <p>CONTA ATIVA: antoniocecilia223@gmail.com</p>
         </div>
     </div>
 
     <div id="secret-page" class="page">
-        <h2 style="text-align:center; color:#ff0000; margin-bottom:30px;">⚠️ NÚCLEO CENTRAL SDC CUP</h2>
+        <h2 style="text-align:center; color:#ff0000;">⚠️ TERMINAL SDC CUP ADMIN</h2>
         <div class="secret-terminal">
             <div id="hacker-flow"></div>
-            <div class="admin-panel">
-                <button class="admin-btn" onclick="alert('Transferência de 200€ iniciada...')">💰 PRÉMIO SDC 28</button>
-                <button class="admin-btn" onclick="alert('Servidor SCD 2026 Reiniciado!')">🔄 REBOOT SCD 2026</button>
-                <button class="admin-btn" onclick="alert('Modo Deus Ativado!')">⚡ MODO DEUS</button>
-                <button class="admin-btn" onclick="alert('Encriptação Celpay 100%')">🛡️ SEGURANÇA CELPAY</button>
+            <div style="margin-top:20px; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <button onclick="alert('Prémio SDC 28: Enviando...')" style="background:#111; color:#ff0000; border:1px solid #ff0000; padding:10px; cursor:pointer;">💰 PRÉMIO SDC 28</button>
+                <button onclick="alert('Sistema Reiniciado')" style="background:#111; color:#ff0000; border:1px solid #ff0000; padding:10px; cursor:pointer;">🔄 REBOOT</button>
             </div>
         </div>
     </div>
 
-    <footer style="text-align:center; padding-bottom:20px;">
+    <footer style="text-align:center; padding:20px;">
         <button class="secret-btn" onclick="accessSecret()">.</button>
     </footer>
 
     <script>
+        function triggerLoading(pageId) {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'flex';
+            setTimeout(() => {
+                loader.style.display = 'none';
+                openPage(pageId);
+            }, 1500); // Tempo do buraco negro processar
+        }
+
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            if(document.getElementById('nav-'+id)) document.getElementById('nav-'+id).classList.add('active');
+            document.getElementById('nav-' + id).classList.add('active');
             if(id === 'secret-page') startHackerEffect();
-            window.scrollTo(0,0);
         }
 
         function accessSecret() {
-            if(prompt("PASSWORD ADMIN:") === "1234") { openPage('secret-page'); }
-            else { alert("ACESSO NEGADO."); }
+            if(prompt("PASSWORD:") === "1234") { triggerLoading('secret-page'); }
         }
 
         function startHackerEffect() {
             const flow = document.getElementById('hacker-flow');
-            const logs = [
-                "> Estabelecendo ligação segura...",
-                "> Usuário: Celvio | ID: 001",
-                "> Acedendo base de dados SCD 2026...",
-                "> Validando carteira antoniocecilia223...",
-                "> Encriptação Celpay: 256-bit AES",
-                "> SISTEMA PRONTO PARA OPERAÇÃO."
-            ];
+            const logs = ["> Login: Celvio", "> Bypass Firewall...", "> Database SDC CUP 2026: OK", "> Admin Mode Active."];
             flow.innerHTML = "";
-            logs.forEach((log, i) => {
-                setTimeout(() => {
-                    flow.innerHTML += `<div class="hacker-text">${log}</div>`;
-                }, i * 600);
-            });
+            logs.forEach((log, i) => { setTimeout(() => { flow.innerHTML += `<div class="hacker-text">${log}</div>`; }, i * 500); });
         }
-
-        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
     </script>
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
