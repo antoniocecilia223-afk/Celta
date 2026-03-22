@@ -10,48 +10,43 @@
             --bg: #050505;
             --card-bg: rgba(15, 15, 15, 0.95);
             --border: rgba(0, 255, 0, 0.2);
-            --gemini-blue: #4285F4;
         }
 
-        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
         
         body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
+            font-family: 'Segoe UI', sans-serif; 
             margin: 0; background-color: var(--bg); color: #fff; 
-            min-height: 100vh; overflow-x: hidden; 
+            min-height: 100vh; overflow: hidden; 
         }
 
-        /* TELA DE PROCESSAMENTO BURACO NEGRO */
+        /* LOADER BURACO NEGRO */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: none;
             flex-direction: column; align-items: center; justify-content: center;
         }
 
-        .black-hole-logo {
-            width: 140px; height: 140px; background: #000; border-radius: 50%;
-            box-shadow: 0 0 40px 10px #fff, 0 0 80px 25px var(--primary), inset 0 0 50px #000;
-            animation: blackHolePulse 2s infinite ease-in-out;
+        .black-hole {
+            width: 120px; height: 120px; background: #000; border-radius: 50%;
+            box-shadow: 0 0 30px 10px #fff, 0 0 60px 20px var(--primary), inset 0 0 30px #000;
+            animation: pulse 1.5s infinite alternate;
         }
 
-        @keyframes blackHolePulse {
-            0% { transform: scale(0.9); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(0.9); }
-        }
+        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); } }
 
         /* NAVEGAÇÃO */
         nav { 
-            background: rgba(0, 0, 0, 0.9); padding: 15px; 
-            display: flex; justify-content: center; gap: 10px; 
+            background: rgba(0, 0, 0, 0.9); padding: 12px; 
+            display: flex; justify-content: center; gap: 8px; 
             border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000;
-            flex-wrap: wrap; backdrop-filter: blur(20px);
+            flex-wrap: wrap; backdrop-filter: blur(10px);
         }
 
         nav a { 
-            color: #aaa; text-decoration: none; font-weight: bold; cursor: pointer; 
-            font-size: 10px; text-transform: uppercase; padding: 10px 16px; 
-            border-radius: 8px; border: 1px solid transparent;
+            color: #888; text-decoration: none; font-weight: bold; cursor: pointer; 
+            font-size: 10px; text-transform: uppercase; padding: 10px 14px; 
+            border-radius: 6px; border: 1px solid transparent;
         }
 
         nav a:hover, nav a.active { 
@@ -59,99 +54,100 @@
             background: rgba(0, 255, 0, 0.05);
         }
 
-        /* PÁGINAS */
-        .page { display: none; padding: 30px; animation: pageSlide 0.6s ease; }
+        /* CONTEÚDO */
+        .page { display: none; height: calc(100vh - 70px); width: 100vw; animation: fadeIn 0.5s ease; }
         .active-page { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        iframe { width: 100%; border-radius: 12px; border: none; background: #000; min-height: 600px; }
+        iframe { width: 100%; height: 100%; border: none; background: #000; }
 
-        /* ESTILO BOTÃO GEMINI */
-        .gemini-container {
-            text-align: center; padding: 50px; background: rgba(66, 133, 244, 0.1);
-            border: 1px solid var(--gemini-blue); border-radius: 20px; margin-top: 50px;
-        }
-        .gemini-btn {
-            background: var(--gemini-blue); color: white; padding: 20px 40px;
-            border-radius: 50px; text-decoration: none; font-weight: bold;
-            font-size: 20px; display: inline-block; box-shadow: 0 0 30px var(--gemini-blue);
-        }
-
-        /* SEARCH HOME */
-        .home-center { text-align: center; margin-top: 10vh; }
+        /* HOME */
+        .home-content { text-align: center; padding-top: 15vh; }
         .search-bar { 
-            width: 90%; max-width: 600px; padding: 20px; border-radius: 50px; 
-            border: 2px solid var(--primary); background: transparent; color: #fff; font-size: 18px;
+            width: 80%; max-width: 500px; padding: 18px; border-radius: 40px; 
+            border: 2px solid var(--primary); background: transparent; color: #fff; font-size: 18px; text-align: center;
+        }
+
+        /* ESTILO PARA QUANDO SITES BLOQUEIAM */
+        .error-handler {
+            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;
+            text-align: center; padding: 20px;
+        }
+        .btn-portal {
+            background: var(--primary); color: #000; padding: 15px 30px; border-radius: 30px;
+            text-decoration: none; font-weight: bold; margin-top: 20px; box-shadow: 0 0 20px var(--primary);
         }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div id="loader">
-        <div class="black-hole-logo"></div>
-        <h2 style="margin-top:40px; letter-spacing:10px;">CELTA OS</h2>
+        <div class="black-hole"></div>
+        <h2 style="margin-top:20px; letter-spacing:5px;">CELTA PROCESSING...</h2>
     </div>
 
     <nav>
         <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="triggerLoading('gemini')" id="nav-gemini" style="color:var(--gemini-blue);">✨ Gemini IA</a>
-        <a onclick="triggerLoading('news')" id="nav-news">🌎 Google Notícias</a>
-        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Suno AI</a>
-        <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
-        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Cinema</a>
-        <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="triggerLoading('hacking')" id="nav-hacking">📊 Admin</a>
+        <a onclick="triggerLoading('ia-page')" id="nav-ia-page">🤖 Celta IA</a>
+        <a onclick="triggerLoading('news-page')" id="nav-news-page">🌎 Notícias</a>
+        <a onclick="triggerLoading('music-page')" id="nav-music-page">🎵 Música</a>
+        <a onclick="triggerLoading('football-page')" id="nav-football-page">⚽ Futebol</a>
+        <a onclick="triggerLoading('cinema-page')" id="nav-cinema-page">🎬 Cinema</a>
+        <a onclick="triggerLoading('admin-page')" id="nav-admin-page">📊 Admin</a>
     </nav>
 
     <div id="home" class="page active-page">
-        <div class="home-center">
-            <div class="black-hole-logo" style="width:120px; height:120px; margin: 0 auto 40px;"></div>
-            <h1 style="font-size:70px; margin:0; font-style:italic;">CELTA</h1>
+        <div class="home-content">
+            <div class="black-hole" style="width:100px; height:100px; margin: 0 auto 30px;"></div>
+            <h1 style="font-size:60px; font-style:italic; margin:0;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" class="search-bar" placeholder="Pesquisar no Multiverso...">
+                <input type="text" name="q" class="search-bar" placeholder="Pesquisar na rede...">
             </form>
         </div>
     </div>
 
-    <div id="gemini" class="page">
-        <div class="gemini-container">
-            <h1 style="color:var(--gemini-blue);">✨ Google Gemini está pronto</h1>
-            <p>Por segurança, o Gemini precisa ser aberto numa conexão direta.</p><br>
-            <a href="https://gemini.google.com/app" target="_blank" class="gemini-btn">ABRIR GEMINI IA AGORA</a>
-        </div>
+    <div id="ia-page" class="page">
+        <iframe src="https://huggingface.co/chat/"></iframe>
     </div>
 
-    <div id="news" class="page">
-        <h2 style="text-align:center;">🌎 GOOGLE NOTÍCIAS (TOP STORIES)</h2>
-        <iframe src="https://news.google.com/topstories?hl=pt-PT&gl=PT&ceid=PT:pt-150"></iframe>
+    <div id="news-page" class="page">
+        <iframe src="https://www.euronews.com/embed/timeline"></iframe>
     </div>
 
-    <div id="music" class="page">
-        <h1 style="text-align:center;">🎵 BIBLIOTECA CELTA</h1>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px;">
-                <h3>🔥 Afrohouse / Montagem</h3>
-                <iframe style="min-height:200px;" src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe>
-                <iframe style="min-height:200px; margin-top:10px;" src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe>
+    <div id="music-page" class="page" style="overflow-y: auto; padding: 20px;">
+        <h2 style="text-align:center;">🎵 BIBLIOTECA CELTA</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+            <div style="background:#111; padding:15px; border-radius:15px; border-left: 5px solid var(--primary);">
+                <h3>🔥 Afrohouse & Montagem</h3>
+                <iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" style="height:200px;"></iframe>
             </div>
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px;">
-                <h3>🙏 Religiosa / Gospel</h3>
-                <iframe style="min-height:200px;" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N"></iframe>
+            <div style="background:#111; padding:15px; border-radius:15px; border-left: 5px solid #ff00ff;">
+                <h3>🙏 Religiosa</h3>
+                <iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N" style="height:200px;"></iframe>
             </div>
         </div>
     </div>
 
-    <div id="ia" class="page"><iframe src="https://suno.com/create"></iframe></div>
-    <div id="cinema" class="page"><iframe src="https://archive.org/details/movies?embed=1"></iframe></div>
-    <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
-    
-    <div id="hacking" class="page">
-        <div style="text-align:center; padding:50px; font-family:monospace; border:1px solid var(--primary);">
-            <h2>CELTA ADMIN</h2>
-            <p>SISTEMA: antoniocecilia223@gmail.com</p>
+    <div id="football-page" class="page">
+        <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
+    </div>
+
+    <div id="cinema-page" class="page">
+        <iframe src="https://archive.org/details/movies?embed=1"></iframe>
+    </div>
+
+    <div id="admin-page" class="page">
+        <div class="error-handler">
+            <div class="black-hole" style="width:80px; height:80px;"></div>
+            <h2>ADMIN DASHBOARD</h2>
+            <p>User: antoniocecilia223@gmail.com</p>
+            <p>Status: Celta Core Online</p>
         </div>
     </div>
 
-    <footer style="text-align:center; padding:30px;"><button style="background:transparent; border:none; color:#111;" onclick="accessSecret()">.</button></footer>
+    <footer style="text-align:center; position:fixed; bottom:10px; width:100%;">
+        <button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button>
+    </footer>
 
     <script>
         function triggerLoading(pageId) {
@@ -167,12 +163,11 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            const navBtn = document.getElementById('nav-' + id);
-            if(navBtn) navBtn.classList.add('active');
+            document.getElementById('nav-' + id).classList.add('active');
         }
 
         function accessSecret() {
-            if(prompt("ADMIN PASS:") === "1234") { triggerLoading('home'); }
+            if(prompt("ADMIN PASS:") === "1234") { triggerLoading('admin-page'); }
         }
     </script>
 </body>
