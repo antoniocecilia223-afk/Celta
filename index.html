@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | SUPREME MULTIVERSE 2026</title>
+    <title>CELTA OS | SUPREME 2026</title>
     <style>
         :root {
             --primary: #00ff00;
@@ -35,9 +35,9 @@
         }
 
         @keyframes blackHolePulse {
-            0% { transform: scale(0.9); box-shadow: 0 0 40px 10px #fff, 0 0 60px 20px var(--primary); }
-            50% { transform: scale(1.1); box-shadow: 0 0 60px 20px #fff, 0 0 100px 40px var(--primary); }
-            100% { transform: scale(0.9); box-shadow: 0 0 40px 10px #fff, 0 0 60px 20px var(--primary); }
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.9); }
         }
 
         /* NAVEGAÇÃO */
@@ -51,42 +51,36 @@
         nav a { 
             color: #aaa; text-decoration: none; font-weight: bold; cursor: pointer; 
             font-size: 10px; text-transform: uppercase; padding: 10px 16px; 
-            border-radius: 8px; border: 1px solid transparent; letter-spacing: 1px;
+            border-radius: 8px; border: 1px solid transparent;
         }
 
         nav a:hover, nav a.active { 
             color: var(--primary); border: 1px solid var(--primary); 
-            background: rgba(0, 255, 0, 0.05); box-shadow: 0 0 15px rgba(0,255,0,0.2);
+            background: rgba(0, 255, 0, 0.05);
         }
 
-        /* ESTILO DAS PÁGINAS */
+        /* PÁGINAS */
         .page { display: none; padding: 30px; animation: pageSlide 0.6s ease; }
         .active-page { display: block; }
-        @keyframes pageSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* MÚSICA ORGANIZADA */
-        .music-group { margin-bottom: 50px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 20px; }
-        .group-title { 
-            font-size: 22px; color: var(--primary); margin-bottom: 20px; 
-            display: flex; align-items: center; gap: 10px; font-weight: 800;
+        iframe { width: 100%; border-radius: 12px; border: none; background: #000; min-height: 600px; }
+
+        /* ESTILO BOTÃO GEMINI */
+        .gemini-container {
+            text-align: center; padding: 50px; background: rgba(66, 133, 244, 0.1);
+            border: 1px solid var(--gemini-blue); border-radius: 20px; margin-top: 50px;
         }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .music-card { 
-            background: var(--card-bg); border-radius: 15px; padding: 15px; 
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        .gemini-btn {
+            background: var(--gemini-blue); color: white; padding: 20px 40px;
+            border-radius: 50px; text-decoration: none; font-weight: bold;
+            font-size: 20px; display: inline-block; box-shadow: 0 0 30px var(--gemini-blue);
         }
-        .music-card:hover { transform: scale(1.03); border-color: var(--primary); }
-
-        iframe { width: 100%; border-radius: 12px; border: none; background: #000; min-height: 500px; }
-        .music-player { min-height: 200px !important; }
 
         /* SEARCH HOME */
         .home-center { text-align: center; margin-top: 10vh; }
         .search-bar { 
-            width: 90%; max-width: 600px; padding: 22px; border-radius: 60px; 
-            border: 2px solid var(--primary); background: transparent; color: #fff; 
-            font-size: 18px; outline: none; box-shadow: 0 0 20px rgba(0,255,0,0.1);
+            width: 90%; max-width: 600px; padding: 20px; border-radius: 50px; 
+            border: 2px solid var(--primary); background: transparent; color: #fff; font-size: 18px;
         }
     </style>
 </head>
@@ -94,102 +88,70 @@
 
     <div id="loader">
         <div class="black-hole-logo"></div>
-        <h2 style="margin-top:40px; letter-spacing:10px; font-weight:200;">CELTA OS</h2>
-        <p style="color:var(--primary); font-family:monospace; font-size:12px;">INICIALIZANDO NÚCLEO... [OK]</p>
+        <h2 style="margin-top:40px; letter-spacing:10px;">CELTA OS</h2>
     </div>
 
     <nav>
         <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
         <a onclick="triggerLoading('gemini')" id="nav-gemini" style="color:var(--gemini-blue);">✨ Gemini IA</a>
+        <a onclick="triggerLoading('news')" id="nav-news">🌎 Google Notícias</a>
         <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Suno AI</a>
         <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
-        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
+        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Cinema</a>
         <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="triggerLoading('hacking')" id="nav-hacking">📊 Admin</a>
     </nav>
 
     <div id="home" class="page active-page">
         <div class="home-center">
             <div class="black-hole-logo" style="width:120px; height:120px; margin: 0 auto 40px;"></div>
-            <h1 style="font-size:80px; margin:0; letter-spacing:-4px; font-style:italic;">CELTA</h1>
+            <h1 style="font-size:70px; margin:0; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" class="search-bar" placeholder="Pesquisar no Multiverso Celta...">
+                <input type="text" name="q" class="search-bar" placeholder="Pesquisar no Multiverso...">
             </form>
         </div>
     </div>
 
     <div id="gemini" class="page">
-        <h2 style="text-align:center; color:var(--gemini-blue); margin-bottom:20px;">✨ GOOGLE GEMINI AI</h2>
-        <iframe src="https://gemini.google.com/app" allow="microphone; clipboard-write; camera"></iframe>
+        <div class="gemini-container">
+            <h1 style="color:var(--gemini-blue);">✨ Google Gemini está pronto</h1>
+            <p>Por segurança, o Gemini precisa ser aberto numa conexão direta.</p><br>
+            <a href="https://gemini.google.com/app" target="_blank" class="gemini-btn">ABRIR GEMINI IA AGORA</a>
+        </div>
+    </div>
+
+    <div id="news" class="page">
+        <h2 style="text-align:center;">🌎 GOOGLE NOTÍCIAS (TOP STORIES)</h2>
+        <iframe src="https://news.google.com/topstories?hl=pt-PT&gl=PT&ceid=PT:pt-150"></iframe>
+    </div>
+
+    <div id="music" class="page">
+        <h1 style="text-align:center;">🎵 BIBLIOTECA CELTA</h1>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px;">
+                <h3>🔥 Afrohouse / Montagem</h3>
+                <iframe style="min-height:200px;" src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe>
+                <iframe style="min-height:200px; margin-top:10px;" src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe>
+            </div>
+            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:10px;">
+                <h3>🙏 Religiosa / Gospel</h3>
+                <iframe style="min-height:200px;" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N"></iframe>
+            </div>
+        </div>
     </div>
 
     <div id="ia" class="page"><iframe src="https://suno.com/create"></iframe></div>
-
-    <div id="music" class="page">
-        <h1 style="text-align:center; margin-bottom:40px;">🎵 BIBLIOTECA CELTA SUPREME</h1>
-
-        <div class="music-group">
-            <div class="group-title">🕺 AFROHOUSE & DEEP HOUSE</div>
-            <div class="grid">
-                <div class="music-card"><b>Sina da Ofélia (Afro)</b><iframe class="music-player" src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe></div>
-                <div class="music-card"><b>Afro House Mix 2026</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
-            </div>
-        </div>
-
-        <div class="music-group">
-            <div class="group-title">🔥 MONTAGEM & PHONK</div>
-            <div class="grid">
-                <div class="music-card"><b>Taka Montagem</b><iframe class="music-player" src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe></div>
-                <div class="music-card"><b>Mega Funk & Montagem</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0h_XWn-9kY0N"></iframe></div>
-            </div>
-        </div>
-
-        <div class="music-group">
-            <div class="group-title">🙏 MÚSICA RELIGIOSA</div>
-            <div class="grid">
-                <div class="music-card"><b>Gospel Angola/PT</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N"></iframe></div>
-                <div class="music-card"><b>Adoração Intensa</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0-G_vXWn-9kY0N"></iframe></div>
-            </div>
-        </div>
-
-        <div class="music-group">
-            <div class="group-title">🌍 SONS AFRICANOS (SEMBA & KIZOMBA)</div>
-            <div class="grid">
-                <div class="music-card"><b>Clássicos Africanos</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX3_XWn-9kY0N"></iframe></div>
-                <div class="music-card"><b>Afrobeats Vibes</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX4_XWn-9kY0N"></iframe></div>
-            </div>
-        </div>
-
-        <div class="music-group">
-            <div class="group-title">🎸 MÚSICAS POP & ROCK</div>
-            <div class="grid">
-                <div class="music-card"><b>Linkin Park</b><iframe class="music-player" src="https://www.youtube.com/embed/Wa2MqAhAK5s"></iframe></div>
-                <div class="music-card"><b>Pop Global 2026</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL4fGSI1pDJn6jWqsV_p8J6m_pS5AALZ6G"></iframe></div>
-            </div>
-        </div>
-    </div>
-
     <div id="cinema" class="page"><iframe src="https://archive.org/details/movies?embed=1"></iframe></div>
     <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
-    <div id="news" class="page"><iframe src="https://www.youtube.com/embed/pykpO5kQJ98"></iframe></div>
     
     <div id="hacking" class="page">
-        <div style="text-align:center; padding:50px; font-family:monospace; border:1px solid var(--primary); border-radius:20px;">
-            <h2 style="color:var(--primary);">CELTA ADMIN TERMINAL</h2>
-            <p>CONTA: antoniocecilia223@gmail.com</p>
-            <p>SISTEMA: ENCRIPTADO [AES-256]</p>
+        <div style="text-align:center; padding:50px; font-family:monospace; border:1px solid var(--primary);">
+            <h2>CELTA ADMIN</h2>
+            <p>SISTEMA: antoniocecilia223@gmail.com</p>
         </div>
     </div>
 
-    <div id="secret-page" class="page">
-        <h2 style="text-align:center; color:#ff0000;">⚠️ NÚCLEO CENTRAL SDC CUP</h2>
-        <div id="hacker-flow" style="background:#000; border:2px solid #ff0000; padding:20px; font-family:monospace; color:#ff0000;"></div>
-    </div>
-
-    <footer style="text-align:center; padding:30px;">
-        <button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button>
-    </footer>
+    <footer style="text-align:center; padding:30px;"><button style="background:transparent; border:none; color:#111;" onclick="accessSecret()">.</button></footer>
 
     <script>
         function triggerLoading(pageId) {
@@ -207,19 +169,10 @@
             document.getElementById(id).classList.add('active-page');
             const navBtn = document.getElementById('nav-' + id);
             if(navBtn) navBtn.classList.add('active');
-            if(id === 'secret-page') startHackerEffect();
-            window.scrollTo(0,0);
         }
 
         function accessSecret() {
-            if(prompt("ADMIN PASSWORD:") === "1234") { triggerLoading('secret-page'); }
-        }
-
-        function startHackerEffect() {
-            const flow = document.getElementById('hacker-flow');
-            const logs = ["> Login: Celvio Barcelona", "> Bypass Firewall...", "> SDC CUP 2026 Admin Access: GRANTED"];
-            flow.innerHTML = "";
-            logs.forEach((log, i) => { setTimeout(() => { flow.innerHTML += `<div>${log}</div>`; }, i * 400); });
+            if(prompt("ADMIN PASS:") === "1234") { triggerLoading('home'); }
         }
     </script>
 </body>
