@@ -1,192 +1,194 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | MULTIVERSE 2026</title>
+    <title>CELTA OS | SUPREME MULTIVERSE 2026</title>
     <style>
         :root {
             --primary: #00ff00;
             --bg: #050505;
-            --card-bg: rgba(20, 20, 20, 0.9);
+            --card-bg: rgba(15, 15, 15, 0.95);
             --border: rgba(0, 255, 0, 0.2);
+            --gemini-blue: #4285F4;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         
         body { 
-            font-family: 'Segoe UI', sans-serif; 
-            margin: 0; 
-            background-color: var(--bg); 
-            color: #fff; 
-            min-height: 100vh; 
-            overflow-x: hidden; 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            margin: 0; background-color: var(--bg); color: #fff; 
+            min-height: 100vh; overflow-x: hidden; 
         }
 
-        /* TELA DE PROCESSAMENTO (BURACO NEGRO + VÍDEO) */
+        /* TELA DE PROCESSAMENTO BURACO NEGRO */
         #loader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 9999;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: none;
+            flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* LOGO BURACO NEGRO CELTA */
         .black-hole-logo {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            background: #000;
-            border-radius: 50%;
-            box-shadow: 0 0 40px 15px #fff, 0 0 80px 30px #00ff00, inset 0 0 40px #000;
-            animation: pulse 1.5s infinite alternate;
-            z-index: 10;
+            width: 140px; height: 140px; background: #000; border-radius: 50%;
+            box-shadow: 0 0 40px 10px #fff, 0 0 80px 25px var(--primary), inset 0 0 50px #000;
+            animation: blackHolePulse 2s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            from { transform: scale(0.95); box-shadow: 0 0 40px 10px #00ff00; }
-            to { transform: scale(1.05); box-shadow: 0 0 70px 25px #fff; }
+        @keyframes blackHolePulse {
+            0% { transform: scale(0.9); box-shadow: 0 0 40px 10px #fff, 0 0 60px 20px var(--primary); }
+            50% { transform: scale(1.1); box-shadow: 0 0 60px 20px #fff, 0 0 100px 40px var(--primary); }
+            100% { transform: scale(0.9); box-shadow: 0 0 40px 10px #fff, 0 0 60px 20px var(--primary); }
         }
 
-        /* NAVEGAÇÃO PROFISSIONAL */
+        /* NAVEGAÇÃO */
         nav { 
-            background: rgba(0, 0, 0, 0.9); 
-            padding: 15px; 
-            display: flex; 
-            justify-content: center; 
-            gap: 10px; 
-            border-bottom: 1px solid var(--border); 
-            position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(15px);
-            flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.9); padding: 15px; 
+            display: flex; justify-content: center; gap: 10px; 
+            border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000;
+            flex-wrap: wrap; backdrop-filter: blur(20px);
         }
 
         nav a { 
-            color: #888; text-decoration: none; font-weight: bold; cursor: pointer; 
-            font-size: 10px; text-transform: uppercase; padding: 10px 15px; 
-            border-radius: 5px; border: 1px solid transparent;
+            color: #aaa; text-decoration: none; font-weight: bold; cursor: pointer; 
+            font-size: 10px; text-transform: uppercase; padding: 10px 16px; 
+            border-radius: 8px; border: 1px solid transparent; letter-spacing: 1px;
         }
 
         nav a:hover, nav a.active { 
             color: var(--primary); border: 1px solid var(--primary); 
-            background: rgba(0, 255, 0, 0.05);
-            box-shadow: 0 0 10px var(--primary);
+            background: rgba(0, 255, 0, 0.05); box-shadow: 0 0 15px rgba(0,255,0,0.2);
         }
 
-        /* CONTEÚDO DAS PÁGINAS */
-        .page { display: none; padding: 25px; animation: fadeIn 0.8s ease; }
+        /* ESTILO DAS PÁGINAS */
+        .page { display: none; padding: 30px; animation: pageSlide 0.6s ease; }
         .active-page { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pageSlide { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1400px; margin: 0 auto; }
-        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 20px; border-left: 4px solid var(--primary); }
-
-        iframe { width: 100%; border-radius: 12px; border: 1px solid #333; min-height: 550px; background: #000; }
-
-        /* HOME / BUSCA */
-        .search-container { text-align: center; margin-top: 12vh; }
-        .search-input { 
-            width: 85%; max-width: 600px; padding: 20px; border-radius: 50px; 
-            border: 2px solid var(--primary); background: rgba(255,255,255,0.05); color: #fff; font-size: 18px; outline: none;
+        /* MÚSICA ORGANIZADA */
+        .music-group { margin-bottom: 50px; padding: 20px; background: rgba(255,255,255,0.02); border-radius: 20px; }
+        .group-title { 
+            font-size: 22px; color: var(--primary); margin-bottom: 20px; 
+            display: flex; align-items: center; gap: 10px; font-weight: 800;
         }
 
-        /* TERMINAL HACKER (PÁGINA SECRETA) */
-        .secret-terminal { background: #000; border: 2px solid #ff0000; padding: 20px; font-family: monospace; min-height: 300px; border-radius: 10px; }
-        .hacker-text { color: #ff0000; font-size: 14px; margin-bottom: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .music-card { 
+            background: var(--card-bg); border-radius: 15px; padding: 15px; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .music-card:hover { transform: scale(1.03); border-color: var(--primary); }
 
-        .secret-btn { background: transparent; border: none; color: #111; font-size: 12px; cursor: pointer; margin-top: 20px; }
+        iframe { width: 100%; border-radius: 12px; border: none; background: #000; min-height: 500px; }
+        .music-player { min-height: 200px !important; }
+
+        /* SEARCH HOME */
+        .home-center { text-align: center; margin-top: 10vh; }
+        .search-bar { 
+            width: 90%; max-width: 600px; padding: 22px; border-radius: 60px; 
+            border: 2px solid var(--primary); background: transparent; color: #fff; 
+            font-size: 18px; outline: none; box-shadow: 0 0 20px rgba(0,255,0,0.1);
+        }
     </style>
 </head>
 <body onload="initSystem()">
 
     <div id="loader">
         <div class="black-hole-logo"></div>
-        <h2 style="margin-top:40px; letter-spacing:8px; font-style:italic;">PROCESSANDO...</h2>
-        <p style="color:var(--primary); font-family:monospace;">MULTIVERSO CELTA ATIVO</p>
+        <h2 style="margin-top:40px; letter-spacing:10px; font-weight:200;">CELTA OS</h2>
+        <p style="color:var(--primary); font-family:monospace; font-size:12px;">INICIALIZANDO NÚCLEO... [OK]</p>
     </div>
 
     <nav>
         <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
+        <a onclick="triggerLoading('gemini')" id="nav-gemini" style="color:var(--gemini-blue);">✨ Gemini IA</a>
+        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Suno AI</a>
+        <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
         <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
-        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Suno IA</a>
-        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="triggerLoading('ent')" id="nav-ent">🎵 Música</a>
-        <a onclick="triggerLoading('call')" id="nav-call">📞 Chamada</a>
-        <a onclick="triggerLoading('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="triggerLoading('hacking')" id="nav-hacking">📊 Hacking</a>
+        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
+        <a onclick="triggerLoading('hacking')" id="nav-hacking">📊 Admin</a>
     </nav>
 
     <div id="home" class="page active-page">
-        <div class="search-container">
+        <div class="home-center">
             <div class="black-hole-logo" style="width:120px; height:120px; margin: 0 auto 40px;"></div>
-            <h1 style="font-size:70px; margin:0; letter-spacing:-3px;">CELTA OS</h1>
+            <h1 style="font-size:80px; margin:0; letter-spacing:-4px; font-style:italic;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" class="search-input" placeholder="Pesquisar no sistema...">
+                <input type="text" name="q" class="search-bar" placeholder="Pesquisar no Multiverso Celta...">
             </form>
         </div>
     </div>
 
-    <div id="ia" class="page">
-        <h2 style="text-align:center; color:var(--primary);">🤖 SUNO IA GENERATOR</h2>
-        <iframe src="https://suno.com/create"></iframe>
+    <div id="gemini" class="page">
+        <h2 style="text-align:center; color:var(--gemini-blue); margin-bottom:20px;">✨ GOOGLE GEMINI AI</h2>
+        <iframe src="https://gemini.google.com/app" allow="microphone; clipboard-write; camera"></iframe>
     </div>
 
-    <div id="cinema" class="page">
-        <h2 style="text-align:center; color:#ffcc00;">🎬 CELTA CINEMA FREE</h2>
-        <iframe src="https://archive.org/details/movies?embed=1"></iframe>
-    </div>
+    <div id="ia" class="page"><iframe src="https://suno.com/create"></iframe></div>
 
-    <div id="news" class="page">
-        <h2 style="text-align:center;">🌎 NOTÍCIAS EM TEMPO REAL</h2>
-        <iframe src="https://www.youtube.com/embed/pykpO5kQJ98"></iframe>
-    </div>
+    <div id="music" class="page">
+        <h1 style="text-align:center; margin-bottom:40px;">🎵 BIBLIOTECA CELTA SUPREME</h1>
 
-    <div id="futebol" class="page">
-        <h2 style="text-align:center;">⚽ PLACAR AO VIVO</h2>
-        <iframe src="https://www.scorebat.com/embed/livescore/" style="height:650px;"></iframe>
-    </div>
-
-    <div id="ent" class="page">
-        <div class="grid">
-            <div class="card"><b>SINA DA OFÉLIA</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U" style="min-height:250px;"></iframe></div>
-            <div class="card"><b>TAKA MONTAGEM</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ" style="min-height:250px;"></iframe></div>
-            <div class="card"><b>LINKIN PARK</b><iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s" style="min-height:250px;"></iframe></div>
+        <div class="music-group">
+            <div class="group-title">🕺 AFROHOUSE & DEEP HOUSE</div>
+            <div class="grid">
+                <div class="music-card"><b>Sina da Ofélia (Afro)</b><iframe class="music-player" src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe></div>
+                <div class="music-card"><b>Afro House Mix 2026</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
+            </div>
         </div>
-    </div>
 
-    <div id="call" class="page">
-        <iframe src="https://meet.jit.si/CeltaGlobal2026" allow="camera; microphone; fullscreen; autoplay"></iframe>
-    </div>
-
-    <div id="jogos" class="page">
-        <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
-    </div>
-
-    <div id="hacking" class="page">
-        <div class="card" style="text-align:center; padding:80px;">
-            <h2 style="color:var(--primary);">NETWORK SCANNING...</h2>
-            <p>CONTA ATIVA: antoniocecilia223@gmail.com</p>
+        <div class="music-group">
+            <div class="group-title">🔥 MONTAGEM & PHONK</div>
+            <div class="grid">
+                <div class="music-card"><b>Taka Montagem</b><iframe class="music-player" src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe></div>
+                <div class="music-card"><b>Mega Funk & Montagem</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0h_XWn-9kY0N"></iframe></div>
+            </div>
         </div>
-    </div>
 
-    <div id="secret-page" class="page">
-        <h2 style="text-align:center; color:#ff0000;">⚠️ TERMINAL SDC CUP ADMIN</h2>
-        <div class="secret-terminal">
-            <div id="hacker-flow"></div>
-            <div style="margin-top:20px; display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <button onclick="alert('Prémio SDC 28: Enviando...')" style="background:#111; color:#ff0000; border:1px solid #ff0000; padding:10px; cursor:pointer;">💰 PRÉMIO SDC 28</button>
-                <button onclick="alert('Sistema Reiniciado')" style="background:#111; color:#ff0000; border:1px solid #ff0000; padding:10px; cursor:pointer;">🔄 REBOOT</button>
+        <div class="music-group">
+            <div class="group-title">🙏 MÚSICA RELIGIOSA</div>
+            <div class="grid">
+                <div class="music-card"><b>Gospel Angola/PT</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N"></iframe></div>
+                <div class="music-card"><b>Adoração Intensa</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0-G_vXWn-9kY0N"></iframe></div>
+            </div>
+        </div>
+
+        <div class="music-group">
+            <div class="group-title">🌍 SONS AFRICANOS (SEMBA & KIZOMBA)</div>
+            <div class="grid">
+                <div class="music-card"><b>Clássicos Africanos</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX3_XWn-9kY0N"></iframe></div>
+                <div class="music-card"><b>Afrobeats Vibes</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX4_XWn-9kY0N"></iframe></div>
+            </div>
+        </div>
+
+        <div class="music-group">
+            <div class="group-title">🎸 MÚSICAS POP & ROCK</div>
+            <div class="grid">
+                <div class="music-card"><b>Linkin Park</b><iframe class="music-player" src="https://www.youtube.com/embed/Wa2MqAhAK5s"></iframe></div>
+                <div class="music-card"><b>Pop Global 2026</b><iframe class="music-player" src="https://www.youtube.com/embed/videoseries?list=PL4fGSI1pDJn6jWqsV_p8J6m_pS5AALZ6G"></iframe></div>
             </div>
         </div>
     </div>
 
-    <footer style="text-align:center; padding:20px;">
-        <button class="secret-btn" onclick="accessSecret()">.</button>
+    <div id="cinema" class="page"><iframe src="https://archive.org/details/movies?embed=1"></iframe></div>
+    <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
+    <div id="news" class="page"><iframe src="https://www.youtube.com/embed/pykpO5kQJ98"></iframe></div>
+    
+    <div id="hacking" class="page">
+        <div style="text-align:center; padding:50px; font-family:monospace; border:1px solid var(--primary); border-radius:20px;">
+            <h2 style="color:var(--primary);">CELTA ADMIN TERMINAL</h2>
+            <p>CONTA: antoniocecilia223@gmail.com</p>
+            <p>SISTEMA: ENCRIPTADO [AES-256]</p>
+        </div>
+    </div>
+
+    <div id="secret-page" class="page">
+        <h2 style="text-align:center; color:#ff0000;">⚠️ NÚCLEO CENTRAL SDC CUP</h2>
+        <div id="hacker-flow" style="background:#000; border:2px solid #ff0000; padding:20px; font-family:monospace; color:#ff0000;"></div>
+    </div>
+
+    <footer style="text-align:center; padding:30px;">
+        <button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button>
     </footer>
 
     <script>
@@ -196,26 +198,28 @@
             setTimeout(() => {
                 loader.style.display = 'none';
                 openPage(pageId);
-            }, 1500); // Tempo do buraco negro processar
+            }, 1000);
         }
 
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
-            document.getElementById('nav-' + id).classList.add('active');
+            const navBtn = document.getElementById('nav-' + id);
+            if(navBtn) navBtn.classList.add('active');
             if(id === 'secret-page') startHackerEffect();
+            window.scrollTo(0,0);
         }
 
         function accessSecret() {
-            if(prompt("PASSWORD:") === "1234") { triggerLoading('secret-page'); }
+            if(prompt("ADMIN PASSWORD:") === "1234") { triggerLoading('secret-page'); }
         }
 
         function startHackerEffect() {
             const flow = document.getElementById('hacker-flow');
-            const logs = ["> Login: Celvio", "> Bypass Firewall...", "> Database SDC CUP 2026: OK", "> Admin Mode Active."];
+            const logs = ["> Login: Celvio Barcelona", "> Bypass Firewall...", "> SDC CUP 2026 Admin Access: GRANTED"];
             flow.innerHTML = "";
-            logs.forEach((log, i) => { setTimeout(() => { flow.innerHTML += `<div class="hacker-text">${log}</div>`; }, i * 500); });
+            logs.forEach((log, i) => { setTimeout(() => { flow.innerHTML += `<div>${log}</div>`; }, i * 400); });
         }
     </script>
 </body>
