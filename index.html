@@ -6,13 +6,9 @@
     <title>CELTA OS | SUPREME 2026</title>
     <style>
         :root { 
-            --primary: #00ff00; 
-            --bg: #050505; 
-            --card-bg: #111; 
-            --accent: #ff00ff; 
-            --netcine-red: #e50914; 
-            --euro-blue: #003399; 
-            --deezer-purple: #a238ff; 
+            --primary: #00ff00; --bg: #050505; --card-bg: #111; 
+            --accent: #ff00ff; --netcine-red: #e50914; 
+            --euro-blue: #003399; --deezer-purple: #a238ff; 
             --weather-blue: #00d4ff;
         }
         * { box-sizing: border-box; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -50,21 +46,17 @@
         nav a:hover, nav a.active { color: var(--primary); border: 1px solid var(--primary); background: rgba(0,255,0,0.05); }
 
         /* PÁGINAS */
-        .page { display: none; padding: 25px; animation: fadeIn 0.6s ease; }
+        .page { display: none; padding: 25px; animation: fadeIn 0.6s ease; min-height: calc(100vh - 80px); }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        iframe { width: 100%; border: none; border-radius: 15px; background: #000; min-height: 650px; }
+        iframe { width: 100%; height: 600px; border: none; border-radius: 15px; background: #000; margin-bottom: 20px; }
 
-        /* PORTAIS DE ACESSO */
-        .portal-container { text-align: center; padding: 25px; border-radius: 20px; margin-bottom: 20px; }
-        .portal-btn { color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
-
-        /* MÚSICA & CLIMA WIDGETS */
-        .shelf-title { color: var(--primary); margin: 30px 0 10px 0; font-size: 18px; font-weight: bold; }
-        .music-shelf { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scrollbar-width: thin; }
+        /* MÚSICA & WIDGETS */
+        .shelf-title { color: var(--primary); margin: 25px 0 10px 0; font-size: 18px; font-weight: bold; }
+        .music-shelf { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; }
         .music-card { min-width: 260px; background: var(--card-bg); padding: 15px; border-radius: 15px; border: 1px solid #222; }
-        .music-card iframe { min-height: 160px !important; }
+        .music-card iframe { height: 160px !important; }
 
         /* BUSCA HOME */
         .home-wrap { text-align: center; margin-top: 10vh; }
@@ -83,10 +75,10 @@
 
     <nav>
         <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 IA Chat</a>
+        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Celta IA</a>
+        <a onclick="triggerLoading('clima')" id="nav-clima">☁️ Clima & Astros</a>
         <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
         <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
-        <a onclick="triggerLoading('clima')" id="nav-clima">☁️ Clima</a>
         <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="triggerLoading('jogos')" id="nav-jogos">🕹️ Jogos</a>
         <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
@@ -102,47 +94,38 @@
         </div>
     </div>
 
-    <div id="ia" class="page"><iframe src="https://www.aichatting.net/pt/"></iframe></div>
+    <div id="ia" class="page">
+        <iframe src="https://www.blackbox.ai/"></iframe>
+    </div>
+
+    <div id="clima" class="page">
+        <h2 style="color:var(--weather-blue);">☁️ RADAR WINDY</h2>
+        <iframe src="https://www.windy.com/?-15.191,12.153,5"></iframe>
+        
+        <h2 style="color:var(--primary); margin-top:40px;">🔭 EVENTOS ASTRONÓMICOS (Equinócio)</h2>
+        <iframe src="https://www.tempo.com/noticias/actualidade/fenomeno-astronomico-em-20-de-marco-equinocio-marca-nova-fase-do-ano.html" style="height: 800px;"></iframe>
+    </div>
 
     <div id="music" class="page">
-        <div class="portal-container" style="background: rgba(162, 56, 255, 0.1); border: 1px solid var(--deezer-purple);">
-            <h2 style="color:var(--deezer-purple);">🎵 DEEZER MUSIC PLAYER</h2>
-            <a href="https://www.deezer.com/pt/" target="_blank" class="portal-btn" style="background: var(--deezer-purple); box-shadow: 0 0 15px var(--deezer-purple);">ABRIR DEEZER</a>
+        <div style="background: rgba(162, 56, 255, 0.1); border: 1px solid var(--deezer-purple); padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 20px;">
+            <h2 style="color:var(--deezer-purple); margin:0;">🎵 DEEZER PLAYER</h2>
+            <a href="https://www.deezer.com/pt/" target="_blank" style="color:white; text-decoration:none; font-weight:bold;">ABRIR DEEZER</a>
         </div>
         
         <div class="shelf-title">🔥 Afrohouse & Montagem</div>
         <div class="music-shelf">
             <div class="music-card"><b>Sina da Ofélia</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe></div>
             <div class="music-card"><b>Taka Montagem</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe></div>
-            <div class="music-card"><b>Mix Afro 2026</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
-        </div>
-
-        <div class="shelf-title" style="color:var(--accent);">🙏 Religiosa & Adoração</div>
-        <div class="music-shelf">
-            <div class="music-card"><b>Gospel Mix</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N"></iframe></div>
-            <div class="music-card"><b>Adoração 2026</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0-G_vXWn-9kY0N"></iframe></div>
+            <div class="music-card"><b>Mix Afro</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
         </div>
         <iframe src="https://www.deezer.com/pt/" style="margin-top:20px;"></iframe>
     </div>
 
     <div id="cinema" class="page">
-        <div class="portal-container" style="background: rgba(229, 9, 20, 0.1); border: 1px solid var(--netcine-red);">
-            <h2 style="color:var(--netcine-red);">🎬 NETCINE</h2>
-            <a href="https://netcineq.lat/" target="_blank" class="portal-btn" style="background: var(--netcine-red); box-shadow: 0 0 15px var(--netcine-red);">ENTRAR NO CINEMA</a>
-        </div>
         <iframe src="https://netcineq.lat/"></iframe>
     </div>
 
-    <div id="clima" class="page">
-        <h2 style="text-align:center; color:var(--weather-blue);">☁️ METEOROLOGIA CELTA</h2>
-        <div style="background:rgba(0, 212, 255, 0.05); border-radius:20px; padding:20px; border:1px solid var(--weather-blue);">
-            <iframe src="https://www.meteoblue.com/pt/tempo/widget/three/mo%c3%a7%c3%a2medes_angola_3347071?geoloc=fixed&nocache=1"  style="width:100%; height:600px;"></iframe>
-        </div>
-    </div>
-
-    <div id="news" class="page">
-        <iframe src="https://pt.euronews.com/noticias/internacional"></iframe>
-    </div>
+    <div id="news" class="page"><iframe src="https://pt.euronews.com/noticias/internacional"></iframe></div>
 
     <div id="jogos" class="page">
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
@@ -153,7 +136,7 @@
 
     <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
 
-    <footer style="text-align:center; padding:30px;"><button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button></footer>
+    <footer style="text-align:center; padding:20px;"><button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button></footer>
 
     <script>
         function triggerLoading(pageId) {
