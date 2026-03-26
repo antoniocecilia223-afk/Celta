@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CELTA OS | SUPREME 2026</title>
     <style>
-        :root { --primary: #00ff00; --bg: #050505; --card-bg: #111; }
-        * { box-sizing: border-box; transition: 0.3s; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #fff; overflow-x: hidden; }
+        :root { 
+            --primary: #00ff00; 
+            --bg: #050505; 
+            --card-bg: #111; 
+            --accent: #ff00ff; 
+            --netcine-red: #e50914; 
+            --euro-blue: #003399; 
+            --deezer-purple: #a238ff; 
+            --weather-blue: #00d4ff;
+        }
+        * { box-sizing: border-box; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; background: var(--bg); color: #fff; 
+            overflow-x: hidden; min-height: 100vh;
+        }
 
         /* LOADER BURACO NEGRO */
         #loader {
@@ -16,38 +30,46 @@
             flex-direction: column; align-items: center; justify-content: center;
         }
         .black-hole {
-            width: 120px; height: 120px; background: #000; border-radius: 50%;
+            width: 130px; height: 130px; background: #000; border-radius: 50%;
             box-shadow: 0 0 40px #fff, 0 0 80px var(--primary), inset 0 0 40px #000;
             animation: pulse 1.5s infinite alternate;
         }
-        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); } }
+        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); opacity: 0.8; } }
 
-        /* MENU */
+        /* NAVEGAÇÃO */
         nav { 
-            background: rgba(0,0,0,0.9); padding: 15px; display: flex; 
-            justify-content: center; gap: 10px; border-bottom: 1px solid #222; 
+            background: rgba(0,0,0,0.95); padding: 15px; display: flex; 
+            justify-content: center; gap: 8px; border-bottom: 1px solid #222; 
             position: sticky; top: 0; z-index: 1000; flex-wrap: wrap;
+            backdrop-filter: blur(15px);
         }
         nav a { 
-            color: #888; text-decoration: none; font-weight: bold; font-size: 11px; 
-            text-transform: uppercase; padding: 10px 15px; border-radius: 5px; cursor: pointer;
+            color: #888; text-decoration: none; font-weight: bold; font-size: 10px; 
+            text-transform: uppercase; padding: 10px 15px; border-radius: 8px; cursor: pointer;
         }
         nav a:hover, nav a.active { color: var(--primary); border: 1px solid var(--primary); background: rgba(0,255,0,0.05); }
 
-        /* PAGINAS */
-        .page { display: none; padding: 20px; animation: fadeIn 0.5s ease; }
+        /* PÁGINAS */
+        .page { display: none; padding: 25px; animation: fadeIn 0.6s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        iframe { width: 100%; border: none; border-radius: 15px; background: #000; min-height: 600px; }
+        iframe { width: 100%; border: none; border-radius: 15px; background: #000; min-height: 650px; }
 
-        /* ESTILO YT MUSIC */
-        .music-shelf { display: flex; overflow-x: auto; gap: 20px; padding: 10px 0; scrollbar-width: thin; }
-        .music-card { min-width: 250px; background: var(--card-bg); padding: 15px; border-radius: 15px; border-bottom: 3px solid var(--primary); }
-        .music-card iframe { min-height: 150px !important; }
+        /* PORTAIS DE ACESSO */
+        .portal-container { text-align: center; padding: 25px; border-radius: 20px; margin-bottom: 20px; }
+        .portal-btn { color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 10px; }
 
-        .search-bar { 
-            width: 80%; max-width: 500px; padding: 15px; border-radius: 50px; 
+        /* MÚSICA & CLIMA WIDGETS */
+        .shelf-title { color: var(--primary); margin: 30px 0 10px 0; font-size: 18px; font-weight: bold; }
+        .music-shelf { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scrollbar-width: thin; }
+        .music-card { min-width: 260px; background: var(--card-bg); padding: 15px; border-radius: 15px; border: 1px solid #222; }
+        .music-card iframe { min-height: 160px !important; }
+
+        /* BUSCA HOME */
+        .home-wrap { text-align: center; margin-top: 10vh; }
+        .search-box { 
+            width: 85%; max-width: 500px; padding: 18px; border-radius: 50px; 
             border: 2px solid var(--primary); background: transparent; color: #fff; text-align: center; font-size: 18px;
         }
     </style>
@@ -56,74 +78,82 @@
 
     <div id="loader">
         <div class="black-hole"></div>
-        <h2 style="margin-top:20px; letter-spacing:5px;">CELTA PROCESSING...</h2>
+        <h2 style="margin-top:30px; letter-spacing:8px;">CELTA CORE</h2>
     </div>
 
     <nav>
         <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Celta IA</a>
-        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
+        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 IA Chat</a>
         <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
+        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
+        <a onclick="triggerLoading('clima')" id="nav-clima">☁️ Clima</a>
+        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
         <a onclick="triggerLoading('jogos')" id="nav-jogos">🕹️ Jogos</a>
         <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
-        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Cinema</a>
     </nav>
 
     <div id="home" class="page active-page">
-        <div style="text-align:center; margin-top:15vh;">
-            <div class="black-hole" style="width:100px; height:100px; margin: 0 auto 30px;"></div>
-            <h1 style="font-size:80px; font-style:italic; margin:0;">CELTA</h1>
+        <div class="home-wrap">
+            <div class="black-hole" style="width:110px; height:110px; margin: 0 auto 30px;"></div>
+            <h1 style="font-size:70px; font-style:italic; margin:0; letter-spacing:-3px;">CELTA</h1>
             <form action="https://www.google.com/search" method="GET">
-                <input type="text" name="q" class="search-bar" placeholder="Explorar o Multiverso...">
+                <input type="text" name="q" class="search-box" placeholder="Pesquisar no Multiverso...">
             </form>
         </div>
     </div>
 
-    <div id="ia" class="page">
-        <h2 style="text-align:center; color:var(--primary);">🤖 CELTA INTELLIGENCE</h2>
-        <iframe src="https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat"></iframe>
-    </div>
-
-    <div id="news" class="page">
-        <h2 style="text-align:center;">🌎 ÚLTIMAS NOTÍCIAS (PT/AO)</h2>
-        <iframe src="https://www.sapo.pt/noticias"></iframe>
-    </div>
+    <div id="ia" class="page"><iframe src="https://www.aichatting.net/pt/"></iframe></div>
 
     <div id="music" class="page">
-        <h2 style="color:var(--primary);">🔥 Recomendados para Si</h2>
+        <div class="portal-container" style="background: rgba(162, 56, 255, 0.1); border: 1px solid var(--deezer-purple);">
+            <h2 style="color:var(--deezer-purple);">🎵 DEEZER MUSIC PLAYER</h2>
+            <a href="https://www.deezer.com/pt/" target="_blank" class="portal-btn" style="background: var(--deezer-purple); box-shadow: 0 0 15px var(--deezer-purple);">ABRIR DEEZER</a>
+        </div>
+        
+        <div class="shelf-title">🔥 Afrohouse & Montagem</div>
         <div class="music-shelf">
             <div class="music-card"><b>Sina da Ofélia</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe></div>
             <div class="music-card"><b>Taka Montagem</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe></div>
-            <div class="music-card"><b>Linkin Park</b><iframe src="https://www.youtube.com/embed/Wa2MqAhAK5s"></iframe></div>
-            <div class="music-card"><b>Afro House 2026</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
+            <div class="music-card"><b>Mix Afro 2026</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
         </div>
 
-        <h2 style="color:#ff00ff; margin-top:40px;">🙏 Espiritual & Gospel</h2>
+        <div class="shelf-title" style="color:var(--accent);">🙏 Religiosa & Adoração</div>
         <div class="music-shelf">
             <div class="music-card"><b>Gospel Mix</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX1vT-9Z7eB6G_vXWn-9kY0N"></iframe></div>
-            <div class="music-card"><b>Adoração</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0-G_vXWn-9kY0N"></iframe></div>
+            <div class="music-card"><b>Adoração 2026</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX0-G_vXWn-9kY0N"></iframe></div>
         </div>
-    </div>
-
-    <div id="jogos" class="page">
-        <h2 style="text-align:center;">🕹️ CELTA ARCADE</h2>
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
-            <iframe src="https://www.miniplay.com/embed/pac-man" style="min-height:400px;"></iframe>
-            <iframe src="https://m.plonga.com/online-games/snake" style="min-height:400px;"></iframe>
-        </div>
-    </div>
-
-    <div id="futebol" class="page">
-        <iframe src="https://www.scorebat.com/embed/livescore/"></iframe>
+        <iframe src="https://www.deezer.com/pt/" style="margin-top:20px;"></iframe>
     </div>
 
     <div id="cinema" class="page">
-        <iframe src="https://archive.org/details/movies?embed=1"></iframe>
+        <div class="portal-container" style="background: rgba(229, 9, 20, 0.1); border: 1px solid var(--netcine-red);">
+            <h2 style="color:var(--netcine-red);">🎬 NETCINE</h2>
+            <a href="https://netcineq.lat/" target="_blank" class="portal-btn" style="background: var(--netcine-red); box-shadow: 0 0 15px var(--netcine-red);">ENTRAR NO CINEMA</a>
+        </div>
+        <iframe src="https://netcineq.lat/"></iframe>
     </div>
 
-    <footer style="text-align:center; padding:30px;">
-        <button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button>
-    </footer>
+    <div id="clima" class="page">
+        <h2 style="text-align:center; color:var(--weather-blue);">☁️ METEOROLOGIA CELTA</h2>
+        <div style="background:rgba(0, 212, 255, 0.05); border-radius:20px; padding:20px; border:1px solid var(--weather-blue);">
+            <iframe src="https://www.meteoblue.com/pt/tempo/widget/three/mo%c3%a7%c3%a2medes_angola_3347071?geoloc=fixed&nocache=1"  style="width:100%; height:600px;"></iframe>
+        </div>
+    </div>
+
+    <div id="news" class="page">
+        <iframe src="https://pt.euronews.com/noticias/internacional"></iframe>
+    </div>
+
+    <div id="jogos" class="page">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+            <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
+            <iframe src="https://m.plonga.com/online-games/snake"></iframe>
+        </div>
+    </div>
+
+    <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
+
+    <footer style="text-align:center; padding:30px;"><button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button></footer>
 
     <script>
         function triggerLoading(pageId) {
@@ -144,10 +174,7 @@
         }
 
         function accessSecret() {
-            if(prompt("ADMIN PASS:") === "1234") { 
-                alert("ACESSO AO NÚCLEO SDC LIBERADO!");
-                triggerLoading('home');
-            }
+            if(prompt("ADMIN PASS:") === "1234") { triggerLoading('home'); }
         }
     </script>
 </body>
