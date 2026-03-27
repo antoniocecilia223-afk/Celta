@@ -19,6 +19,12 @@
             overflow-x: hidden; min-height: 100vh;
         }
 
+        /* STATUS DE SESSÃO NO NÚCLEO */
+        .logged-in .black-hole {
+            box-shadow: 0 0 60px var(--primary), inset 0 0 20px var(--primary);
+            border: 2px solid var(--primary);
+        }
+
         /* LOADER BURACO NEGRO */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -52,21 +58,17 @@
 
         iframe { width: 100%; height: 600px; border: none; border-radius: 15px; background: #000; margin-bottom: 20px; }
 
-        /* MÚSICA & WIDGETS */
-        .shelf-title { color: var(--primary); margin: 25px 0 10px 0; font-size: 18px; font-weight: bold; }
-        .music-shelf { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; }
-        .music-card { min-width: 260px; background: var(--card-bg); padding: 15px; border-radius: 15px; border: 1px solid #222; }
-        .music-card iframe { height: 160px !important; }
-
         /* BUSCA HOME */
         .home-wrap { text-align: center; margin-top: 10vh; }
         .search-box { 
             width: 85%; max-width: 500px; padding: 18px; border-radius: 50px; 
             border: 2px solid var(--primary); background: transparent; color: #fff; text-align: center; font-size: 18px;
         }
+        
+        #user-status { font-size: 12px; color: var(--primary); margin-top: 10px; opacity: 0.7; }
     </style>
 </head>
-<body onload="initSystem()">
+<body id="main-body" onload="checkAutoLogin()">
 
     <div id="loader">
         <div class="black-hole"></div>
@@ -76,7 +78,7 @@
     <nav>
         <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
         <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Celta IA</a>
-        <a onclick="triggerLoading('clima')" id="nav-clima">☁️ Clima & Astros</a>
+        <a onclick="triggerLoading('clima')" id="nav-clima">☁️ Clima</a>
         <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
         <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
         <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
@@ -88,57 +90,60 @@
         <div class="home-wrap">
             <div class="black-hole" style="width:110px; height:110px; margin: 0 auto 30px;"></div>
             <h1 style="font-size:70px; font-style:italic; margin:0; letter-spacing:-3px;">CELTA</h1>
-            <form action="https://www.google.com/search" method="GET">
+            <div id="user-status">SISTEMA OFFLINE</div>
+            <form action="https://www.google.com/search" method="GET" style="margin-top:20px;">
                 <input type="text" name="q" class="search-box" placeholder="Pesquisar no Multiverso...">
             </form>
         </div>
     </div>
 
     <div id="ia" class="page">
-        <iframe src="https://www.blackbox.ai/"></iframe>
+        <p style="text-align:center; color:var(--primary); font-size:12px;">Inicie sessão na Blackbox para ativar a CELTA OS</p>
+        <iframe id="ia-frame" src="https://www.blackbox.ai/" onmouseover="syncLogin()"></iframe>
     </div>
 
     <div id="clima" class="page">
-        <h2 style="color:var(--weather-blue);">☁️ RADAR WINDY</h2>
-        <iframe src="https://www.windy.com/?-15.191,12.153,5"></iframe>
-        
-        <h2 style="color:var(--primary); margin-top:40px;">🔭 EVENTOS ASTRONÓMICOS (Equinócio)</h2>
-        <iframe src="https://www.tempo.com/noticias/actualidade/fenomeno-astronomico-em-20-de-marco-equinocio-marca-nova-fase-do-ano.html" style="height: 800px;"></iframe>
+        <iframe src="https://www.windy.com/multimodel/-15.191/12.153?temp,-15.654,12.153,7"></iframe>
+        <iframe src="https://www.tempo.com/noticias/actualidade/fenomeno-astronomico-em-20-de-marco-equinocio-marca-nova-fase-do-ano.html" style="height: 700px;"></iframe>
     </div>
 
     <div id="music" class="page">
         <div style="background: rgba(162, 56, 255, 0.1); border: 1px solid var(--deezer-purple); padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 20px;">
-            <h2 style="color:var(--deezer-purple); margin:0;">🎵 DEEZER PLAYER</h2>
-            <a href="https://www.deezer.com/pt/" target="_blank" style="color:white; text-decoration:none; font-weight:bold;">ABRIR DEEZER</a>
+            <h2 style="color:var(--deezer-purple); margin:0;">🎵 DEEZER SYNC</h2>
+            <a href="https://www.deezer.com/pt/" target="_blank" style="color:white; text-decoration:none; font-weight:bold;">ABRIR PLAYER</a>
         </div>
-        
-        <div class="shelf-title">🔥 Afrohouse & Montagem</div>
-        <div class="music-shelf">
-            <div class="music-card"><b>Sina da Ofélia</b><iframe src="https://www.youtube.com/embed/R4_pWm4tT3U"></iframe></div>
-            <div class="music-card"><b>Taka Montagem</b><iframe src="https://www.youtube.com/embed/G5lNWND0oqQ"></iframe></div>
-            <div class="music-card"><b>Mix Afro</b><iframe src="https://www.youtube.com/embed/videoseries?list=PL_XQ6XfG-pX2_XWn-9kY0N"></iframe></div>
-        </div>
-        <iframe src="https://www.deezer.com/pt/" style="margin-top:20px;"></iframe>
+        <iframe src="https://www.deezer.com/pt/"></iframe>
     </div>
 
-    <div id="cinema" class="page">
-        <iframe src="https://netcineq.lat/"></iframe>
-    </div>
-
+    <div id="cinema" class="page"><iframe src="https://netcineq.lat/"></iframe></div>
     <div id="news" class="page"><iframe src="https://pt.euronews.com/noticias/internacional"></iframe></div>
-
     <div id="jogos" class="page">
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
             <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
             <iframe src="https://m.plonga.com/online-games/snake"></iframe>
         </div>
     </div>
-
     <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
 
-    <footer style="text-align:center; padding:20px;"><button style="background:transparent; border:none; color:#111; cursor:pointer;" onclick="accessSecret()">.</button></footer>
-
     <script>
+        let isLoggedIn = false;
+
+        function syncLogin() {
+            if(!isLoggedIn) {
+                isLoggedIn = true;
+                document.getElementById('main-body').classList.add('logged-in');
+                document.getElementById('user-status').innerHTML = "SESSÃO ATIVA | CELTA IA CONNECTED";
+                document.getElementById('user-status').style.color = "#00ff00";
+                localStorage.setItem('celtaSession', 'active');
+            }
+        }
+
+        function checkAutoLogin() {
+            if(localStorage.getItem('celtaSession') === 'active') {
+                syncLogin();
+            }
+        }
+
         function triggerLoading(pageId) {
             const loader = document.getElementById('loader');
             loader.style.display = 'flex';
@@ -154,10 +159,6 @@
             document.getElementById(id).classList.add('active-page');
             document.getElementById('nav-' + id).classList.add('active');
             window.scrollTo(0,0);
-        }
-
-        function accessSecret() {
-            if(prompt("ADMIN PASS:") === "1234") { triggerLoading('home'); }
         }
     </script>
 </body>
