@@ -3,140 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | OMNIVERSO SUPREME</title>
+    <title>CELTA OS | OMNIVERSO SUPREME 2026</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
     <style>
         :root { --primary: #ff0000; --bg: #000; }
         * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s; }
-        
-        body { 
-            font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; 
-            overflow: hidden; width: 100vw; height: 100vh; display: flex; flex-direction: column;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; overflow: hidden; width: 100vw; height: 100vh; display: flex; flex-direction: column; }
 
-        /* TRADUTOR */
-        #translate-wrapper { background: #050505; padding: 5px; text-align: right; border-bottom: 1px solid var(--primary); height: 40px; }
+        /* TOPO E TRADUTOR */
+        #top-bar { background: #050505; padding: 5px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--primary); height: 40px; }
+        #google_translate_element { transform: scale(0.8); }
 
-        /* NAV SUPREMA */
-        nav { 
-            background: rgba(0,0,0,0.95); display: flex; justify-content: center; gap: 5px; 
-            border-bottom: 2px solid var(--primary); height: 50px; align-items: center; z-index: 1000;
-        }
-        nav a { color: #777; text-decoration: none; font-weight: bold; font-size: 10px; text-transform: uppercase; padding: 12px 15px; cursor: pointer; }
+        /* NAVEGAÇÃO DARK NÉON */
+        nav { background: rgba(0,0,0,0.95); display: flex; justify-content: center; gap: 3px; border-bottom: 2px solid var(--primary); height: 50px; align-items: center; z-index: 1000; overflow-x: auto; }
+        nav a { color: #666; text-decoration: none; font-weight: bold; font-size: 9px; text-transform: uppercase; padding: 10px 12px; cursor: pointer; white-space: nowrap; }
         nav a:hover, nav a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* VIEWPORT (ECRÃ TOTAL) */
-        #viewport { flex-grow: 1; width: 100%; position: relative; }
+        /* VIEWPORT */
+        #viewport { flex-grow: 1; width: 100%; position: relative; background: #000; }
         .page { display: none; width: 100%; height: 100%; position: absolute; }
         .active-page { display: block; }
         iframe { width: 100%; height: 100%; border: none; background: #000; }
 
-        /* LOGIN 2FA */
-        #login-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.99); z-index: 10000; display: flex;
-            align-items: center; justify-content: center; backdrop-filter: blur(20px);
-        }
-        .login-box {
-            background: #050505; padding: 40px; border-radius: 20px; border: 2px solid var(--primary);
-            width: 90%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
-        }
-        .login-box input {
-            width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px;
-            border: 1px solid #333; background: #000; color: #fff; text-align: center; font-size: 18px;
-        }
-        .btn-auth { width: 100%; padding: 15px; background: var(--primary); color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; }
+        /* HOME & CONTADOR MUNDIAL */
+        .home-content { text-align: center; padding-top: 5vh; }
+        #countdown-container { margin: 20px auto; background: rgba(255,0,0,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--primary); display: inline-block; box-shadow: 0 0 20px rgba(255,0,0,0.1); }
+        .timer-unit { display: inline-block; margin: 0 10px; }
+        .timer-val { display: block; font-size: 30px; font-weight: bold; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
+        .timer-label { font-size: 10px; color: #555; text-transform: uppercase; }
 
-        /* HOME VISUAL */
-        .bh-core {
-            width: 160px; height: 160px; background: #000; border-radius: 50%;
-            box-shadow: 0 0 40px #fff, 0 0 80px var(--primary), inset 0 0 40px #000;
-            animation: pulse 2s infinite alternate; margin: 15vh auto 20px;
-        }
-        @keyframes pulse { from { transform: scale(0.95); } to { transform: scale(1.05); } }
+        /* SIMULADOR UI */
+        #map { width: 100%; height: 100%; }
+        #sim-ui { position: absolute; left: 15px; top: 15px; z-index: 100; background: rgba(0,0,0,0.85); border: 1px solid var(--primary); padding: 15px; border-radius: 10px; width: 190px; }
+        .sim-btn { width: 100%; padding: 8px; margin: 3px 0; background: #000; border: 1px solid var(--primary); color: var(--primary); font-size: 9px; cursor: pointer; text-transform: uppercase; }
+        .sim-btn:hover { background: var(--primary); color: #000; }
+
+        /* LOGIN */
+        #login-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 10000; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: #050505; padding: 40px; border-radius: 20px; border: 1px solid var(--primary); width: 90%; max-width: 380px; text-align: center; }
+        .login-box input { width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px; border: 1px solid #333; background: #000; color: #fff; text-align: center; font-size: 18px; }
+
+        /* AVATARES */
+        .celta-avatar { width: 22px; height: 22px; border: 3px solid var(--primary); border-radius: 50%; box-shadow: 0 0 15px var(--primary); animation: pulse 1s infinite alternate; }
+        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); } }
     </style>
 </head>
-<body onload="verificarSessao()">
+<body onload="checkSessao()">
 
-    <div id="translate-wrapper"><div id="google_translate_element"></div></div>
+    <div id="top-bar">
+        <span style="color:var(--primary); font-size: 11px; font-weight: bold; letter-spacing: 2px;">ARQUITETO SCD 2026</span>
+        <div id="google_translate_element"></div>
+    </div>
 
     <div id="login-modal">
         <div class="login-box" id="step-1">
-            <h2 style="color:var(--primary); letter-spacing:3px;">CELTA ACCESS</h2>
+            <h2 style="color:var(--primary); letter-spacing:3px; margin-bottom: 20px;">CELTA AUTH</h2>
             <input type="email" id="u-email" placeholder="Email do Arquiteto">
             <input type="password" id="u-pass" placeholder="Password">
-            <button class="btn-auth" onclick="gerarToken()">PEDIR CÓDIGO</button>
+            <button class="sim-btn" style="padding:15px;" onclick="getCode()">PEDIR CÓDIGO 6 DÍGITOS</button>
         </div>
         <div class="login-box" id="step-2" style="display:none;">
-            <h2 style="color:var(--primary);">CÓDIGO DE 6 DÍGITOS</h2>
+            <h2 style="color:var(--primary);">TOKEN ALEATÓRIO</h2>
             <input type="text" id="u-token" placeholder="000000" maxlength="6">
-            <button class="btn-auth" onclick="validarToken()">ENTRAR NO MULTIVERSO</button>
+            <button class="sim-btn" style="padding:15px;" onclick="verify()">VALIDAR ACESSO</button>
         </div>
     </div>
 
     <nav>
-        <a onclick="openPage('home')" id="nav-home" class="active">🏠 Home</a>
-        <a onclick="openPage('omni')" id="nav-omni" style="color:var(--primary)">🔮 Omniverso</a>
+        <a onclick="openPage('home')" id="nav-home" class="active">🏠 Dashboard</a>
+        <a onclick="openPage('omni')" id="nav-omni" style="color:var(--primary)">🔮 Omniverso Sim</a>
+        <a onclick="openPage('noticias')" id="nav-noticias">📰 Notícias</a>
+        <a onclick="openPage('futebol')" id="nav-futebol">⚽ Futebol SCD</a>
         <a onclick="openPage('ia')" id="nav-ia">🤖 Celta IA</a>
         <a onclick="openPage('clima')" id="nav-clima">☁️ Clima</a>
         <a onclick="openPage('music')" id="nav-music">🎵 Música</a>
         <a onclick="openPage('cinema')" id="nav-cinema">🎬 Cinema</a>
-        <a onclick="location.reload()" style="color:var(--primary)">🔒 Sair</a>
     </nav>
 
     <div id="viewport">
         <div id="home" class="page active-page">
-            <div style="text-align:center;">
-                <div class="bh-core"></div>
-                <h1 style="font-size:90px; color:var(--primary); text-shadow: 0 0 30px var(--primary); font-style:italic;">CELTA</h1>
-                <p id="user-tag" style="letter-spacing:10px; color:#333; font-size:10px;">SISTEMA PROTEGIDO</p>
+            <div class="home-content">
+                <h1 style="font-size:70px; color:var(--primary); font-style:italic;">CELTA OS</h1>
+                
+                <div id="countdown-container">
+                    <p style="font-size:12px; margin-bottom:15px; letter-spacing:2px; color:#aaa;">RUMO AO MUNDIAL 2026</p>
+                    <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">Dias</span></div>
+                    <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">Horas</span></div>
+                    <div class="timer-unit"><span id="mins" class="timer-val">00</span><span class="timer-label">Minutos</span></div>
+                </div>
+                
+                <p id="user-display" style="color:#222; margin-top:30px; letter-spacing:5px;"></p>
             </div>
         </div>
 
         <div id="omni" class="page">
-            <iframe src="https://worldwidetelescope.org/webclient/"></iframe>
+            <div id="sim-ui">
+                <h3 style="color:var(--primary); font-size:11px; margin-bottom:10px;">CELTA ENGINE</h3>
+                <button class="sim-btn" onclick="spawn('car')">🚗 Criar Carro</button>
+                <button class="sim-btn" onclick="spawn('plane')">✈️ Criar Avião</button>
+                <button class="sim-btn" onclick="spawn('ship')">🚢 Criar Navio</button>
+                <button class="sim-btn" style="color:#fff;" onclick="clearItems()">🧹 Reset Sim</button>
+            </div>
+            <div id="map"></div>
         </div>
 
+        <div id="noticias" class="page"><iframe src="https://g1.globo.com/"></iframe></div>
+
+        <div id="futebol" class="page"><iframe src="https://ge.globo.com/"></iframe></div>
+
         <div id="ia" class="page"><iframe src="https://www.blackbox.ai/"></iframe></div>
-        <div id="clima" class="page"><iframe src="https://www.windy.com/"></iframe></div>
-        <div id="music" class="page"><iframe src="https://www.deezer.com/pt/channels/explore"></iframe></div>
+        <div id="clima" class="page"><iframe src="https://embed.windy.com/embed2.html?lat=-15.191&lon=12.153&zoom=5&overlay=temp"></iframe></div>
+        <div id="music" class="page"><iframe src="https://www.deezer.com/pt/channels/explore" style="display:none;" id="dz-frame"></iframe>
+            <div style="padding:100px; text-align:center;"><h2>CELTA MUSIC</h2><button class="sim-btn" style="width:200px" onclick="window.open('https://www.deezer.com')">Abrir Player</button></div>
+        </div>
         <div id="cinema" class="page"><iframe src="https://netcineq.lat/"></iframe></div>
     </div>
 
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
 
-        let tokenAtual = "";
+        let activeToken = "";
+        let map;
+        let avatar;
+        let spawned = [];
+        let pos = { lon: 12.153, lat: -15.191 };
 
-        function gerarToken() {
-            if(!document.getElementById('u-email').value.includes("@")) return alert("Email Inválido");
-            tokenAtual = Math.floor(100000 + Math.random() * 900000).toString();
-            alert("CÓDIGO CELTA ENVIADO: " + tokenAtual);
+        // CONTADOR MUNDIAL 2026
+        function updateTimer() {
+            const mundialDate = new Date("June 11, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = mundialDate - now;
+            
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        }
+        setInterval(updateTimer, 60000); updateTimer();
+
+        // SEGURANÇA
+        function getCode() {
+            if(!document.getElementById('u-email').value.includes("@")) return alert("Email inválido");
+            activeToken = Math.floor(100000 + Math.random() * 900000).toString();
+            alert("CÓDIGO ALEATÓRIO: " + activeToken);
             document.getElementById('step-1').style.display = 'none';
             document.getElementById('step-2').style.display = 'block';
         }
-
-        function validarToken() {
-            if(document.getElementById('u-token').value === tokenAtual) {
-                localStorage.setItem('celtaSession', document.getElementById('u-email').value);
+        function verify() {
+            if(document.getElementById('u-token').value === activeToken) {
+                localStorage.setItem('celtaArquiteto', document.getElementById('u-email').value);
                 location.reload();
-            } else { alert("CÓDIGO INVÁLIDO"); }
+            } else { alert("Token Incorreto"); }
         }
-
-        function verificarSessao() {
-            const sessao = localStorage.getItem('celtaSession');
-            if(sessao) {
+        function checkSessao() {
+            const user = localStorage.getItem('celtaArquiteto');
+            if(user) {
                 document.getElementById('login-modal').style.display = 'none';
-                document.getElementById('user-tag').innerText = "ARQUITETO: " + sessao.toUpperCase();
-                document.getElementById('user-tag').style.color = "var(--primary)";
+                document.getElementById('user-display').innerText = "ARQUITETO: " + user.toUpperCase();
+                initMap();
             }
         }
+
+        // SIMULADOR
+        function initMap() {
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY2VsdmlvY29zc2EiLCJhIjoiY2xwd2lxN2M0MDFlOTJqcGZ4YXlsbmxubSJ9.e7u4h8kSjN7hO6p-0N3s4w';
+            map = new mapboxgl.Map({ container: 'map', style: 'mapbox://styles/mapbox/dark-v11', center: [pos.lon, pos.lat], zoom: 15, pitch: 50 });
+            
+            const el = document.createElement('div'); el.className = 'celta-avatar';
+            avatar = new mapboxgl.Marker(el).setLngLat([pos.lon, pos.lat]).addTo(map);
+
+            window.addEventListener('keydown', (e) => {
+                const s = 0.0004;
+                if(e.key.toLowerCase() === 'w') pos.lat += s;
+                if(e.key.toLowerCase() === 's') pos.lat -= s;
+                if(e.key.toLowerCase() === 'a') pos.lon -= s;
+                if(e.key.toLowerCase() === 'd') pos.lon += s;
+                avatar.setLngLat([pos.lon, pos.lat]);
+                map.setCenter([pos.lon, pos.lat]);
+            });
+        }
+
+        function spawn(t) {
+            const el = document.createElement('div'); el.style.fontSize = '24px';
+            el.innerText = t === 'car' ? '🚗' : t === 'plane' ? '✈️' : '🚢';
+            const m = new mapboxgl.Marker(el).setLngLat([pos.lon + (Math.random()-0.5)*0.001, pos.lat + (Math.random()-0.5)*0.001]).addTo(map);
+            spawned.push(m);
+        }
+        function clearItems() { spawned.forEach(m => m.remove()); spawned = []; }
 
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
             document.getElementById('nav-'+id).classList.add('active');
+            if(id === 'omni' && map) map.resize();
         }
     </script>
 </body>
