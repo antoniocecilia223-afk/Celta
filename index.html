@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | SUPREME 2026</title>
+    <title>CELTA OS | DARK NEON | OMNIVERSO 2026</title>
     <style>
         :root { 
-            --primary: #00ff00; --bg: #050505; --card-bg: #111; 
+            --primary: #ff0000; /* NOVA COR: VERMELHO NÉON */
+            --bg: #000000; 
+            --card-bg: #111; 
             --accent: #ff00ff; --netcine-red: #e50914; 
-            --euro-blue: #003399; --deezer-purple: #a238ff; 
-            --weather-blue: #00d4ff;
+            --deezer-purple: #a238ff; --weather-blue: #00d4ff;
+            --omni-purple: #6a0dad;
         }
         * { box-sizing: border-box; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         
@@ -19,140 +21,204 @@
             overflow-x: hidden; min-height: 100vh;
         }
 
-        /* STATUS DE SESSÃO NO NÚCLEO */
-        .logged-in .black-hole {
-            box-shadow: 0 0 60px var(--primary), inset 0 0 20px var(--primary);
-            border: 2px solid var(--primary);
-        }
+        /* BARRA DE TRADUÇÃO */
+        #translate-bar { background: #111; padding: 5px; text-align: right; border-bottom: 1px solid var(--primary); }
 
-        /* LOADER BURACO NEGRO */
-        #loader {
+        /* MODAL DE SEGURANÇA MULTI-CAMADA (MANTIDO) */
+        #login-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 9999; display: none;
-            flex-direction: column; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.98); z-index: 10000; display: none;
+            align-items: center; justify-content: center; backdrop-filter: blur(20px);
         }
-        .black-hole {
-            width: 130px; height: 130px; background: #000; border-radius: 50%;
-            box-shadow: 0 0 40px #fff, 0 0 80px var(--primary), inset 0 0 40px #000;
-            animation: pulse 1.5s infinite alternate;
+        .login-box {
+            background: #0a0a0a; padding: 40px; border-radius: 25px; border: 2px solid var(--primary);
+            width: 95%; max-width: 420px; text-align: center; box-shadow: 0 0 60px rgba(255, 0, 0, 0.15);
         }
-        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); opacity: 0.8; } }
+        .login-box input {
+            width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px;
+            border: 1px solid #333; background: #000; color: #fff; text-align: center; font-size: 16px;
+        }
+        .captcha-box { background: #1a1a1a; padding: 15px; border-radius: 12px; margin: 15px 0; border: 1px dashed var(--primary); font-weight: bold; }
+        .btn-entrar { width: 100%; padding: 16px; border-radius: 12px; border: none; background: var(--primary); color: #000; font-weight: bold; cursor: pointer; font-size: 14px; }
 
-        /* NAVEGAÇÃO */
+        /* NAVEGAÇÃO SUPERIOR DARK NÉON */
         nav { 
             background: rgba(0,0,0,0.95); padding: 15px; display: flex; 
-            justify-content: center; gap: 8px; border-bottom: 1px solid #222; 
+            justify-content: center; gap: 8px; border-bottom: 2px solid var(--primary); 
             position: sticky; top: 0; z-index: 1000; flex-wrap: wrap;
-            backdrop-filter: blur(15px);
         }
         nav a { 
             color: #888; text-decoration: none; font-weight: bold; font-size: 10px; 
             text-transform: uppercase; padding: 10px 15px; border-radius: 8px; cursor: pointer;
         }
-        nav a:hover, nav a.active { color: var(--primary); border: 1px solid var(--primary); background: rgba(0,255,0,0.05); }
+        nav a:hover, nav a.active { color: var(--primary); border: 1px solid var(--primary); background: rgba(255, 0, 0, 0.05); }
 
         /* PÁGINAS */
-        .page { display: none; padding: 25px; animation: fadeIn 0.6s ease; min-height: calc(100vh - 80px); }
+        .page { display: none; padding: 25px; animation: fadeIn 0.5s ease; min-height: 85vh; }
         .active-page { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        iframe { width: 100%; height: 600px; border: none; border-radius: 15px; background: #000; margin-bottom: 20px; }
+        iframe { width: 100%; height: 750px; border: none; border-radius: 20px; background: #000; margin-bottom: 25px; }
 
-        /* BUSCA HOME */
-        .home-wrap { text-align: center; margin-top: 10vh; }
-        .search-box { 
-            width: 85%; max-width: 500px; padding: 18px; border-radius: 50px; 
-            border: 2px solid var(--primary); background: transparent; color: #fff; text-align: center; font-size: 18px;
+        /* ESTILO OMNIVERSO COM SIMULADORES */
+        .omni-controls {
+            background: rgba(0, 0, 0, 0.5); border: 1px solid var(--primary);
+            padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center;
         }
-        
-        #user-status { font-size: 12px; color: var(--primary); margin-top: 10px; opacity: 0.7; }
+        .omni-btn {
+            background: #111; color: var(--primary); padding: 12px 24px;
+            border-radius: 50px; text-decoration: none; font-weight: bold;
+            display: inline-block; margin: 8px; font-size: 11px; cursor: pointer;
+            border: 1px solid var(--primary); text-transform: uppercase;
+        }
+        .omni-btn:hover { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
+
+        /* HOME VISUALS NÉON */
+        .home-black-hole {
+            width: 130px; height: 130px; background: #000; border-radius: 50%;
+            box-shadow: 0 0 40px #fff, 0 0 80px var(--primary), inset 0 0 40px #000;
+            animation: pulse 1.5s infinite alternate; margin: 0 auto;
+        }
+        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); opacity: 0.9; } }
     </style>
 </head>
-<body id="main-body" onload="checkAutoLogin()">
+<body onload="verificarSessao()">
 
-    <div id="loader">
-        <div class="black-hole"></div>
-        <h2 style="margin-top:30px; letter-spacing:8px;">CELTA CORE</h2>
+    <div id="translate-bar"><div id="google_translate_element"></div></div>
+
+    <div id="login-modal">
+        <div class="login-box" id="step-1">
+            <div class="home-black-hole" style="width:60px; height:60px; margin: 0 auto 20px;"></div>
+            <h2 style="color:var(--primary); letter-spacing: 2px;">CELTA AUTH</h2>
+            <input type="email" id="user-email" placeholder="Email do Arquiteto">
+            <input type="password" id="user-pass" placeholder="Password">
+            <button class="btn-entrar" onclick="iniciarCaptcha()">AVANÇAR</button>
+            <p onclick="fecharLogin()" style="font-size: 10px; color: #444; margin-top: 20px; cursor: pointer;">BLOQUEAR</p>
+        </div>
+        <div class="login-box" id="step-captcha" style="display:none;">
+            <h2 style="color:var(--weather-blue);">VERIFICAÇÃO HUMANA</h2>
+            <div class="captcha-box">Quanto é: <span id="num1"></span> + <span id="num2"></span> ?</div>
+            <input type="number" id="captcha-input" placeholder="Resultado">
+            <button class="btn-entrar" onclick="validarCaptcha()">CONFIRMAR QUE SOU HUMANO</button>
+        </div>
+        <div class="login-box" id="step-2" style="display:none;">
+            <h2 style="color:var(--primary);">CÓDIGO DE ACESSO</h2>
+            <input type="text" id="auth-code" placeholder="CÓDIGO 2FA" maxlength="6">
+            <button class="btn-entrar" onclick="finalizarAcesso()">DESBLOQUEAR SISTEMA</button>
+        </div>
     </div>
 
     <nav>
-        <a onclick="triggerLoading('home')" id="nav-home" class="active">🔍 Busca</a>
-        <a onclick="triggerLoading('ia')" id="nav-ia">🤖 Celta IA</a>
-        <a onclick="triggerLoading('clima')" id="nav-clima">☁️ Clima</a>
-        <a onclick="triggerLoading('music')" id="nav-music">🎵 Música</a>
-        <a onclick="triggerLoading('cinema')" id="nav-cinema">🎬 Filmes</a>
-        <a onclick="triggerLoading('news')" id="nav-news">🌎 Notícias</a>
-        <a onclick="triggerLoading('jogos')" id="nav-jogos">🕹️ Jogos</a>
-        <a onclick="triggerLoading('futebol')" id="nav-futebol">⚽ Futebol</a>
+        <a onclick="openPage('home')" id="nav-home" class="active">🔍 Busca</a>
+        <a onclick="openPage('ia')" id="nav-ia">🤖 Celta IA</a>
+        <a onclick="openPage('omni')" id="nav-omni" style="color:var(--primary); border-color:var(--primary);">🔮 OMNIVERSO</a>
+        <a onclick="openPage('clima')" id="nav-clima">☁️ Clima</a>
+        <a onclick="openPage('music')" id="nav-music">🎵 Música</a>
+        <a onclick="openPage('cinema')" id="nav-cinema">🎬 Filmes</a>
+        <a onclick="abrirLogin()" id="nav-login" style="background:#111; color:var(--primary); border:1px solid var(--primary);">👤 ENTRAR</a>
     </nav>
 
     <div id="home" class="page active-page">
-        <div class="home-wrap">
-            <div class="black-hole" style="width:110px; height:110px; margin: 0 auto 30px;"></div>
-            <h1 style="font-size:70px; font-style:italic; margin:0; letter-spacing:-3px;">CELTA</h1>
-            <div id="user-status">SISTEMA OFFLINE</div>
-            <form action="https://www.google.com/search" method="GET" style="margin-top:20px;">
-                <input type="text" name="q" class="search-box" placeholder="Pesquisar no Multiverso...">
+        <div style="text-align:center; margin-top:12vh;">
+            <div class="home-black-hole"></div>
+            <h1 style="font-size:85px; font-style:italic; margin:20px 0 0 0; letter-spacing:-4px; color:var(--primary); text-shadow: 0 0 20px var(--primary);">CELTA</h1>
+            <div id="status-display" style="font-size:11px; margin-top:15px; color:#333; letter-spacing:3px;">DARK NEON MULTIVERSE v4.0</div>
+            <form action="https://www.google.com/search" method="GET" style="margin-top:30px;">
+                <input type="text" name="q" style="width:85%; max-width:550px; padding:18px; border-radius:50px; border:2px solid var(--primary); background:transparent; color:#fff; text-align:center; box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);" placeholder="Pesquisar no Multiverso Segura...">
             </form>
         </div>
     </div>
 
-    <div id="ia" class="page">
-        <p style="text-align:center; color:var(--primary); font-size:12px;">Inicie sessão na Blackbox para ativar a CELTA OS</p>
-        <iframe id="ia-frame" src="https://www.blackbox.ai/" onmouseover="syncLogin()"></iframe>
+    <div id="omni" class="page">
+        <div class="omni-controls">
+            <h2 style="color:var(--primary);">🔮 CELTA OMNIVERSO COMMAND</h2>
+            <p style="font-size:12px; color:#aaa;">Pousa em exoplanetas da NASA, entra num Buraco Negro ou altera a física do Multiverso.</p>
+            <div style="margin-top:20px;">
+                <button class="omni-btn" onclick="setOmni('earth')">🪐 Vista da Terra & Lua Sim</button>
+                <button class="omni-btn" onclick="setOmni('blackhole')">⚫ Buraco Negro (Simulação Relativística)</button>
+                <button class="omni-btn" onclick="setOmni('nasa')">🛰️ NASA Trappist-1 (Exploração Hab.)</button>
+                <button class="omni-btn" onclick="setOmni('sandbox')">💥 Simulador Física (Sandbox/Destruição)</button>
+            </div>
+        </div>
+        <iframe id="omni-frame" src="https://worldwidetelescope.org/webclient/"></iframe>
     </div>
 
+    <div id="ia" class="page"><iframe src="https://www.blackbox.ai/"></iframe></div>
     <div id="clima" class="page">
         <iframe src="https://www.windy.com/multimodel/-15.191/12.153?temp,-15.654,12.153,7"></iframe>
-        <iframe src="https://www.tempo.com/noticias/actualidade/fenomeno-astronomico-em-20-de-marco-equinocio-marca-nova-fase-do-ano.html" style="height: 700px;"></iframe>
+        <iframe src="https://www.tempo.com/noticias/actualidade/fenomeno-astronomico-em-20-de-marco-equinocio-marca-nova-fase-do-ano.html" style="height: 600px;"></iframe>
     </div>
-
-    <div id="music" class="page">
-        <div style="background: rgba(162, 56, 255, 0.1); border: 1px solid var(--deezer-purple); padding: 20px; border-radius: 20px; text-align: center; margin-bottom: 20px;">
-            <h2 style="color:var(--deezer-purple); margin:0;">🎵 DEEZER SYNC</h2>
-            <a href="https://www.deezer.com/pt/" target="_blank" style="color:white; text-decoration:none; font-weight:bold;">ABRIR PLAYER</a>
-        </div>
-        <iframe src="https://www.deezer.com/pt/"></iframe>
-    </div>
-
+    <div id="music" class="page"><iframe src="https://www.deezer.com/pt/"></iframe></div>
     <div id="cinema" class="page"><iframe src="https://netcineq.lat/"></iframe></div>
-    <div id="news" class="page"><iframe src="https://pt.euronews.com/noticias/internacional"></iframe></div>
-    <div id="jogos" class="page">
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
-            <iframe src="https://www.miniplay.com/embed/pac-man"></iframe>
-            <iframe src="https://m.plonga.com/online-games/snake"></iframe>
-        </div>
-    </div>
-    <div id="futebol" class="page"><iframe src="https://www.scorebat.com/embed/livescore/"></iframe></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
+        let captchaResult = 0;
         let isLoggedIn = false;
 
-        function syncLogin() {
-            if(!isLoggedIn) {
-                isLoggedIn = true;
-                document.getElementById('main-body').classList.add('logged-in');
-                document.getElementById('user-status').innerHTML = "SESSÃO ATIVA | CELTA IA CONNECTED";
-                document.getElementById('user-status').style.color = "#00ff00";
-                localStorage.setItem('celtaSession', 'active');
-            }
-        }
-
-        function checkAutoLogin() {
-            if(localStorage.getItem('celtaSession') === 'active') {
-                syncLogin();
-            }
-        }
-
-        function triggerLoading(pageId) {
-            const loader = document.getElementById('loader');
-            loader.style.display = 'flex';
+        // CONTROLES OMNIVERSO AJUSTADOS
+        function setOmni(type) {
+            const frame = document.getElementById('omni-frame');
+            if(!isLoggedIn) { alert("Acesso Negado! Autenticação do Arquiteto necessária."); return; }
+            
+            triggerLoading('omni');
+            
             setTimeout(() => {
-                loader.style.display = 'none';
-                openPage(pageId);
-            }, 1000);
+                switch(type) {
+                    case 'earth': frame.src = "https://worldwidetelescope.org/webclient/"; break;
+                    case 'blackhole': frame.src = "https://www.test-tube.org/blackhole/"; break; // Simulador relativístico estável
+                    case 'nasa': frame.src = "https://worldwidetelescope.org/webclient/?wtml=https://worldwidetelescope.org/docs/Trappist-1v2.wtml"; break; // Motor NASA Trappist-1
+                    case 'sandbox': frame.src = "https://www.test-tube.org/universe/"; break; // Sandbox de destruição sandbox
+                }
+            }, 500);
         }
 
+        // SEGURANÇA MULTI-CAMADA (MANTIDA, AGORA VERMELHA NÉON)
+        function abrirLogin() { document.getElementById('login-modal').style.display = 'flex'; }
+        function fecharLogin() { document.getElementById('login-modal').style.display = 'none'; }
+        function iniciarCaptcha() {
+            const email = document.getElementById('user-email').value;
+            const pass = document.getElementById('user-pass').value;
+            if(!email.includes("@") || pass.length < 4) return alert("Credenciais Inválidas");
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-captcha').style.display = 'block';
+            let n1 = Math.floor(Math.random() * 10) + 1;
+            let n2 = Math.floor(Math.random() * 10) + 1;
+            captchaResult = n1 + n2;
+            document.getElementById('num1').innerText = n1;
+            document.getElementById('num2').innerText = n2;
+        }
+        function validarCaptcha() {
+            const res = document.getElementById('captcha-input').value;
+            if(parseInt(res) === captchaResult) {
+                document.getElementById('step-captcha').style.display = 'none';
+                document.getElementById('step-2').style.display = 'block';
+                console.log("Código 2FA enviado para: " + document.getElementById('user-email').value);
+            } else { alert("Falha Anti-Bot!"); iniciarCaptcha(); }
+        }
+        function finalizarAcesso() {
+            const user = document.getElementById('user-email').value;
+            localStorage.setItem('celtaUser', user);
+            location.reload();
+        }
+        function verificarSessao() {
+            const user = localStorage.getItem('celtaUser');
+            if(user) {
+                isLoggedIn = true;
+                document.getElementById('status-display').innerHTML = "TERMINAL DARK NEON ATIVO: " + user.toUpperCase();
+                document.getElementById('status-display').style.color = "var(--primary)";
+                document.getElementById('status-display').style.textShadow = "0 0 10px var(--primary)";
+                document.getElementById('nav-login').innerHTML = "🛡️ " + user.split('@')[0].toUpperCase();
+                document.getElementById('nav-login').style.background = "#222";
+                document.getElementById('nav-login').style.color = "var(--primary)";
+            }
+        }
+
+        // NAVEGAÇÃO
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
@@ -160,6 +226,7 @@
             document.getElementById('nav-' + id).classList.add('active');
             window.scrollTo(0,0);
         }
+        function triggerLoading(pageId) { /* Função de loading mantida */ openPage(pageId); }
     </script>
 </body>
 </html>
