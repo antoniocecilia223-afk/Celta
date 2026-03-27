@@ -3,193 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | DARK NEON SECURITY</title>
+    <title>CELTA OS | OMNIVERSO SUPREME</title>
     <style>
         :root { --primary: #ff0000; --bg: #000; }
-        * { box-sizing: border-box; transition: 0.3s; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #fff; overflow: hidden; }
-
-        /* NAVEGAÇÃO */
-        nav { 
-            background: rgba(0,0,0,0.95); padding: 12px; display: flex; 
-            justify-content: center; gap: 10px; border-bottom: 2px solid var(--primary); 
-            position: fixed; top: 0; width: 100%; z-index: 1000;
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s; }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; 
+            overflow: hidden; width: 100vw; height: 100vh; display: flex; flex-direction: column;
         }
-        nav a { color: #666; text-decoration: none; font-weight: bold; font-size: 10px; text-transform: uppercase; padding: 8px 12px; cursor: pointer; }
+
+        /* TRADUTOR */
+        #translate-wrapper { background: #050505; padding: 5px; text-align: right; border-bottom: 1px solid var(--primary); height: 40px; }
+
+        /* NAV SUPREMA */
+        nav { 
+            background: rgba(0,0,0,0.95); display: flex; justify-content: center; gap: 5px; 
+            border-bottom: 2px solid var(--primary); height: 50px; align-items: center; z-index: 1000;
+        }
+        nav a { color: #777; text-decoration: none; font-weight: bold; font-size: 10px; text-transform: uppercase; padding: 12px 15px; cursor: pointer; }
         nav a:hover, nav a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* MODAL DE LOGIN 2FA ALEATÓRIO */
+        /* VIEWPORT (ECRÃ TOTAL) */
+        #viewport { flex-grow: 1; width: 100%; position: relative; }
+        .page { display: none; width: 100%; height: 100%; position: absolute; }
+        .active-page { display: block; }
+        iframe { width: 100%; height: 100%; border: none; background: #000; }
+
+        /* LOGIN 2FA */
         #login-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); z-index: 10000; display: flex;
+            background: rgba(0,0,0,0.99); z-index: 10000; display: flex;
             align-items: center; justify-content: center; backdrop-filter: blur(20px);
         }
         .login-box {
-            background: #0a0a0a; padding: 40px; border-radius: 25px; border: 2px solid var(--primary);
-            width: 95%; max-width: 400px; text-align: center; box-shadow: 0 0 60px rgba(255, 0, 0, 0.2);
+            background: #050505; padding: 40px; border-radius: 20px; border: 2px solid var(--primary);
+            width: 90%; max-width: 380px; text-align: center; box-shadow: 0 0 50px rgba(255, 0, 0, 0.4);
         }
         .login-box input {
-            width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px;
-            border: 1px solid #333; background: #000; color: #fff; text-align: center; font-size: 18px; letter-spacing: 2px;
+            width: 100%; padding: 15px; margin: 10px 0; border-radius: 10px;
+            border: 1px solid #333; background: #000; color: #fff; text-align: center; font-size: 18px;
         }
-        .btn-entrar { 
-            width: 100%; padding: 16px; border-radius: 12px; border: none; 
-            background: var(--primary); color: #000; font-weight: bold; cursor: pointer; 
-        }
+        .btn-auth { width: 100%; padding: 15px; background: var(--primary); color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; text-transform: uppercase; }
 
-        /* OMNIVERSO SIMULATOR (PRESERVADO) */
-        .page { display: none; width: 100vw; height: 100vh; padding-top: 60px; }
-        .active-page { display: block; }
-        canvas { display: block; background: #000; }
-
-        .omni-panel {
-            position: absolute; left: 20px; top: 80px; background: rgba(0,0,0,0.85);
-            padding: 20px; border: 1px solid var(--primary); border-radius: 15px; width: 240px;
-        }
-        .home-black-hole {
-            width: 140px; height: 140px; background: #000; border-radius: 50%;
+        /* HOME VISUAL */
+        .bh-core {
+            width: 160px; height: 160px; background: #000; border-radius: 50%;
             box-shadow: 0 0 40px #fff, 0 0 80px var(--primary), inset 0 0 40px #000;
-            animation: pulse 1.5s infinite alternate; margin: 15vh auto 20px;
+            animation: pulse 2s infinite alternate; margin: 15vh auto 20px;
         }
-        @keyframes pulse { from { transform: scale(0.9); } to { transform: scale(1.1); } }
+        @keyframes pulse { from { transform: scale(0.95); } to { transform: scale(1.05); } }
     </style>
 </head>
 <body onload="verificarSessao()">
 
+    <div id="translate-wrapper"><div id="google_translate_element"></div></div>
+
     <div id="login-modal">
         <div class="login-box" id="step-1">
-            <h2 style="color:var(--primary);">CELTA SECURITY</h2>
-            <p style="font-size:10px; color:#555;">INTRODUZA AS CREDENCIAIS</p>
-            <input type="email" id="user-email" placeholder="Email do Arquiteto">
-            <input type="password" id="user-pass" placeholder="Password">
-            <button class="btn-entrar" onclick="gerarETramitirCodigo()">AVANÇAR</button>
+            <h2 style="color:var(--primary); letter-spacing:3px;">CELTA ACCESS</h2>
+            <input type="email" id="u-email" placeholder="Email do Arquiteto">
+            <input type="password" id="u-pass" placeholder="Password">
+            <button class="btn-auth" onclick="gerarToken()">PEDIR CÓDIGO</button>
         </div>
-
         <div class="login-box" id="step-2" style="display:none;">
-            <h2 style="color:var(--primary);">VERIFICAÇÃO 2FA</h2>
-            <p style="font-size:11px; color:#666;">CÓDIGO DE 6 DÍGITOS ENVIADO</p>
-            <input type="text" id="input-token" placeholder="000000" maxlength="6">
-            <button class="btn-entrar" onclick="validarToken()">DESBLOQUEAR OMNIVERSO</button>
-            <p onclick="location.reload()" style="font-size:9px; color:#444; margin-top:15px; cursor:pointer;">REPETIR PROCESSO</p>
+            <h2 style="color:var(--primary);">CÓDIGO DE 6 DÍGITOS</h2>
+            <input type="text" id="u-token" placeholder="000000" maxlength="6">
+            <button class="btn-auth" onclick="validarToken()">ENTRAR NO MULTIVERSO</button>
         </div>
     </div>
 
     <nav>
-        <a onclick="openPage('home')" id="nav-home" class="active">🔍 Home</a>
-        <a onclick="openPage('omni')" id="nav-omni">🔮 OMNIVERSO</a>
+        <a onclick="openPage('home')" id="nav-home" class="active">🏠 Home</a>
+        <a onclick="openPage('omni')" id="nav-omni" style="color:var(--primary)">🔮 Omniverso</a>
         <a onclick="openPage('ia')" id="nav-ia">🤖 Celta IA</a>
-        <a onclick="location.reload()" style="color:var(--primary)">🔄 Reset</a>
+        <a onclick="openPage('clima')" id="nav-clima">☁️ Clima</a>
+        <a onclick="openPage('music')" id="nav-music">🎵 Música</a>
+        <a onclick="openPage('cinema')" id="nav-cinema">🎬 Cinema</a>
+        <a onclick="location.reload()" style="color:var(--primary)">🔒 Sair</a>
     </nav>
 
-    <div id="home" class="page active-page">
-        <div style="text-align:center;">
-            <div class="home-black-hole"></div>
-            <h1 style="font-size:80px; color:var(--primary); margin:0;">CELTA</h1>
-            <p id="user-status" style="color:#333; letter-spacing:3px;">SISTEMA ENCRIPTADO</p>
+    <div id="viewport">
+        <div id="home" class="page active-page">
+            <div style="text-align:center;">
+                <div class="bh-core"></div>
+                <h1 style="font-size:90px; color:var(--primary); text-shadow: 0 0 30px var(--primary); font-style:italic;">CELTA</h1>
+                <p id="user-tag" style="letter-spacing:10px; color:#333; font-size:10px;">SISTEMA PROTEGIDO</p>
+            </div>
         </div>
+
+        <div id="omni" class="page">
+            <iframe src="https://worldwidetelescope.org/webclient/"></iframe>
+        </div>
+
+        <div id="ia" class="page"><iframe src="https://www.blackbox.ai/"></iframe></div>
+        <div id="clima" class="page"><iframe src="https://www.windy.com/"></iframe></div>
+        <div id="music" class="page"><iframe src="https://www.deezer.com/pt/channels/explore"></iframe></div>
+        <div id="cinema" class="page"><iframe src="https://netcineq.lat/"></iframe></div>
     </div>
 
-    <div id="omni" class="page">
-        <div class="omni-panel">
-            <h3 style="color:var(--primary); font-size:12px;">CELTA ENGINE</h3>
-            <button onclick="bigBang()" style="width:100%; padding:10px; background:#000; border:1px solid var(--primary); color:var(--primary); cursor:pointer;">💥 BIG BANG (100 PLANETAS)</button>
-            <button onclick="resetSim()" style="width:100%; padding:10px; margin-top:5px; background:#200; border:1px solid #f00; color:#fff; cursor:pointer;">LIMPAR ESPAÇO</button>
-        </div>
-        <canvas id="universeCanvas"></canvas>
-    </div>
-
-    <div id="ia" class="page"><iframe src="https://www.blackbox.ai/" style="width:100%; height:100%; border:none;"></iframe></div>
-
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
-        let codigoGerado = "";
-        const canvas = document.getElementById('universeCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
 
-        // --- LÓGICA DE SEGURANÇA 2FA ALEATÓRIA ---
-        function gerarETramitirCodigo() {
-            const email = document.getElementById('user-email').value;
-            if(!email.includes("@")) return alert("Email Inválido!");
+        let tokenAtual = "";
 
-            // Gera código de 6 dígitos aleatórios
-            codigoGerado = Math.floor(100000 + Math.random() * 900000).toString();
-            
-            // Simulação de envio (Na vida real isto iria por API de email)
-            alert("SISTEMA CELTA: Um código de 6 dígitos foi enviado para " + email + "\n\n(Para teste, o código é: " + codigoGerado + ")");
-            console.log("CÓDIGO DE ACESSO: " + codigoGerado);
-
+        function gerarToken() {
+            if(!document.getElementById('u-email').value.includes("@")) return alert("Email Inválido");
+            tokenAtual = Math.floor(100000 + Math.random() * 900000).toString();
+            alert("CÓDIGO CELTA ENVIADO: " + tokenAtual);
             document.getElementById('step-1').style.display = 'none';
             document.getElementById('step-2').style.display = 'block';
         }
 
         function validarToken() {
-            const tokenInserido = document.getElementById('input-token').value;
-            if(tokenInserido === codigoGerado) {
-                localStorage.setItem('celtaAuth', 'true');
-                localStorage.setItem('celtaUser', document.getElementById('user-email').value);
-                document.getElementById('login-modal').style.display = 'none';
-                verificarSessao();
-            } else {
-                alert("CÓDIGO INCORRETO! ACESSO NEGADO.");
-            }
+            if(document.getElementById('u-token').value === tokenAtual) {
+                localStorage.setItem('celtaSession', document.getElementById('u-email').value);
+                location.reload();
+            } else { alert("CÓDIGO INVÁLIDO"); }
         }
 
         function verificarSessao() {
-            if(localStorage.getItem('celtaAuth') === 'true') {
+            const sessao = localStorage.getItem('celtaSession');
+            if(sessao) {
                 document.getElementById('login-modal').style.display = 'none';
-                document.getElementById('user-status').innerText = "ARQUITETO: " + localStorage.getItem('celtaUser').toUpperCase();
-                document.getElementById('user-status').style.color = "var(--primary)";
-                initSim();
+                document.getElementById('user-tag').innerText = "ARQUITETO: " + sessao.toUpperCase();
+                document.getElementById('user-tag').style.color = "var(--primary)";
             }
         }
-
-        // --- LÓGICA DO SIMULADOR (NADA FOI APAGADO) ---
-        function initSim() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            resetSim();
-            animate();
-        }
-
-        class Particle {
-            constructor(x, y, r, c, v) { this.x=x; this.y=y; this.r=r; this.c=c; this.v=v; }
-            draw() {
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-                ctx.fillStyle = this.c; ctx.shadowBlur = 15; ctx.shadowColor = this.c;
-                ctx.fill();
-            }
-            update() {
-                particles.forEach(p => {
-                    if(p === this) return;
-                    let dx = p.x - this.x; let dy = p.y - this.y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    if(dist < 500) {
-                        let force = (p.r / (dist * dist)) * 0.5;
-                        this.v.x += dx * force; this.v.y += dy * force;
-                    }
-                });
-                this.x += this.v.x; this.y += this.v.y;
-                this.draw();
-            }
-        }
-
-        function animate() {
-            ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(0,0,canvas.width,canvas.height);
-            particles.forEach(p => p.update());
-            requestAnimationFrame(animate);
-        }
-
-        function bigBang() {
-            for(let i=0; i<100; i++) {
-                particles.push(new Particle(canvas.width/2, canvas.height/2, Math.random()*4+1, `hsl(${Math.random()*360},70%,50%)`, {x:(Math.random()-0.5)*10, y:(Math.random()-0.5)*10}));
-            }
-        }
-
-        function resetSim() { particles = [new Particle(canvas.width/2, canvas.height/2, 25, '#ff0000', {x:0, y:0})]; }
 
         function openPage(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
+            document.getElementById('nav-'+id).classList.add('active');
         }
     </script>
 </body>
