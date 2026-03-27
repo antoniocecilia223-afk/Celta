@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | ARCHITECT EDITION v4.2</title>
+    <title>CELTA OS | ARCHITECT SUPREME</title>
     <style>
         :root { --primary: #ff0000; --bg: #000; --panel: #050505; }
         * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
 
-        /* HEADER & SEARCH ENGINE */
+        /* HEADER & PESQUISA */
         header { background: var(--panel); padding: 12px 25px; border-bottom: 1px solid var(--primary); display: flex; align-items: center; gap: 20px; z-index: 1001; }
-        .search-engine { flex-grow: 1; display: flex; background: #0c0c0c; border: 1px solid #222; border-radius: 4px; padding: 6px 15px; }
+        .search-engine { flex-grow: 1; display: flex; background: #0c0c0c; border: 1px solid #222; border-radius: 4px; padding: 8px 15px; }
         .search-engine input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
         .search-engine button { background: none; border: none; color: var(--primary); cursor: pointer; font-weight: bold; }
 
-        /* NAVIGATION BAR */
+        /* NAVEGAÇÃO ENTRE ABAS */
         nav { background: rgba(0,0,0,0.98); display: flex; justify-content: center; border-bottom: 1px solid #111; height: 50px; align-items: center; }
         nav a { color: #444; text-decoration: none; font-weight: bold; font-size: 10px; text-transform: uppercase; padding: 0 15px; cursor: pointer; letter-spacing: 1px; }
         nav a:hover, nav a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* VIEWPORT */
+        /* ÁREA DE CONTEÚDO */
         #viewport { flex-grow: 1; position: relative; width: 100%; overflow: hidden; }
         .page { display: none; width: 100%; height: 100%; position: absolute; }
         .active-page { display: block; }
         iframe { width: 100%; height: 100%; border: none; background: #000; }
 
-        /* MODULE: NETWORK MANAGEMENT */
-        #net-monitor { padding: 30px; background: #000; overflow-y: auto; }
-        .net-card { background: #080808; border: 1px solid #1a1a1a; border-radius: 8px; padding: 25px; margin-bottom: 20px; }
+        /* MÓDULO 2: GESTÃO DE REDE */
+        .net-monitor { padding: 30px; overflow-y: auto; background: #000; height: 100%; }
+        .net-card { background: #080808; border: 1px solid #1a1a1a; border-radius: 8px; padding: 25px; margin-bottom: 20px; max-width: 800px; margin: 0 auto 20px auto; }
         .net-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; margin-top: 15px; }
         .stat-box { border-left: 3px solid var(--primary); padding-left: 15px; }
         .stat-label { font-size: 10px; color: #444; text-transform: uppercase; margin-bottom: 5px; }
         .stat-val { font-size: 20px; font-weight: bold; color: #fff; }
         .btn-boost { background: var(--primary); color: #000; border: none; padding: 18px; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; text-transform: uppercase; margin-top: 20px; letter-spacing: 1px; }
 
-        /* FOOTER & WORLD CUP TIMER */
+        /* RODAPÉ MUNDIAL */
         footer { 
             background: var(--panel); border-top: 1px solid var(--primary); height: 55px; 
             display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
@@ -44,61 +44,50 @@
         #wc-timer { color: var(--primary); font-weight: bold; font-size: 19px; text-shadow: 0 0 12px var(--primary); }
         .loc-tag { font-size: 10px; color: #333; font-weight: bold; }
 
-        /* STANDBY CENTER */
         .standby { text-align: center; padding-top: 20vh; }
         .standby h1 { font-size: 100px; font-style: italic; color: var(--primary); opacity: 0.8; text-shadow: 0 0 30px var(--primary); }
     </style>
 </head>
-<body onload="initCelta()">
+<body onload="bootSystem()">
 
     <header>
         <div style="color:var(--primary); font-weight: bold; letter-spacing: 2px; font-size: 18px;">CELTA</div>
         <div class="search-engine">
-            <input type="text" id="omni-search" placeholder="Navegar no Omniverso..." onkeydown="if(event.key==='Enter') doSearch()">
-            <button onclick="doSearch()">IR</button>
+            <input type="text" id="omni-input" placeholder="Pesquisar no Omniverso..." onkeydown="if(event.key==='Enter') executeSearch()">
+            <button onclick="executeSearch()">IR</button>
         </div>
         <div id="google_translate_element"></div>
     </header>
 
     <nav>
-        <a onclick="show('home')" id="m-home" class="active">🏠 Dashboard</a>
-        <a onclick="show('net')" id="m-net" style="color:var(--primary)">⚡ Gestão de Rede</a>
-        <a onclick="show('browser')" id="m-browser">🌐 Navegador</a>
-        <a onclick="show('scd')" id="m-scd">⚽ SCD Arena</a>
-        <a onclick="show('news')" id="m-news">📰 Notícias</a>
-        <a onclick="show('clima')" id="m-clima">☁️ Clima</a>
+        <a onclick="ir('home')" id="m-home" class="active">🏠 Dashboard</a>
+        <a onclick="ir('net')" id="m-net" style="color:var(--primary)">⚡ Gestão de Rede</a>
+        <a onclick="ir('browser')" id="m-browser">🌐 Navegador</a>
+        <a onclick="ir('scd')" id="m-scd">⚽ SCD Arena</a>
+        <a onclick="ir('news')" id="m-news">📰 Notícias</a>
+        <a onclick="ir('clima')" id="m-clima">☁️ Clima</a>
     </nav>
 
     <div id="viewport">
         <div id="home" class="page active-page">
             <div class="standby">
                 <h1>CELTA</h1>
-                <p style="letter-spacing: 15px; color: #1a1a1a; font-weight: bold;">ARQUITETO DO OMNIVERSO</p>
+                <p style="letter-spacing: 15px; color: #1a1a1a; font-weight: bold;">SISTEMA OPERATIVO SUPREMO</p>
             </div>
         </div>
 
-        <div id="net" class="page" id="net-monitor">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h2 style="color:var(--primary); font-style:italic; margin-bottom:20px;">NETWORK MANAGEMENT</h2>
+        <div id="net" class="page">
+            <div class="net-monitor">
                 <div class="net-card">
+                    <h2 style="color:var(--primary); font-style:italic; margin-bottom:15px;">NETWORK STATUS</h2>
                     <div class="net-grid">
-                        <div class="stat-box">
-                            <div class="stat-label">Latência (Ping)</div>
-                            <div id="p-val" class="stat-val">-- ms</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-label">Conexão</div>
-                            <div id="n-type" class="stat-val">SCANNING</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-label">Velocidade</div>
-                            <div id="s-val" class="stat-val">-- Mbps</div>
-                        </div>
+                        <div class="stat-box"><div class="stat-label">Ping</div><div id="p-val" class="stat-val">-- ms</div></div>
+                        <div class="stat-box"><div class="stat-label">Rede</div><div id="n-type" class="stat-val">SCAN</div></div>
+                        <div class="stat-box"><div class="stat-label">Downlink</div><div id="s-val" class="stat-val">-- Mbps</div></div>
                     </div>
                 </div>
                 <div class="net-card">
-                    <p style="font-size:12px; color:#555; line-height:1.6;">Otimização ativa: Priorizando pacotes de dados para a SCD Arena e Navegador Celta. Clique abaixo para forçar o Network Boost.</p>
-                    <button class="btn-boost" onclick="applyTurbo()">EXECUTAR CELTA TURBO</button>
+                    <button class="btn-boost" onclick="turbo()">EXECUTAR NETWORK BOOST</button>
                 </div>
             </div>
         </div>
@@ -113,35 +102,33 @@
     </div>
 
     <footer>
-        <div class="loc-tag">MOÇÂMEDES, ANGOLA | WAT</div>
+        <div class="loc-tag">ANGOLA | SCD PROJECTS</div>
         <div>
-            <span style="color:#222; font-size:10px; margin-right:15px; font-weight:bold;">COUNTDOWN MUNDIAL 2026:</span>
+            <span style="color:#222; font-size:10px; margin-right:15px; font-weight:bold;">MUNDIAL 2026:</span>
             <span id="wc-timer">000d 00h 00m 00s</span>
         </div>
-        <div style="color:var(--primary); font-size:11px; font-weight:bold;">v4.2 SUPREME</div>
+        <div style="color:var(--primary); font-size:11px; font-weight:bold;">CELTA OS v4.2</div>
     </footer>
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
 
-        function initCelta() {
-            startWC();
-            monitorNet();
-            setInterval(monitorNet, 4000);
+        function bootSystem() {
+            startTimer();
+            monitor();
+            setInterval(monitor, 5000);
         }
 
-        // NAVEGADOR
-        function doSearch() {
-            let q = document.getElementById('omni-search').value;
+        function executeSearch() {
+            let q = document.getElementById('omni-input').value;
             if(q) {
                 document.getElementById('omni-frame').src = "https://www.google.com/search?q=" + encodeURIComponent(q) + "&igu=1";
-                show('browser');
+                ir('browser');
             }
         }
 
-        // MÓDULO 2: GESTÃO DE REDE
-        function monitorNet() {
+        function monitor() {
             const start = Date.now();
             fetch('https://www.google.com/favicon.ico', { mode: 'no-cors', cache: 'no-store' }).then(() => {
                 document.getElementById('p-val').innerText = (Date.now() - start) + " ms";
@@ -152,13 +139,12 @@
             }
         }
 
-        function applyTurbo() {
-            alert("SISTEMA CELTA: MEMÓRIA LIMPA E REDE OPTIMIZADA.");
+        function turbo() {
+            alert("CELTA TURBO: CACHE LIMPO E PRIORIDADE DE REDE APLICADA.");
             location.reload();
         }
 
-        // TIMER MUNDIAL
-        function startWC() {
+        function startTimer() {
             const target = new Date("June 11, 2026 00:00:00").getTime();
             setInterval(() => {
                 const diff = target - new Date().getTime();
@@ -170,8 +156,7 @@
             }, 1000);
         }
 
-        // NAVEGAÇÃO ENTRE ABAS
-        function show(id) {
+        function ir(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
