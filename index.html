@@ -3,154 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELTA OS | SUPREME ARCHITECT v5.0</title>
+    <title>CELTA OS | ARCHITECT SUPREME v5.1</title>
     <style>
         :root { --primary: #ff0000; --bg: #000; --panel: #050505; }
         * { box-sizing: border-box; margin: 0; padding: 0; transition: 0.3s; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #fff; overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
 
-        /* HEADER FIXO NO TOPO */
+        /* HEADER FIXO */
         header { 
             background: var(--panel); padding: 12px 25px; border-bottom: 1px solid var(--primary); 
-            display: flex; align-items: center; gap: 20px; z-index: 1001; position: relative;
+            display: flex; align-items: center; gap: 20px; z-index: 1001;
         }
         .search-engine { flex-grow: 1; display: flex; background: #0c0c0c; border: 1px solid #222; border-radius: 4px; padding: 8px 15px; }
         .search-engine input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 14px; }
         .search-engine button { background: none; border: none; color: var(--primary); cursor: pointer; font-weight: bold; }
 
         /* NAVEGAÇÃO */
-        nav { background: rgba(0,0,0,0.98); display: flex; justify-content: center; border-bottom: 1px solid #111; height: 50px; align-items: center; }
+        nav { background: rgba(0,0,0,0.98); display: flex; justify-content: center; border-bottom: 1px solid #111; height: 45px; align-items: center; z-index: 1001; }
         nav a { color: #444; text-decoration: none; font-weight: bold; font-size: 10px; text-transform: uppercase; padding: 0 15px; cursor: pointer; letter-spacing: 1px; }
         nav a:hover, nav a.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
         /* VIEWPORT */
-        #viewport { flex-grow: 1; position: relative; width: 100%; overflow: hidden; }
+        #viewport { flex-grow: 1; position: relative; width: 100%; overflow: hidden; padding-bottom: 60px; }
         .page { display: none; width: 100%; height: 100%; position: absolute; }
         .active-page { display: block; }
         iframe { width: 100%; height: 100%; border: none; background: #000; }
 
-        /* BURACO NEGRO (CENTRO DA HOME) */
+        /* BURACO NEGRO INTEGRADO */
         .black-hole-container { 
             height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            background: radial-gradient(circle, #0a0000 0%, #000 70%);
+            background: radial-gradient(circle, #0a0000 0%, #000 75%);
         }
         .black-hole {
-            width: 200px; height: 200px; background: #000; border-radius: 50%;
-            box-shadow: 0 0 60px 20px #ff0000, inset 0 0 50px #300;
-            position: relative; animation: absorb 4s infinite ease-in-out;
+            width: 180px; height: 180px; background: #000; border-radius: 50%;
+            box-shadow: 0 0 50px 15px #ff0000, inset 0 0 40px #300;
+            position: relative; animation: absorb 3s infinite ease-in-out;
         }
         @keyframes absorb {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 60px 20px #ff0000; }
-            50% { transform: scale(1.1); box-shadow: 0 0 100px 40px #ff0000; }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 50px 15px #ff0000; }
+            50% { transform: scale(1.08); box-shadow: 0 0 90px 30px #ff0000; }
         }
-        .celta-title { font-size: 80px; font-style: italic; color: var(--primary); margin-top: 30px; letter-spacing: 10px; text-shadow: 0 0 20px #000; }
 
-        /* MÓDULO REDE */
-        .net-monitor { padding: 30px; overflow-y: auto; height: 100%; }
-        .net-card { background: #080808; border: 1px solid #1a1a1a; border-radius: 8px; padding: 25px; max-width: 800px; margin: 0 auto 20px auto; }
-        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .stat-box { border-left: 3px solid var(--primary); padding-left: 15px; }
-
-        /* RODAPÉ E CONTADOR MUNDIAL */
-        footer { 
-            background: var(--panel); border-top: 1px solid var(--primary); height: 60px; 
-            display: flex; align-items: center; justify-content: space-between; padding: 0 30px;
-            z-index: 1002;
+        /* CONTADOR MUNDIAL (FIXO) */
+        .celta-footer { 
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(5, 5, 5, 0.95); border-top: 1px solid var(--primary);
+            display: flex; align-items: center; justify-content: space-between; padding: 0 25px;
+            z-index: 2000; backdrop-filter: blur(5px);
         }
-        #wc-timer { color: var(--primary); font-weight: bold; font-size: 22px; text-shadow: 0 0 15px var(--primary); font-family: 'Courier New', monospace; }
-        .footer-info { font-size: 10px; color: #444; font-weight: bold; text-transform: uppercase; }
+        #wc-timer { 
+            color: var(--primary); font-weight: bold; font-size: 24px; 
+            text-shadow: 0 0 20px var(--primary); font-family: 'Courier New', monospace; 
+        }
+        .footer-tag { font-size: 9px; color: #555; font-weight: bold; letter-spacing: 2px; }
 
-        .btn-boost { background: var(--primary); color: #000; border: none; padding: 15px; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px; }
+        /* REDE MONITOR */
+        .net-card { background: #080808; border: 1px solid #1a1a1a; padding: 20px; border-radius: 8px; max-width: 500px; margin: 40px auto; }
+        .btn-boost { background: var(--primary); color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 15px; border-radius: 4px; }
     </style>
 </head>
-<body onload="bootSystem()">
+<body onload="boot()">
 
     <header>
-        <div style="color:var(--primary); font-weight: bold; letter-spacing: 3px; font-size: 22px;">CELTA</div>
+        <div style="color:var(--primary); font-weight: bold; letter-spacing: 2px; font-size: 20px;">CELTA</div>
         <div class="search-engine">
-            <input type="text" id="omni-search" placeholder="Navegar no Omniverso..." onkeydown="if(event.key==='Enter') doSearch()">
-            <button onclick="doSearch()">BUSCAR</button>
+            <input type="text" id="omni-in" placeholder="Pesquisar no Omniverso..." onkeydown="if(event.key==='Enter') search()">
+            <button onclick="search()">BUSCAR</button>
         </div>
         <div id="google_translate_element"></div>
     </header>
 
     <nav>
-        <a onclick="ir('home')" id="m-home" class="active">Dashboard</a>
-        <a onclick="ir('net')" id="m-net" style="color:var(--primary)">Rede Boost</a>
-        <a onclick="ir('browser')" id="m-browser">Navegador</a>
-        <a onclick="ir('scd')" id="m-scd">SCD Arena</a>
-        <a onclick="ir('news')" id="m-news">Notícias</a>
-        <a onclick="ir('clima')" id="m-clima">Clima</a>
+        <a onclick="tab('home')" id="m-home" class="active">Dashboard</a>
+        <a onclick="tab('net')" id="m-net" style="color:var(--primary)">Rede</a>
+        <a onclick="tab('browser')" id="m-browser">Navegador</a>
+        <a onclick="tab('futebol')" id="m-futebol">Futebol</a>
+        <a onclick="tab('news')" id="m-news">Notícias</a>
+        <a onclick="tab('clima')" id="m-clima">Clima</a>
     </nav>
 
     <div id="viewport">
         <div id="home" class="page active-page">
             <div class="black-hole-container">
                 <div class="black-hole"></div>
-                <h1 class="celta-title">CELTA</h1>
-                <p style="color: #333; font-weight: bold; letter-spacing: 5px;">ARCHITECT SUPREME</p>
+                <h1 style="font-size: 60px; font-style: italic; color: var(--primary); margin-top: 25px; letter-spacing: 12px;">CELTA</h1>
+                <p style="color: #222; font-weight: bold; font-size: 10px; letter-spacing: 4px;">SISTEMA OPERATIVO ANGOLANO</p>
             </div>
         </div>
 
         <div id="net" class="page">
-            <div class="net-monitor">
-                <div class="net-card">
-                    <h3 style="color:var(--primary); margin-bottom:20px; font-style:italic;">NETWORK STATUS</h3>
-                    <div class="stat-grid">
-                        <div class="stat-box"><p style="font-size:10px; color:#444;">PING</p><p id="p-val" style="font-size:20px;">-- ms</p></div>
-                        <div class="stat-box"><p style="font-size:10px; color:#444;">TIPO</p><p id="n-type" style="font-size:20px;">SCAN</p></div>
-                        <div class="stat-box"><p style="font-size:10px; color:#444;">VELOCIDADE</p><p id="s-val" style="font-size:20px;">-- Mbps</p></div>
-                    </div>
-                    <button class="btn-boost" onclick="location.reload()">EXECUTAR CELTA TURBO</button>
+            <div class="net-card">
+                <h3 style="color:var(--primary); font-style:italic; margin-bottom:15px;">NET MONITOR</h3>
+                <div style="display:flex; justify-content: space-between; text-align:center;">
+                    <div><p style="color:#444; font-size:10px;">PING</p><p id="p-val" style="font-size:20px;">-- ms</p></div>
+                    <div><p style="color:#444; font-size:10px;">REDE</p><p id="n-type" style="font-size:20px;">SCAN</p></div>
                 </div>
+                <button class="btn-boost" onclick="location.reload()">EXECUTAR BOOST</button>
             </div>
         </div>
 
-        <div id="browser" class="page"><iframe id="omni-frame" src="https://www.google.com/search?igu=1"></iframe></div>
+        <div id="browser" class="page"><iframe id="f-omni" src="https://www.google.com/search?igu=1"></iframe></div>
         
-        <div id="scd" class="page"><iframe src="https://www.flashscore.pt/"></iframe></div>
+        <div id="futebol" class="page"><iframe src="https://pt.besoccer.com/"></iframe></div>
         
         <div id="news" class="page"><iframe src="https://g1.globo.com/"></iframe></div>
 
         <div id="clima" class="page"><iframe src="https://embed.windy.com/embed2.html?lat=-15.191&lon=12.153&zoom=5"></iframe></div>
     </div>
 
-    <footer>
-        <div class="footer-info">MOÇÂMEDES, ANGOLA | WAT</div>
+    <div class="celta-footer">
+        <div class="footer-tag">MOÇÂMEDES | SCD</div>
         <div id="wc-timer">000d 00h 00m 00s</div>
-        <div style="color:var(--primary); font-weight:bold; font-size:12px;">v5.0</div>
-    </footer>
+        <div style="color:var(--primary); font-weight:bold;">v5.1</div>
+    </div>
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script>
         function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'pt'}, 'google_translate_element'); }
 
-        function bootSystem() {
-            startWC();
-            monitorNet();
-            setInterval(monitorNet, 4000);
+        function boot() {
+            startTimer();
+            netLoop();
+            setInterval(netLoop, 4000);
         }
 
-        function doSearch() {
-            let q = document.getElementById('omni-search').value;
-            if(q) {
-                document.getElementById('omni-frame').src = "https://www.google.com/search?q=" + encodeURIComponent(q) + "&igu=1";
-                ir('browser');
+        function search() {
+            let val = document.getElementById('omni-in').value;
+            if(val) {
+                document.getElementById('f-omni').src = "https://www.google.com/search?q=" + encodeURIComponent(val) + "&igu=1";
+                tab('browser');
             }
         }
 
-        function monitorNet() {
+        function netLoop() {
             const start = Date.now();
             fetch('https://www.google.com/favicon.ico', { mode: 'no-cors', cache: 'no-store' }).then(() => {
                 document.getElementById('p-val').innerText = (Date.now() - start) + " ms";
             });
             if (navigator.connection) {
                 document.getElementById('n-type').innerText = navigator.connection.effectiveType.toUpperCase();
-                document.getElementById('s-val').innerText = navigator.connection.downlink + " Mbps";
             }
         }
 
-        function startWC() {
+        function startTimer() {
             const target = new Date("June 11, 2026 00:00:00").getTime();
             setInterval(() => {
                 const diff = target - new Date().getTime();
@@ -162,7 +157,7 @@
             }, 1000);
         }
 
-        function ir(id) {
+        function tab(id) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
             document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
             document.getElementById(id).classList.add('active-page');
